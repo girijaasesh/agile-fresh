@@ -1,16 +1,14 @@
 {
-  "name": "agile-fresh",
-  "version": "0.1.0",
-  "private": true,
+  "name": "agile-edge",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node server.js"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.35"
+    "next": "14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
