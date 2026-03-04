@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 const { pool } = require('../../../lib/db');
 
 export async function POST(req) {
