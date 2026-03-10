@@ -13,6 +13,6 @@ app.prepare().then(() => {
     handle(req, res, parsedUrl);
   }).listen(port, (err) => {
     if (err) throw err;
-    console.log(`> AgileEdge running on port ${port}`);
+    console.log(`> AgileEdge v2 running on port ${port}`);
   });
 });
