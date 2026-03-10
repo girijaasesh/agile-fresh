@@ -33,7 +33,7 @@ const handler = NextAuth({
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || 'agile-edge-fallback-secret-2026',
 });
 
 export { handler as GET, handler as POST };
