@@ -1,25 +1,18 @@
-export const dynamic = 'force-dynamic';
-import { NextResponse } from 'next/server';
+const { createServer } = require('http');
+const { parse } = require('url');
+const next = require('next');
 
-export async function POST(req) {
-  const { username, password } = await req.json();
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+const port = process.env.PORT || 3000;
 
-  if (
-    username === process.env.ADMIN_USER &&
-    password === process.env.ADMIN_PASSWORD
-  ) {
-    const response = NextResponse.json({ success: true });
-    response.cookies.set('admin_token', process.env.NEXTAUTH_SECRET, {
-      httpOnly: true,
-      secure: true,
-      maxAge: 60 * 60 * 8,
-      path: '/',
-    });
-    return response;
-  }
-
-  return NextResponse.json(
-    { success: false, error: 'Invalid credentials' },
-    { status: 401 }
-  );
-}
+app.prepare().then(() => {
+  createServer((req, res) => {
+    const parsedUrl = parse(req.url, true);
+    handle(req, res, parsedUrl);
+  }).listen(port, (err) => {
+    if (err) throw err;
+    console.log(`> AgileEdge running on port ${port}`);
+  });
+});
