@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function AdminLogin() {
@@ -13,17 +12,22 @@ export default function AdminLogin() {
   const handleLogin = async () => {
     setLoading(true);
     setError('');
-    const result = await signIn('credentials', {
-      username,
-      password,
-      redirect: false,
-    });
-    setLoading(false);
-    if (result?.ok) {
-      router.push('/admin');
-    } else {
-      setError('Invalid username or password');
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        router.push('/admin');
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
     }
+    setLoading(false);
   };
 
   return (
@@ -44,10 +48,10 @@ export default function AdminLogin() {
         boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
       }}>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <h1 style={{ color: '#0B1629', fontSize: '24px', margin: '0 0 4px' }}>
+          <h1 style={{ color: '#0B1629', fontSize: '28px', margin: '0 0 4px' }}>
             AgileEdge
           </h1>
-          <p style={{ color: '#C9A84C', margin: 0, fontSize: '14px' }}>
+          <p style={{ color: '#C9A84C', margin: 0, fontSize: '14px', fontWeight: 'bold' }}>
             Admin Portal
           </p>
         </div>
@@ -67,7 +71,13 @@ export default function AdminLogin() {
         )}
 
         <div style={{ marginBottom: '16px' }}>
-          <label style={{ display: 'block', marginBottom: '6px', fontSize: '14px', color: '#374151', fontWeight: 'bold' }}>
+          <label style={{
+            display: 'block',
+            marginBottom: '6px',
+            fontSize: '14px',
+            color: '#374151',
+            fontWeight: 'bold',
+          }}>
             Username
           </label>
           <input
@@ -82,13 +92,18 @@ export default function AdminLogin() {
               borderRadius: '8px',
               fontSize: '14px',
               boxSizing: 'border-box',
-              outline: 'none',
             }}
           />
         </div>
 
         <div style={{ marginBottom: '24px' }}>
-          <label style={{ display: 'block', marginBottom: '6px', fontSize: '14px', color: '#374151', fontWeight: 'bold' }}>
+          <label style={{
+            display: 'block',
+            marginBottom: '6px',
+            fontSize: '14px',
+            color: '#374151',
+            fontWeight: 'bold',
+          }}>
             Password
           </label>
           <input
@@ -104,7 +119,6 @@ export default function AdminLogin() {
               borderRadius: '8px',
               fontSize: '14px',
               boxSizing: 'border-box',
-              outline: 'none',
             }}
           />
         </div>
@@ -127,7 +141,12 @@ export default function AdminLogin() {
           {loading ? 'Signing in...' : 'Sign In'}
         </button>
 
-        <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '12px', color: '#9CA3AF' }}>
+        <p style={{
+          textAlign: 'center',
+          marginTop: '24px',
+          fontSize: '12px',
+          color: '#9CA3AF',
+        }}>
           AgileEdge Administration Portal
         </p>
       </div>
