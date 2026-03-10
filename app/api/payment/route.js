@@ -1,27 +1,39 @@
-export const dynamic = 'force-dynamic';
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
-const Stripe = require('stripe');
-
-export async function POST(req) {
-  try {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-    const { amount, currency, name, email, courseTitle } = await req.json();
-
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100),
-      currency: currency.toLowerCase(),
-      metadata: {
-        customerName: name,
-        customerEmail: email,
-        courseTitle: courseTitle,
+const handler = NextAuth({
+  providers: [
+    CredentialsProvider({
+      name: 'Admin Login',
+      credentials: {
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
-      receipt_email: email,
-    });
+      async authorize(credentials) {
+        if (
+          credentials.username === process.env.ADMIN_USER &&
+          credentials.password === process.env.ADMIN_PASSWORD
+        ) {
+          return { id: 1, name: 'Admin', role: 'admin' };
+        }
+        return null;
+      },
+    }),
+  ],
+  pages: {
+    signIn: '/admin/login',
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.role = user.role;
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.role = token.role;
+      return session;
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+});
 
-    return Response.json({ 
-      clientSecret: paymentIntent.client_secret 
-    });
-  } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
-  }
-}
+export { handler as GET, handler as POST };
