@@ -11,7 +11,8 @@ app.prepare().then(() => {
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
-  }).listen(port, () => {
+  }).listen(port, (err) => {
+    if (err) throw err;
     console.log(`> AgileEdge running on port ${port}`);
   });
 });

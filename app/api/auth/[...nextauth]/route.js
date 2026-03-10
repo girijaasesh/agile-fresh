@@ -1,20 +1,22 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
-      name: 'Admin Login',
+      name: 'credentials',
       credentials: {
         username: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
+        const validUser = process.env.ADMIN_USER || 'admin';
+        const validPass = process.env.ADMIN_PASSWORD || 'admin123';
         if (
-          credentials.username === process.env.ADMIN_USER &&
-          credentials.password === process.env.ADMIN_PASSWORD
+          credentials?.username === validUser &&
+          credentials?.password === validPass
         ) {
-          return { id: 1, name: 'Admin', role: 'admin' };
+          return { id: '1', name: 'Admin' };
         }
         return null;
       },
@@ -23,17 +25,11 @@ const handler = NextAuth({
   pages: {
     signIn: '/admin/login',
   },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) token.role = user.role;
-      return token;
-    },
-    async session({ session, token }) {
-      session.user.role = token.role;
-      return session;
-    },
+  secret: process.env.NEXTAUTH_SECRET || 'agile-edge-secret-2026',
+  session: {
+    strategy: 'jwt',
   },
-  secret: process.env.NEXTAUTH_SECRET || 'agile-edge-fallback-secret-2026',
-});
+};
 
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
