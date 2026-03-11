@@ -16,4 +16,4 @@ cat > package.json << 'EOF'
     "stripe": "^20.4.1"
   }
 }
-EOF
+
