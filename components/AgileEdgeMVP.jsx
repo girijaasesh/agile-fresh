@@ -905,7 +905,7 @@ const RegistrationFlow = ({ currency, toast }) => {
         </div>
       );
 
-      case 4: return (
+      case 4: console.log('PAYMENT DEBUG - finalPrice:', finalPrice, 'session:', session, 'selectedSession:', selectedSession); return (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 32 }}>
           <div>
             <h2 style={{ fontFamily: 'Playfair Display', fontSize: 26, color: 'var(--navy)', marginBottom: 8 }}>Payment</h2>
