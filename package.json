@@ -1,4 +1,3 @@
-cat > package.json << 'EOF'
 {
   "name": "agile-edge",
   "version": "1.0.0",
@@ -16,4 +15,3 @@ cat > package.json << 'EOF'
     "stripe": "^20.4.1"
   }
 }
-
