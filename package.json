@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p ${PORT:-3000}"
+    "start": "next start"
   },
   "dependencies": {
     "next": "^14.2.35",
@@ -17,16 +17,3 @@
 }
 ```
 
-Save and close.
-
----
-
-**Step 2 — Update Hostinger start command:**
-
-Go to hPanel → Deployments → **Settings and redeploy**:
-
-- **Build command:** `npm run build`
-- **Output directory:** leave empty or `/`
-- Scroll down and find **Start command** — set it to:
-```
-next start -p $PORT
