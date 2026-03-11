@@ -361,7 +361,7 @@ const NavBar = ({ page, setPage }) => (
         ))}
       </div>
       <div style={{ display: 'flex', gap: 8 }}>
-        <button className="btn btn-outline btn-sm" onClick={() => setPage('admin')}>Admin</button>
+        
         <button className="btn btn-primary btn-sm" onClick={() => setPage('register')}>Enroll Now</button>
       </div>
     </div>
