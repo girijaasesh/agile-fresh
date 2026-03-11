@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import dynamic from 'next/dynamic';
+const PaymentForm = dynamic(() => import('./PaymentForm'), { ssr: false });
 
 // ============================================================
 // BRAND: AgileEdge | "Transform at Scale"
@@ -909,28 +911,14 @@ const RegistrationFlow = ({ currency, toast }) => {
             <h2 style={{ fontFamily: 'Playfair Display', fontSize: 26, color: 'var(--navy)', marginBottom: 8 }}>Payment</h2>
             <p style={{ color: 'var(--slate)', marginBottom: 24 }}>Secure payment powered by Stripe. Your card details are never stored.</p>
             <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 12, padding: 24, marginBottom: 20 }}>
-              <div className="form-label" style={{ marginBottom: 16 }}>Card Details</div>
-              <div className="form-group">
-                <label className="form-label">Cardholder Name</label>
-                <input className="form-input" placeholder={form.name || 'Full name on card'} />
-              </div>
-              <div className="form-group">
-                <label className="form-label">Card Number</label>
-                <input className="form-input font-mono" placeholder="4242 4242 4242 4242" maxLength={19} />
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                <div className="form-group">
-                  <label className="form-label">Expiry</label>
-                  <input className="form-input font-mono" placeholder="MM / YY" maxLength={7} />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">CVC</label>
-                  <input className="form-input font-mono" placeholder="•••" maxLength={3} type="password" />
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
-                <span style={{ fontSize: 12, color: 'var(--slate)' }}>🔒 256-bit SSL encrypted · Powered by Stripe</span>
-              </div>
+              <PaymentForm
+                amount={finalPrice}
+                currency={currency}
+                name={form.name}
+                email={form.email}
+                courseTitle={selected?.title || ''}
+                onSuccess={() => setStep(5)}
+              />
             </div>
             <div style={{ marginBottom: 20, padding: 16, background: '#F8FAFC', borderRadius: 10, border: '1px dashed #CBD5E1' }}>
               <label className="form-label">Coupon Code</label>
@@ -942,9 +930,7 @@ const RegistrationFlow = ({ currency, toast }) => {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <button className="btn btn-ghost" onClick={() => setStep(3)}>← Back</button>
-              <button className="btn btn-primary" style={{ minWidth: 200 }} onClick={() => setStep(5)}>
-                Pay {fmt(finalPrice, currency)} Securely →
-              </button>
+              <span></span>
             </div>
           </div>
           {/* Summary panel */}
