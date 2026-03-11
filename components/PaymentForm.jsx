@@ -8,7 +8,9 @@ import {
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+console.log('Stripe key loaded:', key ? 'YES' : 'NO - KEY MISSING');
+const stripePromise = loadStripe(key);
 
 function CheckoutForm({ amount, currency, onSuccess }) {
   const stripe = useStripe();
