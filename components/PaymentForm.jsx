@@ -8,9 +8,6 @@ import {
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-const stripePromise = loadStripe(key);
-
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_51T7pjcFmjjA2mxuOJX6rGCCXEMZoUPddPSKa3drzGhQFAihfUN4zHbWp9C50Wojh9TBGM1SN9syhmBxwBlVrAHtB00B6i1qkxy');
 
 function CheckoutForm({ amount, currency, onSuccess }) {
