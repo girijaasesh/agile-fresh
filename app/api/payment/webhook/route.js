@@ -3,69 +3,88 @@ const Stripe = require('stripe');
 const { pool } = require('../../../../lib/db');
 const nodemailer = require('nodemailer');
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.hostinger.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+async function sendConfirmationEmail(data) {
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.hostinger.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
 
-async function sendConfirmationEmail({ full_name, email, course_title, session_date, format, price }) {
-  const dateStr = session_date ? new Date(session_date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'TBD';
+  const dateStr = data.session_date
+    ? new Date(data.session_date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    : 'TBD';
 
   await transporter.sendMail({
-    from: `"AgileEdge Training" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: `Registration Confirmed — ${course_title}`,
-    html: `
-      <!DOCTYPE html>
-      <html>
-      <head><meta charset="utf-8"></head>
-      <body style="margin:0;padding:0;background:#F1F5F9;font-family:Arial,sans-serif;">
-        <div style="max-width:600px;margin:40px auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-          
-          <div style="background:#0B1629;padding:32px;text-align:center;">
-            <div style="display:inline-block;background:#C9A84C;color:#0B1629;font-weight:900;font-size:18px;padding:8px 16px;border-radius:8px;letter-spacing:1px;">AE</div>
-            <div style="color:#C9A84C;font-size:22px;font-weight:700;margin-top:12px;">AgileEdge</div>
-            <div style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:4px;">Transform at Scale</div>
-          </div>
+    from: '"AgileEdge Training" <' + process.env.EMAIL_USER + '>',
+    to: data.email,
+    subject: 'Registration Confirmed - ' + data.course_title,
+    html: '<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">'
+      + '<div style="background:#0B1629;padding:32px;text-align:center;">'
+      + '<div style="color:#C9A84C;font-size:22px;font-weight:700;">AgileEdge</div>'
+      + '<div style="color:rgba(255,255,255,0.6);font-size:13px;">Transform at Scale</div>'
+      + '</div>'
+      + '<div style="padding:32px;background:white;">'
+      + '<div style="background:#D1FAE5;border-left:4px solid #10B981;padding:16px;border-radius:8px;margin-bottom:24px;">'
+      + '<div style="color:#065F46;font-weight:700;">Registration Confirmed!</div>'
+      + '<div style="color:#065F46;font-size:14px;">Your payment was successful and your seat is reserved.</div>'
+      + '</div>'
+      + '<h2 style="color:#0B1629;">Hello ' + data.full_name + ',</h2>'
+      + '<p style="color:#475569;">Thank you for registering with AgileEdge. We look forward to seeing you!</p>'
+      + '<div style="background:#F8FAFC;border-radius:10px;padding:24px;margin:24px 0;">'
+      + '<div style="font-weight:700;color:#0B1629;margin-bottom:16px;">Registration Details</div>'
+      + '<p style="margin:8px 0;color:#475569;">Course: <strong>' + data.course_title + '</strong></p>'
+      + '<p style="margin:8px 0;color:#475569;">Date: <strong>' + dateStr + '</strong></p>'
+      + '<p style="margin:8px 0;color:#475569;">Format: <strong>' + (data.format || 'TBD') + '</strong></p>'
+      + '</div>'
+      + '<p style="color:#475569;font-size:14px;">You will receive joining instructions 48 hours before the session.</p>'
+      + '<p style="color:#475569;font-size:14px;">For questions, contact us at ' + process.env.EMAIL_USER + '</p>'
+      + '</div>'
+      + '<div style="background:#F8FAFC;padding:16px;text-align:center;border-top:1px solid #E2E8F0;">'
+      + '<p style="color:#94A3B8;font-size:12px;margin:0;">AgileEdge Training | agile.optim-soln.com</p>'
+      + '</div>'
+      + '</div>',
+  });
+}
 
-          <div style="padding:40px 32px;">
-            <div style="background:#D1FAE5;border-left:4px solid #10B981;padding:16px 20px;border-radius:8px;margin-bottom:32px;">
-              <div style="color:#065F46;font-weight:700;font-size:16px;">✓ Registration Confirmed!</div>
-              <div style="color:#065F46;font-size:14px;margin-top:4px;">Your payment was successful and your seat is reserved.</div>
-            </div>
+export async function POST(req) {
+  try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const body = await req.text();
+    const signature = req.headers.get('stripe-signature');
+    const event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
 
-            <h2 style="color:#0B1629;font-size:20px;margin:0 0 8px;">Hello ${full_name},</h2>
-            <p style="color:#475569;font-size:15px;line-height:1.7;margin:0 0 32px;">
-              Thank you for registering with AgileEdge. We're excited to have you join us for this training program.
-            </p>
+    if (event.type === 'payment_intent.succeeded') {
+      const paymentIntent = event.data.object;
+      const email = paymentIntent.metadata && paymentIntent.metadata.customerEmail
+        ? paymentIntent.metadata.customerEmail
+        : paymentIntent.receipt_email;
 
-            <div style="background:#F8FAFC;border-radius:10px;padding:24px;margin-bottom:32px;">
-              <div style="color:#0B1629;font-weight:700;font-size:16px;margin-bottom:16px;">📋 Registration Details</div>
-              <table style="width:100%;border-collapse:collapse;">
-                <tr>
-                  <td style="padding:8px 0;color:#64748B;font-size:14px;width:40%;">Course</td>
-                  <td style="padding:8px 0;color:#0B1629;font-size:14px;font-weight:600;">${course_title}</td>
-                </tr>
-                <tr style="border-top:1px solid #E2E8F0;">
-                  <td style="padding:8px 0;color:#64748B;font-size:14px;">Date</td>
-                  <td style="padding:8px 0;color:#0B1629;font-size:14px;">${dateStr}</td>
-                </tr>
-                <tr style="border-top:1px solid #E2E8F0;">
-                  <td style="padding:8px 0;color:#64748B;font-size:14px;">Format</td>
-                  <td style="padding:8px 0;color:#0B1629;font-size:14px;">${format || 'TBD'}</td>
-                </tr>
-                <tr style="border-top:1px solid #E2E8F0;">
-                  <td style="padding:8px 0;color:#64748B;font-size:14px;">Amount Paid</td>
-                  <td style="padding:8px 0;color:#0B1629;font-size:14px;font-weight:600;">$${price || 'N/A'}</td>
-                </tr>
-              </table>
-            </div>
+      await pool.query(
+        'UPDATE registrations SET payment_status = $1, stripe_payment_id = $2 WHERE email = $3 AND payment_status = $4',
+        ['paid', paymentIntent.id, email, 'pending']
+      );
 
-            <div style="background:#FFF9EC;border-radius:10px;padding:24px;margin-bottom:32px;">
-              <div style="color:#92400E;font-weight:700;font-size:15px;margin-bottom:8px;">📌 What happens next?</div>
-              <ul style="color:#78350F;font-size:14px;line-height:1.8;margin:0;padding-left:20px;">
+      const result = await pool.query(
+        'SELECT r.full_name, r.email, c.title as course_title, s.session_date, s.format FROM registrations r LEFT JOIN sessions s ON r.session_id = s.id LEFT JOIN certifications c ON s.certification_id = c.id WHERE r.email = $1 AND r.payment_status = $2 ORDER BY r.created_at DESC LIMIT 1',
+        [email, 'paid']
+      );
+
+      if (result.rows.length > 0) {
+        await sendConfirmationEmail(result.rows[0]);
+      }
+    }
+
+    return Response.json({ received: true });
+  } catch (error) {
+    console.error('Webhook error:', error.message);
+    return Response.json({ error: error.message }, { status: 400 });
+  }
+}
