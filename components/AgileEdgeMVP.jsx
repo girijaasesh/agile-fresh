@@ -911,7 +911,8 @@ const RegistrationFlow = ({ currency, toast }) => {
             <h2 style={{ fontFamily: 'Playfair Display', fontSize: 26, color: 'var(--navy)', marginBottom: 8 }}>Payment</h2>
             <p style={{ color: 'var(--slate)', marginBottom: 24 }}>Secure payment powered by Stripe. Your card details are never stored.</p>
             <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 12, padding: 24, marginBottom: 20 }}>
-              <PaymentForm
+             <PaymentForm
+                key={form.email + (selected?.id || '')}
                 amount={finalPrice}
                 currency={currency}
                 name={form.name}
@@ -919,6 +920,7 @@ const RegistrationFlow = ({ currency, toast }) => {
                 courseTitle={selected?.title || ''}
                 onSuccess={() => setStep(5)}
               />
+
             </div>
             <div style={{ marginBottom: 20, padding: 16, background: '#F8FAFC', borderRadius: 10, border: '1px dashed #CBD5E1' }}>
               <label className="form-label">Coupon Code</label>
