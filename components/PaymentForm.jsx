@@ -46,7 +46,11 @@ function CheckoutForm({ amount, currency, onSuccess }) {
 
   return (
     <div>
-      <PaymentElement />
+      <PaymentElement options={{
+        layout: 'tabs',
+        wallets: { applePay: 'never', googlePay: 'never' },
+        terms: { card: 'never' },
+      }} />
       {error && (
         <div style={{ background: '#FEE2E2', color: '#991B1B', padding: '12px', borderRadius: '8px', marginTop: '16px', fontSize: '14px' }}>
           {error}
@@ -68,7 +72,6 @@ export default function PaymentForm({ amount, currency, name, email, courseTitle
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Reset when email or course changes
   useEffect(() => {
     setClientSecret('');
     setError('');
@@ -108,4 +111,31 @@ export default function PaymentForm({ amount, currency, name, email, courseTitle
           {currency} {amount}
         </p>
         {error && (
-          <div style={{ background: '#FEE2E2', co
+          <div style={{ background: '#FEE2E2', color: '#991B1B', padding: '12px', borderRadius: '8px', marginBottom: '16px', fontSize: '14px' }}>
+            {error}
+          </div>
+        )}
+        <button
+          onClick={initializePayment}
+          disabled={loading}
+          style={{ width: '100%', padding: '14px', background: loading ? '#9CA3AF' : '#0B1629', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: 'bold', cursor: loading ? 'not-allowed' : 'pointer' }}
+        >
+          {loading ? 'Loading...' : 'Proceed to Payment'}
+        </button>
+        <p style={{ marginTop: '12px', fontSize: '12px', color: '#9CA3AF' }}>
+          🔒 256-bit SSL encrypted · Powered by Stripe
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <Elements stripe={stripePromise} options={{ clientSecret }} key={clientSecret}>
+      <CheckoutForm
+        amount={amount}
+        currency={currency}
+        onSuccess={onSuccess}
+      />
+    </Elements>
+  );
+}
