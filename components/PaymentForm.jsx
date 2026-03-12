@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   PaymentElement,
   Elements,
@@ -48,32 +48,14 @@ function CheckoutForm({ amount, currency, onSuccess }) {
     <div>
       <PaymentElement />
       {error && (
-        <div style={{
-          background: '#FEE2E2',
-          color: '#991B1B',
-          padding: '12px',
-          borderRadius: '8px',
-          marginTop: '16px',
-          fontSize: '14px',
-        }}>
+        <div style={{ background: '#FEE2E2', color: '#991B1B', padding: '12px', borderRadius: '8px', marginTop: '16px', fontSize: '14px' }}>
           {error}
         </div>
       )}
       <button
         onClick={handleSubmit}
         disabled={loading || !stripe}
-        style={{
-          width: '100%',
-          padding: '14px',
-          background: loading ? '#9CA3AF' : '#0B1629',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '8px',
-          fontSize: '16px',
-          fontWeight: 'bold',
-          cursor: loading ? 'not-allowed' : 'pointer',
-          marginTop: '24px',
-        }}
+        style={{ width: '100%', padding: '14px', background: loading ? '#9CA3AF' : '#0B1629', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: 'bold', cursor: loading ? 'not-allowed' : 'pointer', marginTop: '24px' }}
       >
         {loading ? 'Processing...' : `Pay ${currency} ${amount}`}
       </button>
@@ -86,8 +68,15 @@ export default function PaymentForm({ amount, currency, name, email, courseTitle
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Reset when email or course changes
+  useEffect(() => {
+    setClientSecret('');
+    setError('');
+  }, [email, courseTitle]);
+
   const initializePayment = async () => {
     setLoading(true);
+    setError('');
     try {
       const res = await fetch('/api/payment', {
         method: 'POST',
@@ -112,52 +101,11 @@ export default function PaymentForm({ amount, currency, name, email, courseTitle
         <p style={{ marginBottom: '16px', color: '#374151' }}>
           Course: <strong>{courseTitle}</strong>
         </p>
+        <p style={{ marginBottom: '8px', color: '#374151' }}>
+          Registering as: <strong>{name}</strong> ({email})
+        </p>
         <p style={{ marginBottom: '24px', fontSize: '24px', fontWeight: 'bold', color: '#0B1629' }}>
           {currency} {amount}
         </p>
         {error && (
-          <div style={{
-            background: '#FEE2E2',
-            color: '#991B1B',
-            padding: '12px',
-            borderRadius: '8px',
-            marginBottom: '16px',
-            fontSize: '14px',
-          }}>
-            {error}
-          </div>
-        )}
-        <button
-          onClick={initializePayment}
-          disabled={loading}
-          style={{
-            width: '100%',
-            padding: '14px',
-            background: loading ? '#9CA3AF' : '#0B1629',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '8px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            cursor: loading ? 'not-allowed' : 'pointer',
-          }}
-        >
-          {loading ? 'Loading...' : 'Proceed to Payment'}
-        </button>
-        <p style={{ marginTop: '12px', fontSize: '12px', color: '#9CA3AF' }}>
-          🔒 256-bit SSL encrypted · Powered by Stripe
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <CheckoutForm
-        amount={amount}
-        currency={currency}
-        onSuccess={onSuccess}
-      />
-    </Elements>
-  );
-}
+          <div style={{ background: '#FEE2E2', co
