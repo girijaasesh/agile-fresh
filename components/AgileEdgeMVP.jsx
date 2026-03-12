@@ -1490,7 +1490,7 @@ export default function App() {
       {!isAdmin && <Footer setPage={setPage} />}
       {!isAdmin && (
         <div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 90, display: 'flex', gap: 6, background: 'rgba(11,22,41,0.95)', padding: '8px 12px', borderRadius: 30, border: '1px solid rgba(201,168,76,0.2)', backdropFilter: 'blur(8px)' }}>
-          {[['home', '🏠', 'Home'], ['certifications', '📋', 'Courses'], ['register', '✍️', 'Enroll'], ['corporate', '🏢', 'Corporate'], ['admin', '⚙️', 'Admin']].map(([id, emoji, label]) => (
+          {[['home', '🏠', 'Home'], ['certifications', '📋', 'Courses'], ['register', '✍️', 'Enroll'], ['corporate', '🏢', 'Corporate']admin', '⚙️', 'Admin']].map(([id, emoji, label]) => (
             <button key={id} onClick={() => setPage(id)} style={{ padding: '7px 14px', borderRadius: 20, border: 'none', cursor: 'pointer', fontSize: 13, fontFamily: 'DM Sans', fontWeight: page === id ? 700 : 400, background: page === id ? 'var(--gold)' : 'transparent', color: page === id ? 'var(--navy)' : 'rgba(255,255,255,0.6)', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: 5 }}>
               {emoji} {label}
             </button>
