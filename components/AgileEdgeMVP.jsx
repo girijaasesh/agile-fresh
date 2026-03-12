@@ -485,7 +485,7 @@ const HomePage = ({ setPage, currency, setCurrency, toast }) => {
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: 40, paddingBottom: 80 }}>
           <div className="hero-eyebrow">
             <span style={{ width: 6, height: 6, background: 'var(--gold)', borderRadius: '50%', display: 'inline-block' }} />
-            SAFe 6.0 Certified Program Consultant
+            EMPOWERING PROFESSIONALS ACROSS ORGANIZATIONS
           </div>
           <h1 className="hero-title">
             Enterprise Agile<br />
@@ -493,7 +493,7 @@ const HomePage = ({ setPage, currency, setCurrency, toast }) => {
             at Scale
           </h1>
           <p className="hero-sub">
-            SAFe SPC-led certification training, coaching, and enterprise workshops. Build the agile capability your organization needs to compete in the digital era.
+            We believe agile mastery goes beyond passing an exam. Our programs are designed to cultivate the right mindset and provide deep, practical understanding of modern agile practices. By combining expert instruction, actionable tools, and real-world insights, we empower professionals to stay ahead of industry trends and unlock new career possibilities.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <button className="btn btn-primary" onClick={() => setPage('certifications')}>
