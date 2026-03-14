@@ -10,7 +10,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_51T7pjcFmjjA2mxuOJX6rGCCXEMZoUPddPSKa3drzGhQFAihfUN4zHbWp9C50Wojh9TBGM1SN9syhmBxwBlVrAHtB00B6i1qkxy');
 
-function CheckoutForm({ amount, currency, onSuccess }) {
+function CheckoutForm({ amount, currency, name, email, onSuccess }) {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -32,6 +32,12 @@ function CheckoutForm({ amount, currency, onSuccess }) {
       elements,
       confirmParams: {
         return_url: `${window.location.origin}/registration-success`,
+        payment_method_data: {
+          billing_details: {
+            name: name,
+            email: email,
+          }
+        }
       },
       redirect: 'if_required',
     });
@@ -52,6 +58,7 @@ function CheckoutForm({ amount, currency, onSuccess }) {
         terms: { card: 'never' },
         fields: {
           billingDetails: {
+            name: 'never',
             email: 'never',
           }
         }
@@ -135,17 +142,16 @@ export default function PaymentForm({ amount, currency, name, email, courseTitle
   }
 
   return (
-    <Elements 
-      stripe={stripePromise} 
-      options={{ 
-        clientSecret,
-        loader: 'auto',
-      }} 
+    <Elements
+      stripe={stripePromise}
+      options={{ clientSecret, loader: 'auto' }}
       key={clientSecret}
     >
       <CheckoutForm
         amount={amount}
         currency={currency}
+        name={name}
+        email={email}
         onSuccess={onSuccess}
       />
     </Elements>
