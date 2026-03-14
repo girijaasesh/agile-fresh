@@ -50,6 +50,11 @@ function CheckoutForm({ amount, currency, onSuccess }) {
         layout: 'tabs',
         wallets: { applePay: 'never', googlePay: 'never' },
         terms: { card: 'never' },
+        fields: {
+          billingDetails: {
+            email: 'never',
+          }
+        }
       }} />
       {error && (
         <div style={{ background: '#FEE2E2', color: '#991B1B', padding: '12px', borderRadius: '8px', marginTop: '16px', fontSize: '14px' }}>
@@ -130,7 +135,14 @@ export default function PaymentForm({ amount, currency, name, email, courseTitle
   }
 
   return (
-    <Elements stripe={stripePromise} options={{ clientSecret }} key={clientSecret}>
+    <Elements 
+      stripe={stripePromise} 
+      options={{ 
+        clientSecret,
+        loader: 'auto',
+      }} 
+      key={clientSecret}
+    >
       <CheckoutForm
         amount={amount}
         currency={currency}

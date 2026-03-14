@@ -14,9 +14,14 @@ export async function POST(req) {
         courseTitle: courseTitle,
       },
       receipt_email: email,
-      automatic_payment_methods: { enabled: true },
+      automatic_payment_methods: { 
+        enabled: true,
+        allow_redirects: 'never'
+      },
     });
-    return Response.json({ clientSecret: paymentIntent.client_secret });
+    return Response.json({ 
+      clientSecret: paymentIntent.client_secret 
+    });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
