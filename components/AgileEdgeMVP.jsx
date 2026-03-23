@@ -46,7 +46,7 @@ const CERTIFICATIONS = [
 
 const UPCOMING = [
   { certId: "sa", date: "2026-04-19", tz: "EST", format: "Virtual", price: 995, earlyBird: 400, ebDeadline: "2026-04-30", seats: 20, booked: 13 },
-  { certId: "ssm", date: "2026-04-26", tz: "EST", format: "Virtual", price: 895, earlyBird: 350, ebDeadline: "2026-04-30", seats: 20, booked: 8 },
+  { certId: "ssm", date: "2026-04-09", tz: "EST", format: "Virtual", price: 895, earlyBird: 350, ebDeadline: "2026-04-30", seats: 20, booked: 8 },
   { certId: "popm", date: "2026-04-05", tz: "PST", format: "In-Person, Chicago", price: 995, earlyBird: 795, ebDeadline: "2026-03-22", seats: 20, booked: 11 },
   { certId: "rte", date: "2026-04-12", tz: "EST", format: "Virtual", price: 1295, earlyBird: 1095, ebDeadline: "2026-03-29", seats: 12, booked: 9 },
   { certId: "spc", date: "2026-04-28", tz: "CST", format: "In-Person, Chicago", price: 3995, earlyBird: 3495, ebDeadline: "2026-04-14", seats: 10, booked: 8 }
