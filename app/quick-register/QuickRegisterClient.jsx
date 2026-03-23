@@ -631,42 +631,13 @@ function RegistrationForm({ form, set, blur, fieldErr, cert, sessions, session, 
         </div>
       )}
 
-      {showCoupon && (
-        <div style={{ marginBottom: 16 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--navy)', marginBottom: 6 }}>Have a coupon code?</div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <input
-              className="qr-input"
-              placeholder="Enter code"
-              value={couponCode}
-              onChange={e => setCouponCode(e.target.value.toUpperCase())}
-              onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), applyCoupon())}
-              style={{ flex: 1, marginBottom: 0 }}
-              disabled={!!couponApplied}
-            />
-            <button type="button" onClick={applyCoupon} disabled={couponLoading || !!couponApplied}
-              style={{ padding: '0 16px', background: couponApplied ? 'var(--success)' : 'var(--gold)', color: couponApplied ? 'white' : 'var(--navy)', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 13, cursor: 'pointer', whiteSpace: 'nowrap' }}>
-              {couponLoading ? '…' : couponApplied ? '✓ Applied' : 'Apply'}
-            </button>
-          </div>
-          {couponApplied && <div style={{ fontSize: 12, color: 'var(--success)', marginTop: 4 }}>✓ ${couponApplied.discount_value} off applied!</div>}
-          {couponError  && <div style={{ fontSize: 12, color: 'var(--danger)',  marginTop: 4 }}>{couponError}</div>}
-        </div>
-      )}
-
       {cert && (
-        <div style={{ padding: '12px 14px', background: 'var(--navy)', borderRadius: 10, marginBottom: 16, color: 'white' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginBottom: 2 }}>{cert.title}</div>
-              {eb && <div style={{ fontSize: 11, color: 'var(--success)' }}>⚡ Special rate applied</div>}
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              {couponDiscount > 0 && <div style={{ fontSize: 12, color: 'rgba(255,255,255,.4)', textDecoration: 'line-through' }}>${basePrice.toLocaleString('en-US')}</div>}
-              <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 24, color: 'var(--gold)' }}>${price.toLocaleString('en-US')}</div>
-              {couponDiscount > 0 && <div style={{ fontSize: 11, color: 'var(--success)' }}>-${couponDiscount} coupon</div>}
-            </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 14px', background: 'var(--navy)', borderRadius: 10, marginBottom: 16, color: 'white' }}>
+          <div>
+            <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginBottom: 2 }}>{cert.title}</div>
+            {eb && <div style={{ fontSize: 11, color: 'var(--success)' }}>⚡ Special rate applied</div>}
           </div>
+          <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 24, color: 'var(--gold)' }}>${price.toLocaleString('en-US')}</div>
         </div>
       )}
 
