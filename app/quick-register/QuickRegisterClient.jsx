@@ -431,7 +431,6 @@ export default function QuickRegisterClient() {
               { icon: '📅', title: 'Flexible Schedules', desc: 'Virtual and in-person cohorts every 2–4 weeks. Morning, afternoon, and weekend slots available.' },
               { icon: '🎓', title: 'SPC-Certified Trainers', desc: 'Learn from practitioners who\'ve led SAFe transformations at Fortune 500 companies.' },
               { icon: '⚡', title: 'Instant Seat Confirmation', desc: 'Register in 60 seconds. Receive your enrollment email within 5 minutes of payment.' },
-              { icon: '↩️', title: '7-Day Full Refund', desc: 'Changed your mind? Get a complete refund, no questions asked, within 7 days.' },
             ].map(h => (
               <div className="qr-highlight" key={h.title}>
                 <div className="qr-highlight-icon">{h.icon}</div>
@@ -652,7 +651,7 @@ function RegistrationForm({ form, set, blur, fieldErr, cert, sessions, session, 
       </button>
 
       <div className="qr-trust-pills">
-        {['🔒 256-bit SSL', '✅ Instant confirmation', '↩️ 7-day refund', '📧 Email within 5 min'].map(t => (
+        {['🔒 256-bit SSL', '✅ Instant confirmation', '📧 Email within 5 min'].map(t => (
           <span className="qr-trust-pill" key={t}>{t}</span>
         ))}
       </div>

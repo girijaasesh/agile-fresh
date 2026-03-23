@@ -315,7 +315,7 @@ export default function QuickLinkCheckout({ params }) {
 
           {/* Trust signals */}
           <div style={{ marginTop: 20, display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-            {['🔒 256-bit SSL', '✅ Instant confirmation', '📧 Pre-course materials sent 7 days prior', '↩️ Full refund within 7 days'].map(t => (
+            {['🔒 256-bit SSL', '✅ Instant confirmation', '📧 Pre-course materials sent 7 days prior'].map(t => (
               <span key={t} style={{ fontSize: 12, color: '#94A3B8' }}>{t}</span>
             ))}
           </div>

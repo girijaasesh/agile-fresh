@@ -1150,8 +1150,7 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
                   ✓ Instant enrollment confirmation<br />
                   ✓ Calendar invite (.ics) sent immediately<br />
                   ✓ Pre-course materials within 24hrs<br />
-                  ✓ Digital certificate upon completion<br />
-                  ✓ Full refund up to 7 days before
+                  ✓ Digital certificate upon completion
                 </div>
               </div>
             </div>
