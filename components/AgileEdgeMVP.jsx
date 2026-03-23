@@ -623,7 +623,6 @@ const HomePage = ({ setPage, currency, setCurrency, toast }) => {
                   <div className="testi-avatar">{t.name[0]}</div>
                   <div>
                     <div className="testi-name" style={{ color: 'white' }}>{t.name}</div>
-                    <div className="testi-role">{t.title}</div>
                     <div style={{ marginTop: 4 }}><span className="badge badge-gold" style={{ fontSize: 10 }}>{t.cert}</span></div>
                   </div>
                 </div>

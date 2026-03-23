@@ -494,7 +494,6 @@ export default function QuickRegisterClient() {
                 <div className="qr-test-stars">{'★'.repeat(t.rating)}</div>
                 <p className="qr-test-text">"{t.text}"</p>
                 <div className="qr-test-name">{t.name}</div>
-                <div className="qr-test-role">{t.title}</div>
                 <span className="qr-test-cert">{t.cert}</span>
               </div>
             ))}
