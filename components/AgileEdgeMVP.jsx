@@ -1227,41 +1227,6 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
     }
   }, [step, selected, selectedSession, form, corpEmails, waitlistMode, currency, finalPrice, session, cert, coupon, couponApplied, handleFormChange, handleCorpEmailChange, handleRemoveCorpEmail, setStep, setForm, setCorpEmails]);
 
-  // ── Auth gate ──────────────────────────────────────────────────────────────
-  const registerCallbackUrl = encodeURIComponent('/?page=register');
-
-  if (status === 'loading') {
-    return (
-      <div style={{ paddingTop: 64, minHeight: '100vh', background: 'var(--cream)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ width: 44, height: 44, border: '3px solid rgba(201,168,76,0.3)', borderTopColor: 'var(--gold)', borderRadius: '50%', animation: 'spin 0.7s linear infinite' }} />
-      </div>
-    );
-  }
-
-  if (status === 'unauthenticated') {
-    return (
-      <div style={{ paddingTop: 64, minHeight: '100vh', background: 'var(--cream)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ background: 'white', borderRadius: 16, padding: 48, maxWidth: 440, width: '100%', textAlign: 'center', boxShadow: '0 12px 40px rgba(0,0,0,0.08)', border: '1px solid #E2E8F0', margin: '0 24px' }}>
-          <div style={{ width: 64, height: 64, background: 'var(--gold-pale)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: 28 }}>🔐</div>
-          <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 24, color: 'var(--navy)', marginBottom: 10 }}>Sign in to Register</h2>
-          <p style={{ fontSize: 15, color: 'var(--slate)', lineHeight: 1.6, marginBottom: 28 }}>
-            Create a free account or sign in to enroll in SAFe certification courses and manage your registrations.
-          </p>
-          <a
-            href={`/auth?callbackUrl=${registerCallbackUrl}`}
-            style={{ display: 'inline-block', background: 'var(--gold)', color: 'var(--navy)', padding: '13px 32px', borderRadius: 8, fontWeight: 700, fontSize: 15, textDecoration: 'none', marginBottom: 12 }}
-          >
-            Sign In / Create Account
-          </a>
-          <p style={{ fontSize: 13, color: 'var(--slate-light)', marginTop: 16 }}>
-            Already have an account?{' '}
-            <a href={`/auth?callbackUrl=${registerCallbackUrl}`} style={{ color: 'var(--gold)', fontWeight: 600, textDecoration: 'none' }}>Sign in here →</a>
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div style={{ paddingTop: 64, minHeight: '100vh', background: 'var(--cream)' }}>
       <div style={{ background: 'var(--navy)', padding: '40px 0 30px' }}>

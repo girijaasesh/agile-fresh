@@ -494,27 +494,15 @@ export default function QuickRegisterClient() {
             <div ref={formRef}>
               <div className="qr-form-card">
 
-                {/* ── Loading ── */}
-                {authStatus === 'loading' && (
-                  <div style={{ textAlign: 'center', padding: '40px 0' }}>
-                    <div className="qr-spinner" style={{ margin: '0 auto', width: 32, height: 32 }} />
-                  </div>
-                )}
-
-                {/* ── Not signed in: inline auth panel ── */}
+                {/* ── Optional Google auto-fill banner (unauthenticated only) ── */}
                 {authStatus === 'unauthenticated' && (
-                  <div>
-                    <div className="qr-form-title">Sign in to Register</div>
-                    <p className="qr-form-sub">Sign in to secure your seat — takes under 60 seconds</p>
-
-                    {/* Google button */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 10, padding: '10px 14px', marginBottom: 20, flexWrap: 'wrap' }}>
+                    <span style={{ fontSize: 13, color: '#64748B' }}>Speed things up — auto-fill with Google</span>
                     <button
                       onClick={() => signIn('google', { callbackUrl: '/quick-register' })}
-                      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '13px 20px', border: '1.5px solid #E2E8F0', borderRadius: 9, background: 'white', fontFamily: 'DM Sans, sans-serif', fontSize: 14, fontWeight: 600, color: '#0B1629', cursor: 'pointer', marginBottom: 16, transition: 'all .2s' }}
-                      onMouseEnter={e => { e.currentTarget.style.borderColor = '#C9A84C'; e.currentTarget.style.background = '#FAFAF7'; }}
-                      onMouseLeave={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.background = 'white'; }}
+                      style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '7px 14px', border: '1.5px solid #E2E8F0', borderRadius: 7, background: 'white', fontFamily: 'DM Sans, sans-serif', fontSize: 13, fontWeight: 600, color: '#0B1629', cursor: 'pointer', whiteSpace: 'nowrap' }}
                     >
-                      <svg width="18" height="18" viewBox="0 0 24 24">
+                      <svg width="15" height="15" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                         <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                         <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
@@ -522,62 +510,34 @@ export default function QuickRegisterClient() {
                       </svg>
                       Continue with Google
                     </button>
-
-                    {/* Divider */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                      <div style={{ flex: 1, height: 1, background: '#E2E8F0' }} />
-                      <span style={{ fontSize: 11, fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: 1 }}>or</span>
-                      <div style={{ flex: 1, height: 1, background: '#E2E8F0' }} />
-                    </div>
-
-                    {/* Email/password link */}
-                    <a
-                      href="/auth?callbackUrl=/quick-register"
-                      style={{ display: 'block', textAlign: 'center', padding: '11px', border: '1.5px solid #E2E8F0', borderRadius: 9, fontSize: 14, fontWeight: 600, color: '#0B1629', textDecoration: 'none', marginBottom: 16, transition: 'border-color .2s' }}
-                    >
-                      Sign in with Email / Password
-                    </a>
-
-                    <p style={{ textAlign: 'center', fontSize: 12, color: '#94A3B8' }}>
-                      No account?{' '}
-                      <a href="/auth?callbackUrl=/quick-register" style={{ color: '#C9A84C', fontWeight: 600, textDecoration: 'none' }}>Create one free →</a>
-                    </p>
-
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 16, justifyContent: 'center' }}>
-                      {['🔒 256-bit SSL', '✅ No spam', '⚡ 60-second setup'].map(t => (
-                        <span key={t} style={{ fontSize: 11, color: '#94A3B8' }}>{t}</span>
-                      ))}
-                    </div>
                   </div>
                 )}
 
-                {/* ── Signed in: show banner + form ── */}
+                {/* ── Signed-in banner ── */}
                 {authStatus === 'authenticated' && (
-                  <>
-                    {/* Signed-in banner */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#F0FDF4', border: '1px solid #86EFAC', borderRadius: 10, padding: '10px 14px', marginBottom: 20 }}>
-                      {authSession.user.image ? (
-                        <img src={authSession.user.image} alt="" referrerPolicy="no-referrer" style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, border: '2px solid #86EFAC' }} />
-                      ) : (
-                        <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#C9A84C', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 13, color: '#0B1629', flexShrink: 0 }}>
-                          {(authSession.user.name || authSession.user.email || '?')[0].toUpperCase()}
-                        </div>
-                      )}
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 12, fontWeight: 700, color: '#15803D' }}>✓ Signed in</div>
-                        <div style={{ fontSize: 12, color: '#64748B', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                          {authSession.user.name ? `${authSession.user.name} · ` : ''}{authSession.user.email}
-                        </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#F0FDF4', border: '1px solid #86EFAC', borderRadius: 10, padding: '10px 14px', marginBottom: 20 }}>
+                    {authSession.user.image ? (
+                      <img src={authSession.user.image} alt="" referrerPolicy="no-referrer" style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, border: '2px solid #86EFAC' }} />
+                    ) : (
+                      <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#C9A84C', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 13, color: '#0B1629', flexShrink: 0 }}>
+                        {(authSession.user.name || authSession.user.email || '?')[0].toUpperCase()}
                       </div>
-                      <button onClick={() => signOut({ callbackUrl: '/quick-register' })} style={{ background: 'none', border: '1px solid #CBD5E1', borderRadius: 6, fontSize: 11, color: '#64748B', cursor: 'pointer', padding: '4px 8px', whiteSpace: 'nowrap', fontFamily: 'DM Sans, sans-serif' }}>
-                        Switch account
-                      </button>
+                    )}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: '#15803D' }}>✓ Signed in</div>
+                      <div style={{ fontSize: 12, color: '#64748B', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {authSession.user.name ? `${authSession.user.name} · ` : ''}{authSession.user.email}
+                      </div>
                     </div>
-
-                    {phase === 'form'    && <RegistrationForm form={form} set={set} blur={blur} fieldErr={fieldErr} cert={cert} sessions={sessions} session={session} price={price} basePrice={basePrice} couponDiscount={couponDiscount} eb={eb} seats={seats} urgency={urgency} submitting={submitting} apiError={apiError} onSubmit={handleSubmit} showCoupon={showCoupon} couponCode={couponCode} setCouponCode={setCouponCode} couponApplied={couponApplied} couponError={couponError} couponLoading={couponLoading} applyCoupon={applyCoupon} />}
-                    {phase === 'payment' && <PaymentSection   form={form} cert={cert} session={session} price={price} regId={regId} onSuccess={handlePaymentSuccess} />}
-                  </>
+                    <button onClick={() => signOut({ callbackUrl: '/quick-register' })} style={{ background: 'none', border: '1px solid #CBD5E1', borderRadius: 6, fontSize: 11, color: '#64748B', cursor: 'pointer', padding: '4px 8px', whiteSpace: 'nowrap', fontFamily: 'DM Sans, sans-serif' }}>
+                      Switch account
+                    </button>
+                  </div>
                 )}
+
+                {/* ── Registration form (always visible) ── */}
+                {phase === 'form'    && <RegistrationForm form={form} set={set} blur={blur} fieldErr={fieldErr} cert={cert} sessions={sessions} session={session} price={price} basePrice={basePrice} couponDiscount={couponDiscount} eb={eb} seats={seats} urgency={urgency} submitting={submitting} apiError={apiError} onSubmit={handleSubmit} showCoupon={showCoupon} couponCode={couponCode} setCouponCode={setCouponCode} couponApplied={couponApplied} couponError={couponError} couponLoading={couponLoading} applyCoupon={applyCoupon} />}
+                {phase === 'payment' && <PaymentSection   form={form} cert={cert} session={session} price={price} regId={regId} onSuccess={handlePaymentSuccess} />}
 
               </div>
             </div>
