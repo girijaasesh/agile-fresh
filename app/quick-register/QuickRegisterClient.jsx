@@ -344,6 +344,21 @@ export default function QuickRegisterClient() {
       try { data = await res.json(); } catch { throw new Error('Server error — please try again'); }
       if (!res.ok) throw new Error(data.error || 'Registration failed');
       setRegId(data.id);
+      // Send seat-reserved email immediately after registration
+      fetch('/api/notify', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:          form.name.trim(),
+          email:         form.email.trim(),
+          course:        cert?.title || 'SAFe Certification',
+          sessionDate:   session?.date   || null,
+          sessionFormat: session?.format || null,
+          sessionTz:     session?.tz     || null,
+          price:         price           || null,
+          regId:         data.id,
+        }),
+      }).catch(() => {}); // fire-and-forget — don't block payment flow
       setPhase('payment');  // show Stripe payment form
     } catch (err) {
       setApiError(err.message);
