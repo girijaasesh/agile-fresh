@@ -698,7 +698,7 @@ const CertificationsPage = ({ setPage, currency, setPreSelectedCert }) => {
                 <div style={{ fontSize: 12, color: 'var(--slate)' }}>Your name and email will be auto-filled when you register. Optional — you can skip this.</div>
               </div>
               <button
-                onClick={() => signIn('google', { callbackUrl: window.location.href })}
+                onClick={() => signIn('google', { callbackUrl: '/?page=certifications' })}
                 style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 18px', border: '1.5px solid #E2E8F0', borderRadius: 8, background: 'white', fontFamily: 'inherit', fontSize: 14, fontWeight: 600, color: '#0B1629', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24">
@@ -720,7 +720,7 @@ const CertificationsPage = ({ setPage, currency, setPreSelectedCert }) => {
               <div style={{ flex: 1, fontSize: 13, color: 'var(--slate)' }}>
                 Signed in as <strong style={{ color: 'var(--navy)' }}>{authSession.user?.name || authSession.user?.email}</strong> — details will auto-fill when you register
               </div>
-              <button onClick={() => signOut({ callbackUrl: window.location.href })} style={{ background: 'none', border: '1px solid #CBD5E1', borderRadius: 6, fontSize: 11, color: 'var(--slate)', cursor: 'pointer', padding: '4px 10px', fontFamily: 'inherit' }}>Sign out</button>
+              <button onClick={() => signOut({ callbackUrl: '/' })} style={{ background: 'none', border: '1px solid #CBD5E1', borderRadius: 6, fontSize: 11, color: 'var(--slate)', cursor: 'pointer', padding: '4px 10px', fontFamily: 'inherit' }}>Sign out</button>
             </div>
           )}
 
@@ -984,7 +984,7 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
               <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
                 <button 
                   type="button" 
-                  onClick={() => signIn('google', { callbackUrl: window.location.href })}
+                  onClick={() => signIn('google', { callbackUrl: '/?page=register' })}
                   style={{
                     background: '#4285F4',
                     color: 'white',
@@ -1143,8 +1143,8 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
           setCorpEmails={setCorpEmails}
           authSession={authSession}
           authStatus={status}
-          onGoogleSignIn={() => signIn('google', { callbackUrl: window.location.href })}
-          onSignOut={() => signOut({ callbackUrl: window.location.href })}
+          onGoogleSignIn={() => signIn('google', { callbackUrl: '/?page=register' })}
+          onSignOut={() => signOut({ callbackUrl: '/' })}
         />
       );
 
@@ -1281,7 +1281,7 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
               <div style={{ fontSize: 12, color: 'var(--slate)' }}>Your name and email will be auto-filled. No account required to continue manually.</div>
             </div>
             <button
-              onClick={() => signIn('google', { callbackUrl: window.location.href })}
+              onClick={() => signIn('google', { callbackUrl: '/?page=register' })}
               style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 18px', border: '1.5px solid #E2E8F0', borderRadius: 8, background: 'white', fontFamily: 'inherit', fontSize: 14, fontWeight: 600, color: '#0B1629', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24">
@@ -1304,7 +1304,7 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
               <div style={{ fontSize: 12, fontWeight: 700, color: '#15803D' }}>✓ Signed in — details auto-filled</div>
               <div style={{ fontSize: 12, color: 'var(--slate)' }}>{authSession.user?.name}{authSession.user?.name && authSession.user?.email ? ' · ' : ''}{authSession.user?.email}</div>
             </div>
-            <button onClick={() => signOut({ callbackUrl: window.location.href })} style={{ background: 'none', border: '1px solid #CBD5E1', borderRadius: 6, fontSize: 11, color: 'var(--slate)', cursor: 'pointer', padding: '4px 10px', fontFamily: 'inherit' }}>Sign out</button>
+            <button onClick={() => signOut({ callbackUrl: '/' })} style={{ background: 'none', border: '1px solid #CBD5E1', borderRadius: 6, fontSize: 11, color: 'var(--slate)', cursor: 'pointer', padding: '4px 10px', fontFamily: 'inherit' }}>Sign out</button>
           </div>
         )}
 
