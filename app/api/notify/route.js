@@ -1,39 +1,13 @@
-/**
- * POST /api/notify
- *
- * Sends a "seat reserved" confirmation email to the registrant immediately
- * after form submission (before payment).
- *
- * Body: { name, email, course, sessionDate, sessionFormat, sessionTz, regId, price }
- */
-
 export const dynamic = 'force-dynamic';
 
-const nodemailer = require('nodemailer');
-
-async function createTransporter() {
-  const host = process.env.EMAIL_HOST || 'smtp.gmail.com';
-  const configs = [
-    { host, port: parseInt(process.env.EMAIL_PORT || '465', 10), secure: true,  tls:{ rejectUnauthorized:false } },
-    { host, port: 587, secure: false, requireTLS: true, tls:{ rejectUnauthorized:false } },
-  ];
-  for (const cfg of configs) {
-    const t = nodemailer.createTransport({ ...cfg, auth:{ user:process.env.EMAIL_USER, pass:process.env.EMAIL_PASS } });
-    try { await t.verify(); return t; } catch(e) { console.error(`[notify] SMTP port ${cfg.port} failed:`, e.message); }
-  }
-  throw new Error(`SMTP auth failed for ${process.env.EMAIL_USER} — check EMAIL_HOST, EMAIL_USER, EMAIL_PASS env vars`);
-}
-
-async function sendEmail({ name, email, course, sessionDate, sessionFormat, sessionTz, price, regId }) {
-  const transporter = await createTransporter();
-
+function buildHtml({ name, course, sessionDate, sessionFormat, sessionTz, price, regId }) {
   const dateStr = sessionDate
     ? new Date(sessionDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
     : 'To be confirmed';
-
   const priceStr = price ? `$${Number(price).toLocaleString('en-US')} USD` : 'See invoice';
+  const fromEmail = process.env.EMAIL_FROM || 'training@optim-sol.com';
 
-  const html = `
+  return `
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -94,7 +68,7 @@ async function sendEmail({ name, email, course, sessionDate, sessionFormat, sess
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
               <tr>
                 <td align="center">
-                  <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://optim-soln.com'}/quick-register"
+                  <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://www.optim-soln.com'}/quick-register"
                      style="display:inline-block;background:#C9A84C;color:#0B1629;text-decoration:none;font-weight:700;font-size:16px;padding:14px 40px;border-radius:8px;">
                     Complete Payment →
                   </a>
@@ -107,7 +81,7 @@ async function sendEmail({ name, email, course, sessionDate, sessionFormat, sess
               <div style="font-size:13px;font-weight:700;color:#0B1629;margin-bottom:8px;">What happens next</div>
               ${[
                 'Complete your payment to confirm your enrollment.',
-                'You\'ll receive a payment receipt and enrollment confirmation immediately.',
+                "You'll receive a payment receipt and enrollment confirmation immediately.",
                 'Pre-course materials will be sent 7 days before your session.',
                 'A Zoom/venue link will be shared 48 hours before the session.',
               ].map((s, i) => `<p style="font-size:13px;color:#64748B;margin:6px 0;">${i + 1}. ${s}</p>`).join('')}
@@ -115,7 +89,7 @@ async function sendEmail({ name, email, course, sessionDate, sessionFormat, sess
 
             <p style="font-size:13px;color:#94A3B8;margin:0;">
               Questions? Reply to this email or contact us at
-              <a href="mailto:${process.env.EMAIL_USER}" style="color:#C9A84C;">${process.env.EMAIL_USER}</a>
+              <a href="mailto:${fromEmail}" style="color:#C9A84C;">${fromEmail}</a>
             </p>
           </td>
         </tr>
@@ -135,16 +109,7 @@ async function sendEmail({ name, email, course, sessionDate, sessionFormat, sess
   </table>
 </body>
 </html>`;
-
-  await transporter.sendMail({
-    from:    `"AgileEdge Training" <${process.env.EMAIL_USER}>`,
-    to:      email,
-    subject: `🎟️ Seat Reserved — ${course} | Complete Your Payment`,
-    html,
-  });
 }
-
-// ── Route handler ─────────────────────────────────────────────────────────────
 
 export async function POST(req) {
   let body;
@@ -160,15 +125,36 @@ export async function POST(req) {
     return Response.json({ error: 'name and email are required' }, { status: 400 });
   }
 
-  // Log env var presence to help debug missing config
-  console.log('[notify] EMAIL_HOST:', process.env.EMAIL_HOST || '(not set)');
-  console.log('[notify] EMAIL_USER:', process.env.EMAIL_USER || '(not set)');
-  console.log('[notify] EMAIL_PASS:', process.env.EMAIL_PASS ? '(set)' : '(not set)');
+  const apiKey = process.env.RESEND_API_KEY;
+  const fromEmail = process.env.EMAIL_FROM || 'training@optim-sol.com';
+
+  console.log('[notify] RESEND_API_KEY:', apiKey ? '(set)' : '(not set)');
   console.log('[notify] Sending to:', email, '| course:', course);
 
+  if (!apiKey) {
+    console.error('[notify] RESEND_API_KEY is not set');
+    return Response.json({ email: false, error: 'Email service not configured' }, { status: 207 });
+  }
+
   try {
-    await sendEmail({ name, email, course, sessionDate, sessionFormat, sessionTz, price, regId });
-    console.log('[notify] Email sent successfully to:', email);
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: `AgileEdge Training <${fromEmail}>`,
+        to:   [email],
+        subject: `🎟️ Seat Reserved — ${course} | Complete Your Payment`,
+        html: buildHtml({ name, email, course, sessionDate, sessionFormat, sessionTz, price, regId }),
+      }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || JSON.stringify(data));
+
+    console.log('[notify] Email sent successfully to:', email, '| id:', data.id);
     return Response.json({ email: true }, { status: 200 });
   } catch (err) {
     console.error('[notify] Email failed:', err.message);
