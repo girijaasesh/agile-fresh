@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 const nodemailer = require('nodemailer');
 
 async function createTransporter() {
-  const host = process.env.EMAIL_HOST || 'smtp.hostinger.com';
+  const host = process.env.EMAIL_HOST || 'smtp.gmail.com';
   const configs = [
     { host, port: parseInt(process.env.EMAIL_PORT || '465', 10), secure: true,  tls:{ rejectUnauthorized:false } },
     { host, port: 587, secure: false, requireTLS: true, tls:{ rejectUnauthorized:false } },
