@@ -1,53 +1,56 @@
 export const dynamic = 'force-dynamic';
 const Stripe = require('stripe');
 const { pool } = require('../../../../lib/db');
-const nodemailer = require('nodemailer');
 
 async function sendConfirmationEmail(data) {
-  const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST || 'smtp.hostinger.com',
-    port: parseInt(process.env.EMAIL_PORT || '465', 10),
-    secure: true,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+  const apiKey   = process.env.RESEND_API_KEY;
+  const fromEmail = process.env.EMAIL_FROM || 'training@optim-sol.com';
+  if (!apiKey) { console.error('[webhook] RESEND_API_KEY not set'); return; }
 
   const dateStr = data.session_date
     ? new Date(data.session_date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
     : 'TBD';
 
-  await transporter.sendMail({
-    from: '"AgileEdge Training" <' + process.env.EMAIL_USER + '>',
-    to: data.email,
-    subject: 'Registration Confirmed - ' + data.course_title,
-    html: '<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">'
-      + '<div style="background:#0B1629;padding:32px;text-align:center;">'
-      + '<div style="color:#C9A84C;font-size:22px;font-weight:700;">AgileEdge</div>'
-      + '<div style="color:rgba(255,255,255,0.6);font-size:13px;">Transform at Scale</div>'
-      + '</div>'
-      + '<div style="padding:32px;background:white;">'
-      + '<div style="background:#D1FAE5;border-left:4px solid #10B981;padding:16px;border-radius:8px;margin-bottom:24px;">'
-      + '<div style="color:#065F46;font-weight:700;">Registration Confirmed!</div>'
-      + '<div style="color:#065F46;font-size:14px;">Your payment was successful and your seat is reserved.</div>'
-      + '</div>'
-      + '<h2 style="color:#0B1629;">Hello ' + data.full_name + ',</h2>'
-      + '<p style="color:#475569;">Thank you for registering with AgileEdge. We look forward to seeing you!</p>'
-      + '<div style="background:#F8FAFC;border-radius:10px;padding:24px;margin:24px 0;">'
-      + '<div style="font-weight:700;color:#0B1629;margin-bottom:16px;">Registration Details</div>'
-      + '<p style="margin:8px 0;color:#475569;">Course: <strong>' + data.course_title + '</strong></p>'
-      + '<p style="margin:8px 0;color:#475569;">Date: <strong>' + dateStr + '</strong></p>'
-      + '<p style="margin:8px 0;color:#475569;">Format: <strong>' + (data.format || 'TBD') + '</strong></p>'
-      + '</div>'
-      + '<p style="color:#475569;font-size:14px;">You will receive joining instructions 48 hours before the session.</p>'
-      + '<p style="color:#475569;font-size:14px;">For questions, contact us at ' + process.env.EMAIL_USER + '</p>'
-      + '</div>'
-      + '<div style="background:#F8FAFC;padding:16px;text-align:center;border-top:1px solid #E2E8F0;">'
-      + '<p style="color:#94A3B8;font-size:12px;margin:0;">AgileEdge Training | optim-soln.com</p>'
-      + '</div>'
-      + '</div>',
+  const html = `
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+  <div style="background:#0B1629;padding:32px;text-align:center;">
+    <div style="color:#C9A84C;font-size:22px;font-weight:700;">AgileEdge</div>
+    <div style="color:rgba(255,255,255,0.6);font-size:13px;">Transform at Scale</div>
+  </div>
+  <div style="padding:32px;background:white;">
+    <div style="background:#D1FAE5;border-left:4px solid #10B981;padding:16px;border-radius:8px;margin-bottom:24px;">
+      <div style="color:#065F46;font-weight:700;">Registration Confirmed!</div>
+      <div style="color:#065F46;font-size:14px;">Your payment was successful and your seat is reserved.</div>
+    </div>
+    <h2 style="color:#0B1629;">Hello ${data.full_name},</h2>
+    <p style="color:#475569;">Thank you for registering with AgileEdge. We look forward to seeing you!</p>
+    <div style="background:#F8FAFC;border-radius:10px;padding:24px;margin:24px 0;">
+      <div style="font-weight:700;color:#0B1629;margin-bottom:16px;">Registration Details</div>
+      <p style="margin:8px 0;color:#475569;">Course: <strong>${data.course_title}</strong></p>
+      <p style="margin:8px 0;color:#475569;">Date: <strong>${dateStr}</strong></p>
+      <p style="margin:8px 0;color:#475569;">Format: <strong>${data.format || 'TBD'}</strong></p>
+    </div>
+    <p style="color:#475569;font-size:14px;">You will receive joining instructions 48 hours before the session.</p>
+    <p style="color:#475569;font-size:14px;">For questions, contact us at ${fromEmail}</p>
+  </div>
+  <div style="background:#F8FAFC;padding:16px;text-align:center;border-top:1px solid #E2E8F0;">
+    <p style="color:#94A3B8;font-size:12px;margin:0;">AgileEdge Training | optim-soln.com</p>
+  </div>
+</div>`;
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from:    `AgileEdge Training <${fromEmail}>`,
+      to:      [data.email],
+      subject: `Registration Confirmed — ${data.course_title}`,
+      html,
+    }),
   });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.message || JSON.stringify(result));
+  console.log('[webhook] Confirmation email sent to:', data.email);
 }
 
 export async function POST(req) {
