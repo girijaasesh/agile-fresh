@@ -223,7 +223,7 @@ const CSS = `
 
 // ─── Main component ────────────────────────────────────────────────────────────
 export default function QuickRegisterClient() {
-  const { data: session, status: authStatus } = useSession();
+  const { data: authSession, status: authStatus } = useSession();
   const formRef = useRef(null);
   const [form, setForm] = useState({
     name: '', email: '', phone: '', certId: '', sessionIdx: '', company: '', corpSize: '', isCorporate: false,
@@ -417,9 +417,9 @@ export default function QuickRegisterClient() {
             <a href="/" className="btn btn-outline qr-nav-back" style={{ padding: '7px 14px', fontSize: 12 }}>
               ← Main site
             </a>
-            {authStatus === 'authenticated' && session?.user ? (
+            {authStatus === 'authenticated' && authSession?.user ? (
               <a href="/dashboard" className="btn btn-gold" style={{ padding: '8px 18px', fontSize: 13, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-                {session.user.image && <img src={session.user.image} alt="" style={{ width: 22, height: 22, borderRadius: '50%' }} referrerPolicy="no-referrer" />}
+                {authSession.user.image && <img src={authSession.user.image} alt="" style={{ width: 22, height: 22, borderRadius: '50%' }} referrerPolicy="no-referrer" />}
                 My Account
               </a>
             ) : (
