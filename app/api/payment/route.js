@@ -13,10 +13,6 @@ async function sendConfirmationEmail(data) {
   const fromEmail = process.env.EMAIL_FROM || 'training@optim-sol.com';
   if (!apiKey) { console.error('[payment] RESEND_API_KEY not set'); return; }
 
-  const dateStr = data.session_date
-    ? new Date(data.session_date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-    : 'TBD';
-
   const html = `
 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
   <div style="background:#1E3A5F;padding:32px;text-align:center;">
@@ -33,8 +29,6 @@ async function sendConfirmationEmail(data) {
     <div style="background:#F8FAFC;border-radius:10px;padding:24px;margin:24px 0;">
       <div style="font-weight:700;color:#1E3A5F;margin-bottom:16px;">Registration Details</div>
       <p style="margin:8px 0;color:#475569;">Course: <strong>${data.course_title}</strong></p>
-      <p style="margin:8px 0;color:#475569;">Date: <strong>${dateStr}</strong></p>
-      <p style="margin:8px 0;color:#475569;">Format: <strong>${data.format || 'TBD'}</strong></p>
     </div>
     <p style="color:#475569;font-size:14px;">You will receive joining instructions 48 hours before the session.</p>
     <p style="color:#475569;font-size:14px;">For questions, contact us at ${fromEmail}</p>
@@ -109,22 +103,14 @@ export async function POST(req) {
       );
       console.log('[payment] Registration updated to paid for:', email);
 
-      // Fetch registration details and send confirmation email
-      const result = await pool.query(
-        `SELECT r.full_name, r.email, c.title as course_title, s.session_date, s.format
-         FROM registrations r
-         LEFT JOIN sessions s ON r.session_id = s.id
-         LEFT JOIN certifications c ON s.certification_id = c.id
-         WHERE r.email = $1 AND r.payment_status = $2
-         ORDER BY r.created_at DESC LIMIT 1`,
-        [email, 'paid']
-      );
-
-      if (result.rows.length > 0) {
-        await sendConfirmationEmail(result.rows[0]);
-      } else {
-        console.error('[payment] No registration found for email after payment:', email);
-      }
+      // Send confirmation email using data from the payment request
+      await sendConfirmationEmail({
+        full_name:    name,
+        email,
+        course_title: courseTitle,
+        session_date: null,
+        format:       null,
+      });
     } catch (dbErr) {
       console.error('[payment] DB/email error (payment still succeeded):', dbErr.message);
     }
