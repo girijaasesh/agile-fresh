@@ -248,6 +248,7 @@ export default function QuickRegisterClient() {
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
           const mapped = data.map(s => ({
+            id:         s.id,
             certId:     s.code.toLowerCase(),
             date:       s.session_date.split('T')[0],
             tz:         s.timezone || 'EST',
@@ -336,7 +337,7 @@ export default function QuickRegisterClient() {
           company:     form.isCorporate ? form.company.trim() : null,
           job_title:   null,
           country:     null,
-          session_id:  null,
+          session_id:  session?.id || null,
           coupon_code: couponApplied ? couponCode.trim().toUpperCase() : null,
           amount_paid: price || null,
           currency:    'USD',

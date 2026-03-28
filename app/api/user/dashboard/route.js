@@ -32,11 +32,15 @@ export async function GET() {
     // Split into upcoming vs past
     const now = new Date();
     const upcoming = registrations.filter(r =>
-      r.session_date && new Date(r.session_date) >= now && r.payment_status === 'paid'
+      r.payment_status === 'paid' &&
+      r.session_date && new Date(r.session_date) >= now
     );
-    const past = registrations.filter(r =>
-      !r.session_date || new Date(r.session_date) < now || r.payment_status !== 'paid'
+    const paid = registrations.filter(r =>
+      r.payment_status === 'paid' &&
+      (!r.session_date || new Date(r.session_date) < now)
     );
+    const pending = registrations.filter(r => r.payment_status !== 'paid');
+    const past = [...paid, ...pending];
 
     // All certifications for suggestions (exclude ones already registered)
     const certResult = await pool.query(
