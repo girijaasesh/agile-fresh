@@ -18,10 +18,12 @@ export default function PaymentForm({ amount, currency, name, email, courseTitle
 
     const initSquare = async () => {
       try {
-        const payments = window.Square.payments(
-          process.env.NEXT_PUBLIC_SQUARE_APP_ID,
-          process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID
-        );
+        const appId = process.env.NEXT_PUBLIC_SQUARE_APP_ID;
+        const locationId = process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID;
+        if (!appId || !locationId) {
+          throw new Error(`Square env vars missing: appId=${appId}, locationId=${locationId}`);
+        }
+        const payments = window.Square.payments(appId, locationId);
         const card = await payments.card({
           style: {
             '.input-container': { borderColor: '#E2E8F0', borderRadius: '8px' },

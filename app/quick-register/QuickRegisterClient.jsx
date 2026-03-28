@@ -742,7 +742,7 @@ function PaymentSection({ form, cert, session, price, onSuccess }) {
   return (
     <div>
       <div className="qr-form-title" style={{ marginBottom: 4 }}>Complete Payment</div>
-      <p className="qr-form-sub">Secure payment via Stripe · 256-bit SSL</p>
+      <p className="qr-form-sub">Secure payment via Square · 256-bit SSL</p>
       <div style={{ background: 'var(--navy)', borderRadius: 12, padding: '16px 20px', marginBottom: 20, color: 'white' }}>
         <div style={{ fontSize: 11, color: 'rgba(255,255,255,.5)', marginBottom: 6, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Order Summary</div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
