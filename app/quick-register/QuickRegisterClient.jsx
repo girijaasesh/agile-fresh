@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
+import { useSession, signIn } from 'next-auth/react';
 
 const PaymentForm = dynamic(() => import('../../components/PaymentForm'), { ssr: false });
 
@@ -222,6 +223,7 @@ const CSS = `
 
 // ─── Main component ────────────────────────────────────────────────────────────
 export default function QuickRegisterClient() {
+  const { data: session, status: authStatus } = useSession();
   const formRef = useRef(null);
   const [form, setForm] = useState({
     name: '', email: '', phone: '', certId: '', sessionIdx: '', company: '', corpSize: '', isCorporate: false,
@@ -412,12 +414,19 @@ export default function QuickRegisterClient() {
             <span className="qr-logo-text">AgileEdge</span>
           </a>
           <div className="qr-nav-right">
-            <a href="tel:+1-800-AGILE" className="btn-ghost-navy btn qr-nav-phone" style={{ color: 'rgba(255,255,255,.55)', fontSize: 13 }}>
-              📞 +1-800-AGILE
-            </a>
             <a href="/" className="btn btn-outline qr-nav-back" style={{ padding: '7px 14px', fontSize: 12 }}>
               ← Main site
             </a>
+            {authStatus === 'authenticated' && session?.user ? (
+              <a href="/dashboard" className="btn btn-gold" style={{ padding: '8px 18px', fontSize: 13, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+                {session.user.image && <img src={session.user.image} alt="" style={{ width: 22, height: 22, borderRadius: '50%' }} referrerPolicy="no-referrer" />}
+                My Account
+              </a>
+            ) : (
+              <button className="btn btn-outline" style={{ padding: '8px 18px', fontSize: 13 }} onClick={() => signIn('google', { callbackUrl: '/dashboard' })}>
+                Sign In
+              </button>
+            )}
             <button className="btn btn-gold" style={{ padding: '8px 18px', fontSize: 13 }} onClick={scrollToForm}>
               Register Now
             </button>

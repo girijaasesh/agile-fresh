@@ -382,6 +382,9 @@ const NavBar = ({ page, setPage }) => {
               <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', fontWeight: 500, maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {user.name || user.email}
               </span>
+              <a href="/dashboard" className="btn btn-sm" style={{ fontSize: 12, padding: '6px 12px', textDecoration: 'none', background: 'rgba(201,168,76,0.12)', color: 'var(--gold)', border: '1px solid rgba(201,168,76,0.35)' }}>
+                My Account
+              </a>
               <button className="btn btn-outline btn-sm" onClick={() => signOut({ callbackUrl: '/' })} style={{ fontSize: 12, padding: '6px 12px' }}>
                 Logout
               </button>
