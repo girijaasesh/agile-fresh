@@ -90,7 +90,6 @@ export default function DashboardPage() {
           {[
             { label: 'Courses Enrolled', value: paidCount, icon: '🎓' },
             { label: 'Upcoming Sessions', value: upcoming.length, icon: '📅' },
-            { label: 'Total Invested', value: fmt(totalSpent), icon: '💰' },
             { label: 'Certifications', value: paidCount, icon: '🏅' },
           ].map(s => (
             <div key={s.label} style={{ background: 'white', borderRadius: 12, padding: '20px 24px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
