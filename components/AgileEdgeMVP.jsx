@@ -870,7 +870,9 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
   const [selected, setSelected] = useState(preSelectedCert || null);
   const [selectedSession, setSelectedSession] = useState(null);
   const [coupon, setCoupon] = useState('');
-  const [couponApplied, setCouponApplied] = useState(false);
+  const [couponApplied, setCouponApplied] = useState(null);
+  const [couponError, setCouponError] = useState('');
+  const [couponLoading, setCouponLoading] = useState(false);
   const [waitlistMode, setWaitlistMode] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', title: '', country: '', experience: '', gst: '', accommodation: '', corpSize: '', isCorporate: false });
   const [corpEmails, setCorpEmails] = useState(['']);
@@ -925,12 +927,23 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
   const cert = selected ? getCert(selected) : null;
   const eb = session && isEarlyBird(session.ebDeadline);
   const basePrice = session ? (eb ? session.earlyBird : session.price) : 0;
-  const discount = couponApplied ? 0.1 : 0;
-  const finalPrice = Math.round(basePrice * (1 - discount));
+  const couponDiscount = couponApplied
+    ? (couponApplied.discount_type === 'fixed'
+        ? Number(couponApplied.discount_value)
+        : Math.round(basePrice * couponApplied.discount_value / 100))
+    : 0;
+  const finalPrice = Math.max(0, basePrice - couponDiscount);
 
-  const applyCoupon = () => {
-    if (coupon.toUpperCase() === 'SAFE20' || coupon.toUpperCase() === 'EARLY10') { setCouponApplied(true); toast('✅ Coupon applied! 10% discount.'); }
-    else toast('❌ Invalid coupon code.');
+  const applyCoupon = async () => {
+    if (!coupon.trim()) return;
+    setCouponLoading(true); setCouponError('');
+    try {
+      const res = await fetch('/api/coupon', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: coupon.trim() }) });
+      const data = await res.json();
+      if (data.valid) { setCouponApplied(data.coupon); toast('✅ Coupon applied!'); }
+      else { setCouponApplied(null); setCouponError('Invalid or expired coupon code.'); }
+    } catch { setCouponError('Could not verify coupon. Try again.'); }
+    finally { setCouponLoading(false); }
   };
 
   const stepContent = useMemo(() => {
@@ -1152,9 +1165,33 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
           <div>
             <h2 style={{ fontFamily: 'Playfair Display', fontSize: 26, color: 'var(--navy)', marginBottom: 8 }}>Payment</h2>
             <p style={{ color: 'var(--slate)', marginBottom: 24 }}>Secure payment powered by Stripe. Your card details are never stored.</p>
+            <div style={{ marginBottom: 20, padding: 16, background: '#F8FAFC', borderRadius: 10, border: '1px dashed #CBD5E1' }}>
+              <label className="form-label">Coupon Code</label>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <input
+                  className="form-input"
+                  placeholder="Enter coupon code"
+                  value={coupon}
+                  onChange={e => setCoupon(e.target.value.toUpperCase())}
+                  onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), applyCoupon())}
+                  style={{ flex: 1, textTransform: 'uppercase', letterSpacing: '0.05em' }}
+                  disabled={!!couponApplied}
+                />
+                {couponApplied ? (
+                  <button className="btn btn-sm" onClick={() => { setCouponApplied(null); setCoupon(''); setCouponError(''); }}
+                    style={{ background: '#FEE2E2', color: '#991B1B', border: 'none' }}>Remove</button>
+                ) : (
+                  <button className="btn btn-outline-navy btn-sm" onClick={applyCoupon} disabled={couponLoading || !coupon.trim()}>
+                    {couponLoading ? 'Checking…' : 'Apply'}
+                  </button>
+                )}
+              </div>
+              {couponApplied && <div style={{ fontSize: 12, color: 'var(--success)', marginTop: 6 }}>✅ ${couponDiscount.toLocaleString('en-US')} off applied!</div>}
+              {couponError && <div style={{ fontSize: 12, color: 'var(--danger)', marginTop: 6 }}>{couponError}</div>}
+            </div>
             <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 12, padding: 24, marginBottom: 20 }}>
              <PaymentForm
-                key={form.email + (selected?.id || '')}
+                key={form.email + (selected?.id || '') + finalPrice}
                 amount={finalPrice}
                 currency={currency}
                 name={form.name}
@@ -1162,15 +1199,6 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
                 courseTitle={selected?.title || ''}
                 onSuccess={() => setStep(5)}
               />
-
-            </div>
-            <div style={{ marginBottom: 20, padding: 16, background: '#F8FAFC', borderRadius: 10, border: '1px dashed #CBD5E1' }}>
-              <label className="form-label">Coupon Code</label>
-              <div style={{ display: 'flex', gap: 8 }}>
-                <input className="form-input" placeholder="Enter code (try SAFE20)" value={coupon} onChange={e => setCoupon(e.target.value)} style={{ flex: 1 }} />
-                <button className="btn btn-outline-navy btn-sm" onClick={applyCoupon}>Apply</button>
-              </div>
-              {couponApplied && <div style={{ fontSize: 12, color: 'var(--success)', marginTop: 6 }}>✅ 10% discount applied!</div>}
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <button className="btn btn-ghost" onClick={() => setStep(3)}>← Back</button>
@@ -1192,7 +1220,7 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
                 </div>
               </div>
               <div>
-                {[['Course Fee', fmt(basePrice, currency)], ['Early Bird Discount', eb ? `-${fmt(session.price - session.earlyBird, currency)}` : 'N/A'], ['Coupon Discount', couponApplied ? `-${fmt(Math.round(basePrice * 0.1), currency)}` : 'N/A']].map(([label, val]) => (
+                {[['Course Fee', fmt(basePrice, currency)], ['Early Bird Discount', eb ? `-${fmt(session.price - session.earlyBird, currency)}` : 'N/A'], ['Coupon Discount', couponApplied ? `-${fmt(couponDiscount, currency)}` : 'N/A']].map(([label, val]) => (
                   <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--slate)', marginBottom: 10 }}>
                     <span>{label}</span><span style={{ color: val.startsWith('-') ? 'var(--success)' : 'inherit' }}>{val}</span>
                   </div>
@@ -1260,7 +1288,7 @@ const RegistrationFlow = ({ currency, toast, preSelectedCert, setPage }) => {
         </div>
       );
     }
-  }, [step, selected, selectedSession, form, corpEmails, waitlistMode, currency, finalPrice, session, cert, coupon, couponApplied, handleFormChange, handleCorpEmailChange, handleRemoveCorpEmail, setStep, setForm, setCorpEmails]);
+  }, [step, selected, selectedSession, form, corpEmails, waitlistMode, currency, finalPrice, session, cert, coupon, couponApplied, couponError, couponLoading, couponDiscount, handleFormChange, handleCorpEmailChange, handleRemoveCorpEmail, setStep, setForm, setCorpEmails]);
 
   return (
     <div style={{ paddingTop: 64, minHeight: '100vh', background: 'var(--cream)' }}>
