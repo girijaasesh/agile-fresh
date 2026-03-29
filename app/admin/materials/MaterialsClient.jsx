@@ -23,17 +23,17 @@ export default function MaterialsClient({ materials: init, certifications, permi
   const handleFileChange = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setSaving(true); setError(''); setUploadProgress('Uploading file…');
+    setSaving(true); setError(''); setUploadProgress(`Uploading ${file.name}…`);
     try {
       const fd = new FormData();
       fd.append('file', file);
       const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      if (!res.ok) throw new Error(data.error || `Upload failed (${res.status})`);
       setForm(f => ({ ...f, file_url: data.url, type: data.type, title: f.title || file.name.replace(/\.[^.]+$/, '') }));
       setUploadProgress('✅ File uploaded successfully');
     } catch (e) { setError(e.message); setUploadProgress(''); }
-    finally { setSaving(false); }
+    finally { setSaving(false); if (fileInputRef.current) fileInputRef.current.value = ''; }
   };
 
   const addMaterial = async () => {
