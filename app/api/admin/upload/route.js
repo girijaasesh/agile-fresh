@@ -13,6 +13,11 @@ const ALLOWED_TYPES = {
   'video/mp4': 'video',
   'video/webm': 'video',
   'video/quicktime': 'video',
+  'image/jpeg': 'image',
+  'image/png': 'image',
+  'image/gif': 'image',
+  'image/webp': 'image',
+  'image/svg+xml': 'image',
 };
 
 const MAX_SIZE = 200 * 1024 * 1024; // 200MB
@@ -41,7 +46,7 @@ export async function POST(req) {
     const mimeType = file.type;
     const fileType = ALLOWED_TYPES[mimeType];
     if (!fileType) {
-      return Response.json({ error: `File type "${mimeType}" not allowed. Use PDF, PPT, Word, or video (MP4/WebM).` }, { status: 400 });
+      return Response.json({ error: `File type "${mimeType}" not allowed. Use PDF, PPT, Word, video (MP4/WebM), or image (JPG/PNG/WebP).` }, { status: 400 });
     }
 
     if (file.size > MAX_SIZE) {
@@ -49,7 +54,8 @@ export async function POST(req) {
     }
 
     const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const pathname = `course-materials/${Date.now()}-${safeName}`;
+    const folder = ALLOWED_TYPES[mimeType] === 'image' ? 'article-images' : 'course-materials';
+    const pathname = `${folder}/${Date.now()}-${safeName}`;
 
     const blob = await put(pathname, file, {
       access: 'public',
