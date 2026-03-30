@@ -308,6 +308,10 @@ const globalStyles = `
 
   @media (max-width: 768px) {
     .nav-links { display: none; }
+    .nav-logo-text { display: none; }
+    .nav-quick-register { display: none !important; }
+    .nav-username { display: none !important; }
+    .nav-inner { padding: 0 16px; height: 56px; }
     .hero-stats { gap: 20px; }
     .hero-stat-num { font-size: 24px; }
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
@@ -384,7 +388,7 @@ const NavBar = ({ page, setPage }) => {
           ))}
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <a href="/quick-register" className="btn btn-sm" style={{ background: 'rgba(201,168,76,0.12)', color: 'var(--gold)', border: '1px solid rgba(201,168,76,0.35)', textDecoration: 'none' }}>
+          <a href="/quick-register" className="btn btn-sm nav-quick-register" style={{ background: 'rgba(201,168,76,0.12)', color: 'var(--gold)', border: '1px solid rgba(201,168,76,0.35)', textDecoration: 'none' }}>
             ⚡ Quick Register
           </a>
           {isLoggedIn ? (
@@ -396,7 +400,7 @@ const NavBar = ({ page, setPage }) => {
                   {(user.name || user.email || '?')[0].toUpperCase()}
                 </div>
               )}
-              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', fontWeight: 500, maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span className="nav-username" style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', fontWeight: 500, maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {user.name || user.email}
               </span>
               <a href="/dashboard" className="btn btn-sm" style={{ fontSize: 12, padding: '6px 12px', textDecoration: 'none', background: 'rgba(201,168,76,0.12)', color: 'var(--gold)', border: '1px solid rgba(201,168,76,0.35)' }}>
