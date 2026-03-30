@@ -555,7 +555,37 @@ const ArticlesCarousel = () => {
         </div>
 
         {/* Cards row — side cards overlap behind center */}
-        <div style={{ display: 'flex', alignItems: 'center', padding: '24px 0 20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', padding: '24px 0 20px', position: 'relative' }}>
+
+          {/* Left arrow */}
+          {articles.length > 1 && (
+            <button onClick={() => go((idx - 1 + articles.length) % articles.length)} style={{
+              position: 'absolute', left: -20, zIndex: 10,
+              width: 44, height: 44, borderRadius: '50%',
+              background: 'white', border: '1.5px solid #D1DCF0',
+              boxShadow: '0 2px 12px rgba(30,58,95,0.15)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', transition: 'all 0.2s', color: '#1E3A5F', fontSize: 18,
+            }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#1E3A5F'; e.currentTarget.style.color = 'white'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = '#1E3A5F'; }}
+            >‹</button>
+          )}
+
+          {/* Right arrow */}
+          {articles.length > 1 && (
+            <button onClick={() => go((idx + 1) % articles.length)} style={{
+              position: 'absolute', right: -20, zIndex: 10,
+              width: 44, height: 44, borderRadius: '50%',
+              background: 'white', border: '1.5px solid #D1DCF0',
+              boxShadow: '0 2px 12px rgba(30,58,95,0.15)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', transition: 'all 0.2s', color: '#1E3A5F', fontSize: 18,
+            }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#1E3A5F'; e.currentTarget.style.color = 'white'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = '#1E3A5F'; }}
+            >›</button>
+          )}
 
           {/* Left card */}
           {articles.length > 1 && (
