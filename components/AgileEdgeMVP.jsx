@@ -541,9 +541,8 @@ const ArticlesCarousel = () => {
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
         {/* Label row */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 0 14px', borderBottom: '1px solid rgba(30,58,95,0.1)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', display: 'inline-block', animation: 'pulse-gold 2s infinite' }} />
-            <span style={{ color: '#8B6914', fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>Latest Articles</span>
+          <div>
+            <span style={{ color: '#1E3A5F', fontSize: 18, fontWeight: 800, fontFamily: "'Playfair Display', serif" }}>Latest Articles</span>
           </div>
           <a href="/articles" style={{ color: '#5A7898', fontSize: 13, textDecoration: 'none', fontWeight: 600, transition: 'color 0.2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#1E3A5F'}
