@@ -599,8 +599,8 @@ const ArticlesCarousel = () => {
                   {main.published_at ? new Date(main.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''}
                 </span>
               </div>
-              <h3 style={{ color: '#1E3A5F', fontSize: 19, fontWeight: 700, margin: '0 0 6px', lineHeight: 1.3, fontFamily: "'Playfair Display', serif" }}>{main.title}</h3>
-              <p style={{ color: '#5A7898', fontSize: 13, margin: 0, lineHeight: 1.6, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{main.summary}</p>
+              <h3 style={{ color: '#1E3A5F', fontSize: 30, fontWeight: 800, margin: '0 0 10px', lineHeight: 1.25, fontFamily: "'Playfair Display', serif" }}>{main.title}</h3>
+              <p style={{ color: '#5A7898', fontSize: 17, margin: 0, lineHeight: 1.7, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{main.summary}</p>
             </div>
           </a>
 
