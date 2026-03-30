@@ -553,7 +553,7 @@ const ArticlesCarousel = () => {
   );
 
   return (
-    <div style={{ background: 'linear-gradient(135deg, #EBF2FF 0%, #E6EEFF 50%, #EEF4FF 100%)', borderBottom: '1px solid #D1DCF0', paddingTop: 64 }}>
+    <div style={{ background: '#FFFFFF', borderBottom: '1px solid #E2E8F0', paddingTop: 64 }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
         {/* Label row */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 0 14px', borderBottom: '1px solid rgba(30,58,95,0.1)' }}>
