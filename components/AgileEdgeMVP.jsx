@@ -363,10 +363,12 @@ const NavBar = ({ page, setPage }) => {
           <span className="nav-logo-text">{BRAND.name}</span>
         </div>
         <div className="nav-links">
-          {[['home', 'Home'], ['certifications', 'Certifications'], ['register', 'Register'], ['corporate', 'Corporate']].map(([id, label]) => (
-            <button key={id} className={`nav-link ${page === id ? 'active' : ''}`} onClick={() => setPage(id)}>{label}</button>
+          {[['home', 'Home'], ['certifications', 'Certifications'], ['register', 'Register'], ['corporate', 'Corporate']].map(([id, label], i) => (
+            <>
+              <button key={id} className={`nav-link ${page === id ? 'active' : ''}`} onClick={() => setPage(id)}>{label}</button>
+              {i === 0 && <a key="hub" href="/articles" className="nav-link" style={{ textDecoration: 'none' }}>Knowledge Hub</a>}
+            </>
           ))}
-          <a href="/articles" className="nav-link" style={{ textDecoration: 'none' }}>Knowledge Hub</a>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           <a href="/quick-register" className="btn btn-sm" style={{ background: 'rgba(201,168,76,0.12)', color: 'var(--gold)', border: '1px solid rgba(201,168,76,0.35)', textDecoration: 'none' }}>
