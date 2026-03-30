@@ -293,6 +293,19 @@ const globalStyles = `
   .cursor-pointer { cursor: pointer; }
   .relative { position: relative; }
 
+  /* Carousel responsive */
+  .carousel-side { width: 200px; flex-shrink: 0; }
+  .carousel-img { aspect-ratio: 16/6; overflow: hidden; background: #D8E6F5; }
+  .carousel-arrow-left { position: absolute; left: -20px; z-index: 10; }
+  .carousel-arrow-right { position: absolute; right: -20px; z-index: 10; }
+
+  @media (max-width: 768px) {
+    .carousel-side { display: none !important; }
+    .carousel-img { aspect-ratio: 4/3 !important; }
+    .carousel-arrow-left { left: 4px !important; }
+    .carousel-arrow-right { right: 4px !important; }
+  }
+
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero-stats { gap: 20px; }
@@ -559,7 +572,7 @@ const ArticlesCarousel = () => {
 
           {/* Left arrow */}
           {articles.length > 1 && (
-            <button onClick={() => go((idx - 1 + articles.length) % articles.length)} style={{
+            <button onClick={() => go((idx - 1 + articles.length) % articles.length)} className="carousel-arrow-left" style={{
               position: 'absolute', left: -20, zIndex: 10,
               width: 44, height: 44, borderRadius: '50%',
               background: 'white', border: '1.5px solid #D1DCF0',
@@ -574,7 +587,7 @@ const ArticlesCarousel = () => {
 
           {/* Right arrow */}
           {articles.length > 1 && (
-            <button onClick={() => go((idx + 1) % articles.length)} style={{
+            <button onClick={() => go((idx + 1) % articles.length)} className="carousel-arrow-right" style={{
               position: 'absolute', right: -20, zIndex: 10,
               width: 44, height: 44, borderRadius: '50%',
               background: 'white', border: '1.5px solid #D1DCF0',
@@ -591,6 +604,7 @@ const ArticlesCarousel = () => {
           {articles.length > 1 && (
             <div
               onClick={() => go((idx - 1 + articles.length) % articles.length)}
+              className="carousel-side"
               style={{
                 position: 'relative', zIndex: 1, flexShrink: 0,
                 width: 200, marginRight: -64,
@@ -615,7 +629,7 @@ const ArticlesCarousel = () => {
             boxShadow: '0 12px 48px rgba(30,58,95,0.18)',
             overflow: 'hidden', animation: 'fadeUp 0.4s ease forwards',
           }}>
-            <div style={{ aspectRatio: '16/6', overflow: 'hidden', background: '#D8E6F5' }}>
+            <div className="carousel-img" style={{ aspectRatio: '16/6', overflow: 'hidden', background: '#D8E6F5' }}>
               {main.cover_image_url
                 ? <img src={main.cover_image_url} alt={main.title} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
                 : <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg,#DBEAFE,#C7D9F5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 48 }}>📝</div>}
@@ -638,6 +652,7 @@ const ArticlesCarousel = () => {
           {articles.length > 1 && (
             <div
               onClick={() => go((idx + 1) % articles.length)}
+              className="carousel-side"
               style={{
                 position: 'relative', zIndex: 1, flexShrink: 0,
                 width: 200, marginLeft: -64,
