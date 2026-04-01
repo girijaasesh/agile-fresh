@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Enterprise Agile Implementation Partner | Optim-Soln',
-  description: 'Optim-Soln partners with Prime Contractors and Government Agencies on SAFe transformations, AWS cloud migrations, and data modernization.',
+  title: 'Enterprise Agile Implementation Partner | Optimized Solutions',
+  description: 'Optimized Solutions partners with Prime Contractors and Government Agencies on SAFe transformations, AWS cloud migrations, and data modernization.',
 };
 
 const NAV_H = 60;
@@ -14,7 +14,7 @@ export default function EnterpriseAgilePage() {
       {/* ── NAV ── */}
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: 'rgba(250,250,248,0.96)', backdropFilter: 'blur(8px)', borderBottom: '1px solid #DDD', height: NAV_H, display: 'flex', alignItems: 'center' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 28px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{ fontFamily: 'Georgia, serif', fontSize: 17, color: '#111', fontWeight: 700, textDecoration: 'none', letterSpacing: '-0.01em' }}>Optim-Soln</Link>
+          <Link href="/" style={{ fontFamily: 'Georgia, serif', fontSize: 17, color: '#111', fontWeight: 700, textDecoration: 'none', letterSpacing: '-0.01em' }}>Optimized Solutions</Link>
           <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
             <Link href="/quick-register" style={{ color: '#666', fontSize: 13, textDecoration: 'none', fontWeight: 500 }}>Training</Link>
             <Link href="/articles" style={{ color: '#666', fontSize: 13, textDecoration: 'none', fontWeight: 500 }}>Knowledge Hub</Link>
@@ -143,7 +143,7 @@ export default function EnterpriseAgilePage() {
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 28px' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, borderBottom: '1px solid #E5E5E5', paddingBottom: 20 }}>
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(22px, 2.5vw, 32px)', color: '#111', margin: 0, letterSpacing: '-0.01em' }}>Three Phases. One Sustained Outcome.</h2>
-            <span style={{ fontSize: 10, color: '#AAA', letterSpacing: '0.1em', textTransform: 'uppercase' }}>The Optim-Soln Framework</span>
+            <span style={{ fontSize: 10, color: '#AAA', letterSpacing: '0.1em', textTransform: 'uppercase' }}>The Optimized Solutions Framework</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
             {[
@@ -197,7 +197,7 @@ export default function EnterpriseAgilePage() {
 
       {/* ── FOOTER ── */}
       <footer style={{ background: '#111', padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <span style={{ fontFamily: 'Georgia, serif', fontSize: 14, color: 'rgba(255,255,255,0.35)', fontWeight: 600 }}>Optim-Soln</span>
+        <span style={{ fontFamily: 'Georgia, serif', fontSize: 14, color: 'rgba(255,255,255,0.35)', fontWeight: 600 }}>Optimized Solutions</span>
         <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.2)', margin: 0 }}>
           © {new Date().getFullYear()} · Enterprise Agile & Cloud Modernization ·{' '}
           <Link href="/enterprise-agile" style={{ color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>AgileEdge Training</Link>
