@@ -19,10 +19,13 @@ const LoadingFallback = () => (
   </div>
 );
 
-const AgileEdgeMVP = dynamic(() => import('./AgileEdgeMVP'), {
-  ssr: false,
-  loading: () => <LoadingFallback />,
-});
+const AgileEdgeMVP = dynamic(
+  () => import('./AgileEdgeMVP').catch(err => {
+    // If the chunk fails to evaluate, return a component that throws so ErrorBoundary catches it
+    return function FailedLoad() { throw err; };
+  }),
+  { ssr: false, loading: () => <LoadingFallback /> }
+);
 
 class ErrorBoundary extends Component {
   constructor(props) {

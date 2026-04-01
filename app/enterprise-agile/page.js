@@ -42,19 +42,24 @@ export default function EnterpriseAgilePage() {
         <div style={{ position: 'absolute', top: '15%', right: '5%', width: 600, height: 600, background: `radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)`, pointerEvents: 'none' }} />
 
         <div style={{ maxWidth: 1180, margin: '0 auto', padding: '80px 28px', position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: 20, padding: '6px 18px', marginBottom: 32 }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: GOLD, display: 'inline-block' }} />
-            <span style={{ color: GOLD, fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Enterprise Agile Implementation Partner · DMV Corridor</span>
-          </div>
 
           <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(36px, 5.5vw, 72px)', color: 'white', lineHeight: 1.1, margin: '0 0 24px', maxWidth: 820 }}>
             Transformation<br />
             <span style={{ color: GOLD }}>Over Transition.</span>
           </h1>
 
-          <p style={{ fontSize: 'clamp(16px, 2vw, 20px)', color: 'rgba(255,255,255,0.7)', lineHeight: 1.75, maxWidth: 620, margin: '0 0 44px' }}>
-            We don't just move you to the cloud — we rebuild how you deliver. Optim-Soln partners with Prime Contractors and Government Agencies on AWS cloud migrations, on-premises modernization, and Scaled Agile transformations built to last.
-          </p>
+          <div style={{ maxWidth: 680, margin: '0 0 44px' }}>
+            {[
+              ['Strategic Portfolio Alignment', 'Synchronizing enterprise strategy with execution to ensure every Value Stream delivers maximum mission impact and measurable ROI.'],
+              ['High-Velocity Agile Release Trains (ARTs)', 'Launching and optimizing ARTs that move organizations from rigid, siloed planning to continuous, flow-based delivery.'],
+              ['Modernized Governance Frameworks', 'Replacing legacy oversight with Lean-Agile governance that maintains strict compliance while accelerating speed-to-market.'],
+            ].map(([title, desc]) => (
+              <div key={title} style={{ marginBottom: 24 }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: GOLD, marginBottom: 6 }}>{title}</div>
+                <div style={{ fontSize: 16, color: 'rgba(255,255,255,0.7)', lineHeight: 1.75 }}>{desc}</div>
+              </div>
+            ))}
+          </div>
 
           <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
             <a href="#contact" style={{ background: GOLD, color: NAVY, padding: '14px 32px', borderRadius: 8, fontWeight: 700, fontSize: 15, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
@@ -67,7 +72,7 @@ export default function EnterpriseAgilePage() {
 
           {/* Proof bar */}
           <div style={{ display: 'flex', gap: 48, marginTop: 72, paddingTop: 48, borderTop: '1px solid rgba(255,255,255,0.08)', flexWrap: 'wrap' }}>
-            {[['SPC · PMP · CSM', 'Principal Credentials'], ['PBGC & DMV Corridor', 'Proven Environments'], ['SAFe · AWS · DevSecOps', 'Core Frameworks'], ['GovCon & Enterprise', 'Sectors Served']].map(([val, label]) => (
+            {[['SPC · PMP · CSM', 'Principal Credentials'], ['SAFe · AWS · DevSecOps', 'Core Frameworks'], ['GovCon & Enterprise', 'Sectors Served']].map(([val, label]) => (
               <div key={label}>
                 <div style={{ fontFamily: 'Georgia, serif', fontSize: 16, color: GOLD, fontWeight: 700 }}>{val}</div>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', marginTop: 4, letterSpacing: '0.04em' }}>{label}</div>
@@ -87,9 +92,6 @@ export default function EnterpriseAgilePage() {
             </h2>
             <p style={{ fontSize: 16, color: SLATE, lineHeight: 1.8, margin: '0 0 20px' }}>
               Federal and enterprise IT leaders face a consistent problem: consultants who speak Agile but deliver waterfall, cloud architects who migrate data without modernizing workflows, and transformation programs that collapse the moment the contract ends.
-            </p>
-            <p style={{ fontSize: 16, color: SLATE, lineHeight: 1.8, margin: '0 0 32px' }}>
-              Optim-Soln is built differently. Every engagement is led by our principal — an SPC, PMP, and CSM with direct, hands-on experience scaling delivery at organizations including the <strong style={{ color: NAVY }}>Pension Benefit Guaranty Corporation (PBGC)</strong> and across the broader DC, Maryland, and Virginia enterprise tech corridor.
             </p>
             <a href="#contact" style={{ background: NAVY, color: 'white', padding: '12px 28px', borderRadius: 7, fontWeight: 700, fontSize: 14, textDecoration: 'none', display: 'inline-block' }}>
               Talk to the Principal →
@@ -235,40 +237,6 @@ export default function EnterpriseAgilePage() {
         </div>
       </section>
 
-      {/* ── COMPARISON TABLE ── */}
-      <section style={{ background: 'white', padding: '100px 28px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div style={{ color: GOLD, fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 16 }}>Why Optim-Soln</div>
-            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(26px, 3vw, 40px)', color: NAVY, margin: 0 }}>
-              Boutique Means the Principal Delivers — Not a Substitute.
-            </h2>
-          </div>
-
-          <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid #E2E8F0', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', background: NAVY, padding: '16px 24px' }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em' }}> </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.5)', textAlign: 'center' }}>Large Consulting Firms</div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: GOLD, textAlign: 'center' }}>Optim-Soln</div>
-            </div>
-            {[
-              ['Leadership Access', 'Senior partner sells, junior staff delivers', 'Principal-led from discovery to close'],
-              ['Methodology', 'One-size-fits-all playbook', 'Tailored to your contract structure and culture'],
-              ['Compliance Fluency', 'General awareness', 'Deep GovCon and federal regulatory experience'],
-              ['Exit Strategy', 'Maximize billable extension', 'Build internal capability, enable independence'],
-              ['Geography', 'National / global', 'DMV-rooted, relationship-driven'],
-            ].map(([label, large, us], i) => (
-              <div key={label} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', padding: '18px 24px', borderTop: '1px solid #F1F5F9', background: i % 2 === 0 ? 'white' : CREAM, alignItems: 'start' }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: NAVY }}>{label}</div>
-                <div style={{ fontSize: 13, color: '#94A3B8', textAlign: 'center', paddingRight: 16 }}>{large}</div>
-                <div style={{ fontSize: 13, color: NAVY_MID, fontWeight: 600, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-                  <span style={{ color: GOLD }}>✓</span> {us}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── CTA ── */}
       <section id="contact" style={{ background: `linear-gradient(145deg, ${NAVY} 0%, #0D1F3C 100%)`, padding: '100px 28px', position: 'relative', overflow: 'hidden' }}>

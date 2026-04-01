@@ -1,5 +1,1 @@
-import ClientWrapper from '../components/ClientWrapper';
-
-export default function Page() {
-  return <ClientWrapper />;
-}
+export { default, metadata } from './enterprise-agile/page';
