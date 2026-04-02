@@ -52,7 +52,7 @@ export default function EnterpriseAgilePage() {
               ['03', 'Modernized Governance Frameworks', 'Replacing legacy oversight with Lean-Agile governance that maintains strict compliance while accelerating speed-to-market.'],
             ].map(([num, title, desc], i) => (
               <div key={num} style={{ padding: '24px 28px 24px 0', paddingLeft: i === 0 ? 0 : 28, borderLeft: i > 0 ? `1px solid ${BORDER}` : 'none' }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: FAINT, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>{num}</div>
+
                 <div style={{ fontSize: 16, fontWeight: 700, color: TEXT, marginBottom: 8, lineHeight: 1.3 }}>{title}</div>
                 <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.65 }}>{desc}</div>
               </div>
