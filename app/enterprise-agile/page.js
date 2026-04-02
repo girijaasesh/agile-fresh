@@ -67,17 +67,6 @@ export default function EnterpriseAgilePage() {
         </div>
       </section>
 
-      {/* ── PROOF BAR ── */}
-      <section style={{ borderBottom: `1px solid ${BORDER}`, background: BG_DARK }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 28px', display: 'flex' }}>
-          {[['SPC · PMP · CSM', 'Principal Credentials'], ['SAFe · AWS · DevSecOps', 'Core Frameworks'], ['GovCon & Enterprise', 'Sectors Served']].map(([val, label], i) => (
-            <div key={label} style={{ flex: 1, padding: '20px 28px', borderRight: i < 2 ? '1px solid rgba(255,255,255,0.1)' : 'none', paddingLeft: i === 0 ? 0 : 28 }}>
-              <div style={{ fontFamily: 'Georgia, serif', fontSize: 15, color: PEACH, fontWeight: 700 }}>{val}</div>
-              <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 4, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* ── DIFFERENTIATION ── */}
       <section style={{ borderBottom: `1px solid ${BORDER}`, background: BG }}>
@@ -127,7 +116,6 @@ export default function EnterpriseAgilePage() {
               { color: LAVENDER, label: 'Agile for Government',       items: ['FISMA, FedRAMP, Section 508', 'Agile within FAR/DFARS structures', 'Sprint cadences aligned to budget cycles', 'PMO reporting without bureaucratic drag', 'Mixed gov/contractor team coaching'] },
             ].map((c, i) => (
               <div key={c.label} style={{ padding: '0 40px 0 0', paddingLeft: i === 0 ? 0 : 40, borderLeft: i > 0 ? `1px solid ${BORDER}` : 'none' }}>
-                <div style={{ width: 28, height: 3, background: c.color, borderRadius: 2, marginBottom: 18 }} />
                 <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 17, color: TEXT, margin: '0 0 18px', lineHeight: 1.3 }}>{c.label}</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {c.items.map(item => (

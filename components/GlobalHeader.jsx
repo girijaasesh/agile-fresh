@@ -18,8 +18,9 @@ export default function GlobalHeader() {
   if (pathname?.startsWith('/admin')) return null;
 
   const isActive = (href) => {
+    if (href.includes('#')) return false;
     if (href === '/') return pathname === '/';
-    return pathname?.startsWith(href.split('#')[0]) && href !== '/';
+    return pathname?.startsWith(href);
   };
 
   return (
@@ -44,8 +45,8 @@ export default function GlobalHeader() {
             <Link key={label} href={href} style={{
               padding: '7px 14px',
               fontSize: 14,
-              fontWeight: isActive(href) ? 700 : 500,
-              color: isActive(href) ? '#111' : '#666',
+              fontWeight: 600,
+              color: isActive(href) ? '#111' : '#555',
               textDecoration: 'none',
               borderBottom: isActive(href) ? '2px solid #111' : '2px solid transparent',
               transition: 'all 0.15s',
