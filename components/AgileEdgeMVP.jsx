@@ -843,7 +843,7 @@ const HomePage = ({ setPage, currency, setCurrency, toast }) => {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
                     <span style={{ fontSize: 11, fontWeight: 700, padding: '4px 10px', borderRadius: 20, background: rc.bg, color: rc.color, letterSpacing: 0.5 }}>{cert.role}</span>
                     <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-                      {cert.aiPowered && <span style={{ fontSize: 10, fontWeight: 700, padding: '4px 8px', borderRadius: 20, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white', letterSpacing: 0.5 }}>✦ AI-Powered</span>}
+                      <span style={{ fontSize: 10, fontWeight: 700, padding: '4px 8px', borderRadius: 20, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white', letterSpacing: 0.5 }}>✦ AI-Powered</span>
                       <span style={{ fontSize: 11, fontWeight: 600, padding: '4px 10px', borderRadius: 20, background: '#F8FAFC', color: 'var(--slate)', border: '1px solid #E2E8F0' }}>{cert.duration}</span>
                     </div>
                   </div>
@@ -1047,7 +1047,7 @@ const CertificationsPage = ({ setPage, currency, setPreSelectedCert }) => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
                   <span className="badge badge-navy">{cert.code}</span>
                   <div style={{ display: 'flex', gap: 6 }}>
-                    {cert.aiPowered && <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white' }}>✦ AI-Powered</span>}
+                    <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white' }}>✦ AI-Powered</span>
                     <span className="badge badge-gold">{cert.duration}</span>
                   </div>
                 </div>

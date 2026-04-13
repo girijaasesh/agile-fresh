@@ -98,7 +98,7 @@ export default function EnterpriseAgilePage() {
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                     <div style={{ fontSize: 16, fontWeight: 700, color: TEXT }}>{title}</div>
-                    {aiPowered && <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 20, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white', whiteSpace: 'nowrap' }}>✦ AI-Powered</span>}
+                    <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 20, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white', whiteSpace: 'nowrap' }}>✦ AI-Powered</span>
                   </div>
                   <div style={{ fontSize: 12, color: FAINT, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>{role}</div>
                   <div style={{ fontSize: 15, color: MUTED, lineHeight: 1.6 }}>{desc}</div>

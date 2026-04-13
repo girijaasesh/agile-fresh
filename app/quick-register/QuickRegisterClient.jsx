@@ -499,7 +499,7 @@ export default function QuickRegisterClient() {
               return (
                 <div className={`qr-price-card${recommended ? ' recommended' : ''}`} key={id}>
                   {recommended && <div className="qr-price-rec-badge">Most Popular</div>}
-                  {c.aiPowered && <div style={{ position: 'absolute', top: recommended ? 16 : -10, right: 14, fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white' }}>✦ AI-Powered</div>}
+                  <div style={{ position: 'absolute', top: recommended ? 16 : -10, right: 14, fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white' }}>✦ AI-Powered</div>
                   <div className="qr-price-code">{c.code}</div>
                   <div className="qr-price-title">{c.title}</div>
                   <div className="qr-price-role">{c.role} · {c.duration}</div>
