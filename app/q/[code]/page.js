@@ -257,7 +257,7 @@ export default function QuickLinkCheckout({ params }) {
                 <input placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
               </div>
               <div className="field">
-                <label>Work Email *</label>
+                <label>Email Address *</label>
                 <input type="email" placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
               </div>
               <div className="field">

@@ -632,8 +632,8 @@ function RegistrationForm({ form, set, blur, fieldErr, cert, sessions, session, 
           <input className={`qr-input${fieldErr('name') ? ' err' : ''}`} placeholder="Jane Smith" value={form.name} autoFocus
             onChange={e => set('name', e.target.value)} onBlur={() => blur('name')} autoComplete="name" />
         </Field>
-        <Field label="Work Email *" error={fieldErr('email')}>
-          <input className={`qr-input${fieldErr('email') ? ' err' : ''}`} type="email" placeholder="jane@company.com" value={form.email}
+        <Field label="Email Address *" error={fieldErr('email')}>
+          <input className={`qr-input${fieldErr('email') ? ' err' : ''}`} type="email" placeholder="jane@example.com" value={form.email}
             onChange={e => set('email', e.target.value)} onBlur={() => blur('email')} autoComplete="email" />
         </Field>
       </div>

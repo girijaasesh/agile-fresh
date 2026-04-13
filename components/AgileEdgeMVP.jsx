@@ -1125,7 +1125,7 @@ const RegistrationDetailsForm = memo(({ form, handleFormChange, corpEmails, hand
       )}
     </div>
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-      {[['name', 'Full Name', 'text', 'e.g. Jane Smith'], ['email', 'Work Email', 'email', 'jane@company.com'], ['phone', 'Phone Number', 'tel', '+1 555 000 0000'], ['company', 'Company / Organization', 'text', 'Acme Corp'], ['title', 'Job Title', 'text', 'Scrum Master'], ['country', 'Country', 'text', 'United States']].map(([key, label, type, placeholder]) => (
+      {[['name', 'Full Name', 'text', 'e.g. Jane Smith'], ['email', 'Email Address', 'email', 'jane@example.com'], ['phone', 'Phone Number', 'tel', '+1 555 000 0000'], ['company', 'Company / Organization', 'text', 'Acme Corp'], ['title', 'Job Title', 'text', 'Scrum Master'], ['country', 'Country', 'text', 'United States']].map(([key, label, type, placeholder]) => (
         <div key={`field-${key}`} className="form-group">
           <label className="form-label">{label}</label>
           <input autoComplete="off" type={type} className="form-input" placeholder={placeholder} value={form[key]} onChange={e => handleFormChange(key, e.target.value)} />
@@ -1779,7 +1779,7 @@ const CorporatePage = ({ toast }) => (
             <div style={{ fontFamily: 'Playfair Display', fontSize: 28, color: 'var(--navy)', marginBottom: 12 }}>Request a Corporate Training Quote</div>
             <p style={{ color: 'var(--slate)', fontSize: 15, marginBottom: 24 }}>Tell us your team size, target certifications, and preferred timeline. We'll respond within 1 business day.</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              {['Contact Name', 'Work Email', 'Company', 'Team Size'].map(f => (
+              {['Contact Name', 'Email Address', 'Company', 'Team Size'].map(f => (
                 <input key={f} className="form-input" placeholder={f} />
               ))}
             </div>
