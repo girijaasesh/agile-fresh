@@ -50,10 +50,9 @@ export default function ArticlesPage() {
     return () => clearInterval(autoRef.current);
   }, [articles.length]);
 
-  const carouselItems = articles.slice(0, 6);
   const goCarousel = (dir) => {
     clearInterval(autoRef.current);
-    setCarouselIdx(i => (i + dir + carouselItems.length) % carouselItems.length);
+    setCarouselIdx(i => (i + dir + articles.length) % articles.length);
   };
 
   const featured = articles[0];
@@ -87,61 +86,77 @@ export default function ArticlesPage() {
 
       {/* Carousel */}
       {articles.length > 0 && (
-        <div style={{ background: '#0F1E35', padding: '40px 0 48px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ background: '#0F1E35', padding: '40px 0 48px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
-              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>Latest Articles</div>
+            {/* Header row */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 }}>
+              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>
+                Latest Articles <span style={{ color: 'rgba(255,255,255,0.25)', marginLeft: 8 }}>{carouselIdx + 1} / {articles.length}</span>
+              </div>
               <div style={{ display: 'flex', gap: 8 }}>
-                <button onClick={() => goCarousel(-1)} style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.05)', color: 'white', cursor: 'pointer', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>‹</button>
-                <button onClick={() => goCarousel(1)}  style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.05)', color: 'white', cursor: 'pointer', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>›</button>
+                <button onClick={() => goCarousel(-1)} style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.05)', color: 'white', cursor: 'pointer', fontSize: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>‹</button>
+                <button onClick={() => goCarousel(1)}  style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.05)', color: 'white', cursor: 'pointer', fontSize: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>›</button>
               </div>
             </div>
 
-            {/* Slides */}
-            <div ref={carouselRef} style={{ position: 'relative', height: 220 }}>
-              {carouselItems.map((a, i) => {
-                const offset = i - carouselIdx;
-                const visible = offset === 0 || offset === 1 || offset === 2 || offset === -1;
-                const posMap = { '-1': -340, 0: 0, 1: 340, 2: 680 };
-                const x = posMap[String(offset)] ?? (offset > 2 ? 1020 : -680);
-                const isActive = offset === 0;
-                const cat = CAT_COLORS[a.category] || CAT_COLORS.agile;
-                const catLabel = CATEGORIES.find(c => c.value === a.category)?.label || a.category;
-                return (
-                  <div key={a.id}
-                    onClick={() => isActive && router.push(`/articles/${a.slug}`)}
-                    style={{
-                      position: 'absolute', top: 0, left: 0,
-                      width: 320, height: 210,
-                      transform: `translateX(${x}px)`,
-                      transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s, scale 0.5s',
-                      opacity: isActive ? 1 : offset === 1 ? 0.7 : offset === 2 ? 0.4 : 0,
-                      scale: isActive ? '1' : '0.92',
-                      cursor: isActive ? 'pointer' : 'default',
-                      borderRadius: 14, overflow: 'hidden',
-                      background: 'white',
-                      boxShadow: isActive ? '0 20px 50px rgba(0,0,0,0.4)' : '0 4px 15px rgba(0,0,0,0.2)',
-                    }}>
-                    <div style={{ height: 110, overflow: 'hidden', background: '#1E3A5F' }}>
-                      {a.cover_image_url
-                        ? <img src={a.cover_image_url} alt={a.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36 }}>📝</div>}
+            {/* Strip — overflow hidden so side cards peek in */}
+            <div style={{ overflow: 'hidden', margin: '0 -24px', padding: '10px 0 20px' }}>
+              <div
+                ref={carouselRef}
+                style={{
+                  display: 'flex',
+                  gap: 20,
+                  transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
+                  transform: `translateX(calc(50% - ${carouselIdx * 320 + 160}px))`,
+                  paddingLeft: 24,
+                  willChange: 'transform',
+                }}
+              >
+                {articles.map((a, i) => {
+                  const isActive = i === carouselIdx;
+                  const isAdjacent = Math.abs(i - carouselIdx) === 1;
+                  const cat = CAT_COLORS[a.category] || CAT_COLORS.agile;
+                  const catLabel = CATEGORIES.find(c => c.value === a.category)?.label || a.category;
+                  return (
+                    <div
+                      key={a.id}
+                      onClick={() => {
+                        if (isActive) router.push(`/articles/${a.slug}`);
+                        else { clearInterval(autoRef.current); setCarouselIdx(i); }
+                      }}
+                      style={{
+                        width: 300, flexShrink: 0,
+                        borderRadius: 14, overflow: 'hidden',
+                        background: 'white',
+                        cursor: 'pointer',
+                        transition: 'opacity 0.4s, transform 0.4s, box-shadow 0.4s',
+                        opacity: isActive ? 1 : isAdjacent ? 0.55 : 0.25,
+                        transform: isActive ? 'translateY(-8px) scale(1.04)' : 'translateY(0) scale(0.96)',
+                        boxShadow: isActive ? '0 24px 48px rgba(0,0,0,0.5)' : '0 4px 12px rgba(0,0,0,0.2)',
+                      }}
+                    >
+                      <div style={{ height: 160, overflow: 'hidden', background: '#1E3A5F' }}>
+                        {a.cover_image_url
+                          ? <img src={a.cover_image_url} alt={a.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s', transform: isActive ? 'scale(1.05)' : 'scale(1)' }} />
+                          : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>📝</div>}
+                      </div>
+                      <div style={{ padding: '14px 16px 18px' }}>
+                        <span style={{ background: cat.bg, color: cat.color, padding: '2px 8px', borderRadius: 4, fontSize: 10, fontWeight: 700 }}>{catLabel}</span>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: '#0B1629', margin: '8px 0 0', lineHeight: 1.45, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.title}</div>
+                        {isActive && <div style={{ fontSize: 12, color: '#64748B', marginTop: 8, lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.summary}</div>}
+                      </div>
                     </div>
-                    <div style={{ padding: '12px 14px' }}>
-                      <span style={{ background: cat.bg, color: cat.color, padding: '2px 8px', borderRadius: 4, fontSize: 10, fontWeight: 700 }}>{catLabel}</span>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: '#0B1629', margin: '6px 0 0', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.title}</div>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
 
             {/* Dots */}
-            <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginTop: 20 }}>
-              {carouselItems.map((_, i) => (
+            <div style={{ display: 'flex', gap: 5, justifyContent: 'center', marginTop: 4 }}>
+              {articles.map((_, i) => (
                 <button key={i} onClick={() => { clearInterval(autoRef.current); setCarouselIdx(i); }}
-                  style={{ width: i === carouselIdx ? 20 : 6, height: 6, borderRadius: 3, border: 'none', cursor: 'pointer', transition: 'all 0.3s',
-                    background: i === carouselIdx ? '#C9A84C' : 'rgba(255,255,255,0.25)' }} />
+                  style={{ width: i === carouselIdx ? 22 : 6, height: 6, borderRadius: 3, border: 'none', padding: 0, cursor: 'pointer', transition: 'all 0.3s',
+                    background: i === carouselIdx ? '#C9A84C' : 'rgba(255,255,255,0.2)' }} />
               ))}
             </div>
           </div>
