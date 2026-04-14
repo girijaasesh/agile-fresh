@@ -11,7 +11,9 @@ export async function GET() {
     });
   }
 
-  const scope = 'w_member_social';
+  // w_organization_social: post as org page (requires Community Management API product)
+  // r_organization_social: read org page content
+  const scope = 'r_organization_social w_organization_social';
   const state = Math.random().toString(36).slice(2);
 
   const authUrl =
