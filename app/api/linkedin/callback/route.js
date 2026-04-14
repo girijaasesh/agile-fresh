@@ -36,7 +36,8 @@ export async function GET(req) {
 
     if (!tokenRes.ok || !tokenData.access_token) {
       console.error('LinkedIn token exchange failed:', tokenData);
-      return NextResponse.redirect(`${appUrl}/admin/articles?linkedin_error=token_exchange_failed`);
+      const errMsg = tokenData.error_description || tokenData.error || JSON.stringify(tokenData);
+      return NextResponse.redirect(`${appUrl}/admin/articles?linkedin_error=${encodeURIComponent(errMsg)}`);
     }
   } catch (e) {
     console.error('LinkedIn OAuth error:', e);
