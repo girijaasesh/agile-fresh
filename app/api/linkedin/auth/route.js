@@ -11,7 +11,7 @@ export async function GET() {
     });
   }
 
-  const scope = 'w_organization_social r_organization_social';
+  const scope = 'w_member_social';
   const state = Math.random().toString(36).slice(2);
 
   const authUrl =
