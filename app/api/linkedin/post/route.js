@@ -19,12 +19,10 @@ export async function POST(req) {
   const { articleId, customText } = await req.json();
   if (!articleId) return Response.json({ error: 'articleId required' }, { status: 400 });
 
-  // Get article
   const articleRes = await pool.query('SELECT * FROM articles WHERE id=$1', [articleId]);
   if (articleRes.rows.length === 0) return Response.json({ error: 'Article not found' }, { status: 404 });
   const article = articleRes.rows[0];
 
-  // Get LinkedIn token
   const tokenRes = await pool.query('SELECT access_token, expires_at FROM linkedin_tokens WHERE id=1');
   if (tokenRes.rows.length === 0) {
     return Response.json({ error: 'LinkedIn not connected. Please connect LinkedIn first.' }, { status: 400 });
@@ -36,20 +34,10 @@ export async function POST(req) {
 
   const articleUrl = `https://www.optim-soln.com/articles/${article.slug}`;
   const companyId = process.env.LINKEDIN_COMPANY_ID || '104213223';
-  const postText = customText?.trim() ||
-    `${article.title}\n\n${article.summary || ''}\n\nRead more: ${articleUrl}`;
+  const postText = (customText?.trim() ||
+    `${article.title}\n\n${article.summary || ''}\n\nRead more: ${articleUrl}`).slice(0, 3000);
 
-  // Step 1: get the authenticated member's person ID
-  const meRes = await fetch('https://api.linkedin.com/v2/me', {
-    headers: { Authorization: `Bearer ${access_token}` },
-  });
-  const meData = await meRes.json();
-  if (!meRes.ok) {
-    return Response.json({ error: `Could not verify LinkedIn identity: ${meData.message || meRes.status}` }, { status: 400 });
-  }
-  const personId = meData.id;
-
-  // Step 2: post as the organization (requires the authenticated member to be a page admin)
+  // Text-only post first — avoids article content format issues
   const body = {
     author: `urn:li:organization:${companyId}`,
     commentary: postText,
@@ -58,13 +46,6 @@ export async function POST(req) {
       feedDistribution: 'MAIN_FEED',
       targetEntities: [],
       thirdPartyDistributionChannels: [],
-    },
-    content: {
-      article: {
-        source: articleUrl,
-        title: article.title,
-        description: article.summary || '',
-      },
     },
     lifecycleState: 'PUBLISHED',
     isReshareDisabledByAuthor: false,
@@ -75,23 +56,21 @@ export async function POST(req) {
     headers: {
       Authorization: `Bearer ${access_token}`,
       'Content-Type': 'application/json',
-      'LinkedIn-Version': '202401',
+      'LinkedIn-Version': '202302',
       'X-Restli-Protocol-Version': '2.0.0',
     },
     body: JSON.stringify(body),
   });
 
-  // Posts API returns 201 with empty body on success
   if (liRes.status === 201) {
     await pool.query('UPDATE articles SET linkedin_posted_at=NOW() WHERE id=$1', [articleId]);
     return Response.json({ success: true });
   }
 
   const liData = await liRes.json().catch(() => ({}));
-  console.error('LinkedIn post failed:', liRes.status, liData, 'personId:', personId, 'companyId:', companyId);
-  const errDetail = liData.message || liData.errorDetails || `LinkedIn error ${liRes.status}`;
+  console.error('LinkedIn post failed:', liRes.status, JSON.stringify(liData), 'companyId:', companyId);
   return Response.json(
-    { error: `${errDetail} (posting as org ${companyId}, member ${personId})` },
+    { error: `${liData.message || liData.errorDetails || `HTTP ${liRes.status}`} [org:${companyId}]` },
     { status: liRes.status }
   );
 }
