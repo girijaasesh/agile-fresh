@@ -8,7 +8,7 @@ const CATEGORIES = [
   { value: 'scrum', label: 'Scrum' },
   { value: 'kanban', label: 'Kanban' },
   { value: 'safe', label: 'SAFe' },
-  { value: 'leadership', label: 'Agile Leadership' },
+  { value: 'agile-leadership', label: 'Agile Leadership' },
 ];
 
 const CAT_COLORS = {
@@ -16,7 +16,7 @@ const CAT_COLORS = {
   scrum:      { bg: '#D1FAE5', color: '#065F46' },
   kanban:     { bg: '#FEF3C7', color: '#92400E' },
   safe:       { bg: '#F3E8FF', color: '#6B21A8' },
-  leadership: { bg: '#FEE2E2', color: '#991B1B' },
+  'agile-leadership': { bg: '#FEE2E2', color: '#991B1B' },
 };
 
 function fmtDate(d) {
@@ -28,7 +28,7 @@ export default function ArticlesPage() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState('all');
-  const [carouselIdx, setCarouselIdx] = useState(0);
+  const [carouselIdx, setCarouselIdx] = useState(3);
   const carouselRef = useRef(null);
   const autoRef = useRef(null);
 
@@ -45,7 +45,7 @@ export default function ArticlesPage() {
   useEffect(() => {
     if (articles.length < 2) return;
     autoRef.current = setInterval(() => {
-      setCarouselIdx(i => (i + 1) % Math.min(articles.length, 6));
+      setCarouselIdx(i => (i + 1) % articles.length);
     }, 4000);
     return () => clearInterval(autoRef.current);
   }, [articles.length]);
