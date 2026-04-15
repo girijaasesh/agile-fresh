@@ -93,7 +93,7 @@ export default function ArticlesPage() {
             {/* Header row */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 }}>
               <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>
-                Latest Articles <span style={{ color: 'rgba(255,255,255,0.25)', marginLeft: 8 }}>{carouselIdx + 1} / {articles.length}</span>
+                Latest Articles
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <button onClick={() => goCarousel(-1)} style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.05)', color: 'white', cursor: 'pointer', fontSize: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>‹</button>
