@@ -26,6 +26,19 @@ function fmtDate(d) {
 }
 
 export default function ArticlesPage() {
+  // inject mobile styles
+  const mobileStyles = `
+    @media (max-width: 680px) {
+      .art-nav-links { display: none !important; }
+      .art-hero h1   { font-size: 28px !important; }
+      .art-cat-filter { gap: 6px !important; }
+      .art-cat-filter button { padding: 6px 12px !important; font-size: 12px !important; }
+      .art-featured   { grid-template-columns: 1fr !important; }
+      .art-featured-img { aspect-ratio: 16/9 !important; }
+      .art-featured-body { padding: 20px !important; }
+      .art-featured-body h2 { font-size: 20px !important; }
+    }
+  `;
   const router = useRouter();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,20 +75,7 @@ export default function ArticlesPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#F8FAFC', fontFamily: "'DM Sans', Arial, sans-serif" }}>
-      {/* Nav */}
-      <nav style={{ background: 'white', borderBottom: '1px solid #E2E8F0', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <div style={{ background: 'linear-gradient(135deg,#C9A84C,#E8C97A)', borderRadius: 7, width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 13, color: '#1E3A5F' }}>AE</div>
-            <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, color: '#1E3A5F' }}>AgileEdge</span>
-          </a>
-          <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
-            <a href="/quick-register" style={{ fontSize: 14, color: '#1E3A5F', textDecoration: 'none', fontWeight: 500 }}>Courses</a>
-            <a href="/articles" style={{ fontSize: 14, color: '#C9A84C', textDecoration: 'none', fontWeight: 700 }}>Articles</a>
-            <a href="/dashboard" style={{ background: '#1E3A5F', color: 'white', padding: '7px 18px', borderRadius: 8, fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>My Account</a>
-          </div>
-        </div>
-      </nav>
+      <style>{mobileStyles}</style>
 
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #0B1629 0%, #1E3A5F 100%)', padding: '60px 24px 48px', textAlign: 'center' }}>
@@ -167,7 +167,7 @@ export default function ArticlesPage() {
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 24px' }}>
         {/* Category filter */}
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 40, justifyContent: 'center' }}>
+        <div className="art-cat-filter" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 40, justifyContent: 'center' }}>
           {CATEGORIES.map(c => (
             <button key={c.value} onClick={() => setCategory(c.value)}
               style={{ padding: '8px 18px', borderRadius: 24, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 13,
@@ -191,13 +191,14 @@ export default function ArticlesPage() {
             {/* Featured article */}
             {featured && category === 'all' && (
               <div onClick={() => router.push(`/articles/${featured.slug}`)}
+                className="art-featured"
                 style={{ background: 'white', borderRadius: 16, overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', marginBottom: 40, cursor: 'pointer', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-                <div style={{ aspectRatio: '4/3', background: '#F1F5F9', overflow: 'hidden' }}>
+                <div className="art-featured-img" style={{ aspectRatio: '4/3', background: '#F1F5F9', overflow: 'hidden' }}>
                   {featured.cover_image_url
                     ? <img src={featured.cover_image_url} alt={featured.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 64 }}>📝</div>}
                 </div>
-                <div style={{ padding: 40, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div className="art-featured-body" style={{ padding: 40, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
                     <span style={{ background: '#C9A84C', color: '#1E3A5F', padding: '3px 10px', borderRadius: 4, fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Featured</span>
                     <span style={{ ...(CAT_COLORS[featured.category] || CAT_COLORS.agile), padding: '3px 10px', borderRadius: 4, fontSize: 11, fontWeight: 700 }}>

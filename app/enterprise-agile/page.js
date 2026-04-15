@@ -24,6 +24,28 @@ const PEACH    = '#D4A070';        // warm amber
 export default function EnterpriseAgilePage() {
   return (
     <div style={{ fontFamily: "'DM Sans', Arial, sans-serif", background: BG, color: TEXT, overflowX: 'hidden', fontSize: 16 }}>
+      <style>{`
+        @media (max-width: 700px) {
+          .ea-hero-cols   { grid-template-columns: 1fr !important; }
+          .ea-hero-col    { padding: 18px 0 !important; border-left: none !important; border-bottom: 1px solid ${BORDER}; }
+          .ea-hero-col:last-child { border-bottom: none; }
+          .ea-cta-row     { flex-direction: column; align-items: flex-start !important; gap: 14px !important; }
+          .ea-2col        { grid-template-columns: 1fr !important; }
+          .ea-left-col    { padding-right: 0 !important; border-right: none !important; border-bottom: 1px solid ${BORDER}; padding-bottom: 32px !important; }
+          .ea-right-col   { padding-left: 0 !important; padding-top: 28px !important; }
+          .ea-3col        { grid-template-columns: 1fr !important; }
+          .ea-3col-item   { padding-left: 0 !important; border-left: none !important; padding-bottom: 28px; border-bottom: 1px solid ${BORDER}; }
+          .ea-3col-item:last-child { border-bottom: none; padding-bottom: 0; }
+          .ea-cert-grid   { grid-template-columns: 1fr !important; }
+          .ea-cert-item   { border-right: none !important; }
+          .ea-section-hdr { flex-direction: column !important; gap: 8px !important; align-items: flex-start !important; }
+          .ea-contact-grid { grid-template-columns: 1fr !important; padding: 32px 20px !important; }
+          .ea-contact-left  { padding-right: 0 !important; border-right: none !important; border-bottom: 1px solid ${BORDER}; padding-bottom: 28px !important; }
+          .ea-contact-right { padding-left: 0 !important; padding-top: 24px !important; }
+          .ea-footer        { flex-direction: column !important; gap: 6px !important; text-align: center; }
+          .ea-pad           { padding: 32px 18px !important; }
+        }
+      `}</style>
 
       {/* ── HERO ── */}
       <section style={{ paddingTop: NAV_H, background: BG_ALT, borderBottom: `1px solid ${BORDER}` }}>
@@ -45,13 +67,13 @@ export default function EnterpriseAgilePage() {
           </div>
 
           {/* Three columns */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', borderBottom: `1px solid ${BORDER}` }}>
+          <div className="ea-hero-cols" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', borderBottom: `1px solid ${BORDER}` }}>
             {[
               ['01', 'Strategic Portfolio Alignment', 'Synchronizing enterprise strategy with execution so every Value Stream delivers maximum mission impact and measurable ROI.'],
               ['02', 'High-Velocity Agile Release Trains', 'Launching and optimizing ARTs that move organizations from rigid, siloed planning to continuous, flow-based delivery.'],
               ['03', 'Modernized Governance Frameworks', 'Replacing legacy oversight with Lean-Agile governance that maintains strict compliance while accelerating speed-to-market.'],
             ].map(([num, title, desc], i) => (
-              <div key={num} style={{ padding: '24px 28px 24px 0', paddingLeft: i === 0 ? 0 : 28, borderLeft: i > 0 ? `1px solid ${BORDER}` : 'none' }}>
+              <div key={num} className="ea-hero-col" style={{ padding: '24px 28px 24px 0', paddingLeft: i === 0 ? 0 : 28, borderLeft: i > 0 ? `1px solid ${BORDER}` : 'none' }}>
                 <div style={{ fontSize: 18, fontWeight: 700, color: TEXT, marginBottom: 10, lineHeight: 1.3 }}>{title}</div>
                 <div style={{ fontSize: 15, color: MUTED, lineHeight: 1.65 }}>{desc}</div>
               </div>
@@ -59,7 +81,7 @@ export default function EnterpriseAgilePage() {
           </div>
 
           {/* CTA row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 24, padding: '20px 0' }}>
+          <div className="ea-cta-row" style={{ display: 'flex', alignItems: 'center', gap: 24, padding: '20px 0' }}>
             <a href="#contact" style={{ background: BG_DARK, color: '#F7F6F2', padding: '12px 30px', fontWeight: 700, fontSize: 15, textDecoration: 'none', borderRadius: 6 }}>Schedule a Consultation →</a>
             <a href="#competencies" style={{ fontSize: 15, color: MUTED, textDecoration: 'none', borderBottom: `1px solid ${FAINT}`, paddingBottom: 1 }}>View Capabilities</a>
           </div>
@@ -69,8 +91,8 @@ export default function EnterpriseAgilePage() {
 
       {/* ── CERTIFICATIONS ── */}
       <section id="certifications" style={{ borderBottom: `1px solid ${BORDER}`, background: BG_ALT }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 28px' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, borderBottom: `1px solid ${BORDER}`, paddingBottom: 20 }}>
+        <div className="ea-pad" style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 28px' }}>
+          <div className="ea-section-hdr" style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, borderBottom: `1px solid ${BORDER}`, paddingBottom: 20 }}>
             <div>
               <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: SAGE, marginBottom: 10 }}>SAFe Certification Programs</div>
               <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(24px, 2.5vw, 34px)', color: TEXT, margin: 0, letterSpacing: '-0.01em' }}>AI-Empowered SAFe Certifications</h2>
@@ -78,7 +100,7 @@ export default function EnterpriseAgilePage() {
             <a href="/quick-register" style={{ fontSize: 15, color: MUTED, textDecoration: 'none', borderBottom: `1px solid ${FAINT}`, paddingBottom: 1, whiteSpace: 'nowrap', flexShrink: 0 }}>View all & register →</a>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 0 }}>
+          <div className="ea-cert-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 0 }}>
             {[
               { code: 'SA',   title: 'SAFe Agilist',               role: 'Leadership',     color: SKY,      desc: 'Foundation certification for enterprise agile leaders. Lean-Agile mindset and transformation at scale.' },
               { code: 'SSM',  title: 'SAFe Scrum Master',          role: 'Scrum Master',   color: SAGE,     aiPowered: true, desc: 'Master facilitation, coaching, and servant leadership inside a SAFe enterprise environment.' },
@@ -86,7 +108,7 @@ export default function EnterpriseAgilePage() {
               { code: 'POPM', title: 'SAFe Product Owner/PM',      role: 'Product Owner',  color: PEACH,    aiPowered: true, desc: 'Master product ownership at scale — vision, roadmaps, and backlog prioritization.' },
               { code: 'SDP',  title: 'SAFe DevOps',                role: 'Technical',      color: LAVENDER, desc: 'Implement DevOps and continuous delivery pipelines to accelerate value delivery.' },
             ].map(({ code, title, role, color, aiPowered, desc }, i) => (
-              <div key={code} style={{
+              <div key={code} className="ea-cert-item" style={{
                 padding: '24px 26px',
                 borderBottom: i < 4 ? `1px solid ${BORDER}` : 'none',
                 borderRight: (i % 2 === 0) ? `1px solid ${BORDER}` : 'none',
@@ -126,9 +148,9 @@ export default function EnterpriseAgilePage() {
 
       {/* ── DIFFERENTIATION ── */}
       <section style={{ borderBottom: `1px solid ${BORDER}`, background: BG }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 28px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
-            <div style={{ padding: '48px 56px 48px 0', borderRight: `1px solid ${BORDER}` }}>
+        <div className="ea-pad" style={{ maxWidth: 1100, margin: '0 auto', padding: '0 28px' }}>
+          <div className="ea-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
+            <div className="ea-left-col" style={{ padding: '48px 56px 48px 0', borderRight: `1px solid ${BORDER}` }}>
               <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: SAGE, marginBottom: 14 }}>Our Differentiation</div>
               <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(26px, 2.5vw, 36px)', color: TEXT, lineHeight: 1.15, margin: '0 0 18px', letterSpacing: '-0.01em' }}>
                 Your Next Engagement Deserves More Than a Staff Aug.
@@ -138,7 +160,7 @@ export default function EnterpriseAgilePage() {
               </p>
               <a href="#contact" style={{ display: 'inline-block', background: BG_DARK, color: '#F7F6F2', padding: '12px 30px', fontWeight: 700, fontSize: 15, textDecoration: 'none', borderRadius: 6 }}>Talk to the Principal →</a>
             </div>
-            <div style={{ paddingLeft: 56, paddingTop: 48, paddingBottom: 48 }}>
+            <div className="ea-right-col" style={{ paddingLeft: 56, paddingTop: 48, paddingBottom: 48 }}>
               {[
                 ['Documented Transformation Framework', 'Not a slide deck — a repeatable operating model installed into your delivery structure from day one.'],
                 ['GovCon Compliance Fluency', 'Deep familiarity with FISMA, FedRAMP, FAR/DFARS contract structures, and federal acquisition lifecycles.'],
@@ -160,18 +182,18 @@ export default function EnterpriseAgilePage() {
 
       {/* ── COMPETENCIES ── */}
       <section id="competencies" style={{ background: BG_ALT, borderBottom: `1px solid ${BORDER}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 28px' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, borderBottom: `1px solid ${BORDER}`, paddingBottom: 20 }}>
+        <div className="ea-pad" style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 28px' }}>
+          <div className="ea-section-hdr" style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, borderBottom: `1px solid ${BORDER}`, paddingBottom: 20 }}>
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(24px, 2.5vw, 34px)', color: TEXT, margin: 0, letterSpacing: '-0.01em' }}>Core Competencies</h2>
             <span style={{ fontSize: 12, color: FAINT, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Three Practice Areas</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
+          <div className="ea-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
             {[
               { color: SAGE,     label: 'SAFe Implementation',      items: ['Stand up and sustain Agile Release Trains', 'PI Planning at enterprise scale', 'SAFe Portfolio Management', 'Coach RTE, SM, and PO roles', 'Business Agility KPI reporting'] },
               { color: SKY,      label: 'Cloud-Native Modernization', items: ['AWS migration strategy & execution', 'On-premises to cloud, zero-disruption', 'Legacy Data Mart & ETL modernization', 'DevSecOps pipeline alignment', 'Federal data governance compliance'] },
               { color: LAVENDER, label: 'Agile for Government',       items: ['FISMA, FedRAMP, Section 508', 'Agile within FAR/DFARS structures', 'Sprint cadences aligned to budget cycles', 'PMO reporting without bureaucratic drag', 'Mixed gov/contractor team coaching'] },
             ].map((c, i) => (
-              <div key={c.label} style={{ padding: '0 40px 0 0', paddingLeft: i === 0 ? 0 : 40, borderLeft: i > 0 ? `1px solid ${BORDER}` : 'none' }}>
+              <div key={c.label} className="ea-3col-item" style={{ padding: '0 40px 0 0', paddingLeft: i === 0 ? 0 : 40, borderLeft: i > 0 ? `1px solid ${BORDER}` : 'none' }}>
                 <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 19, color: TEXT, margin: '0 0 18px', lineHeight: 1.3 }}>{c.label}</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {c.items.map(item => (
@@ -188,18 +210,18 @@ export default function EnterpriseAgilePage() {
 
       {/* ── FRAMEWORK ── */}
       <section style={{ borderBottom: `1px solid ${BORDER}`, background: BG }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 28px' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, borderBottom: `1px solid ${BORDER}`, paddingBottom: 20 }}>
+        <div className="ea-pad" style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 28px' }}>
+          <div className="ea-section-hdr" style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, borderBottom: `1px solid ${BORDER}`, paddingBottom: 20 }}>
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(24px, 2.5vw, 34px)', color: TEXT, margin: 0, letterSpacing: '-0.01em' }}>Three Phases. One Sustained Outcome.</h2>
             <span style={{ fontSize: 12, color: FAINT, letterSpacing: '0.1em', textTransform: 'uppercase' }}>The Optimized Solutions Framework</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
+          <div className="ea-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
             {[
               { num: '01', phase: 'Assess',    title: 'Clarity Before Commitment',       color: SAGE,     desc: 'A structured assessment covering delivery model, cloud posture, team topology, and compliance environment before we recommend anything.',   deliverable: 'Readiness Report + Transformation Roadmap' },
               { num: '02', phase: 'Implement', title: 'Frameworks That Fit Your Reality', color: SKY,      desc: 'SAFe, cloud migration, and data modernization implemented with your specific constraints — no two environments are identical.',             deliverable: 'Live ARTs · Migrated Workloads · Trained Teams' },
               { num: '03', phase: 'Sustain',   title: 'Independence, Not Dependency',    color: LAVENDER, desc: 'Embedded coaching, documented playbooks, and leadership development that deliberately reduce reliance on us over time.',                  deliverable: 'Coaching Bench · Runbooks · Health Metrics' },
             ].map((p, i) => (
-              <div key={p.num} style={{ padding: '0 40px 0 0', paddingLeft: i === 0 ? 0 : 40, borderLeft: i > 0 ? `1px solid ${BORDER}` : 'none' }}>
+              <div key={p.num} className="ea-3col-item" style={{ padding: '0 40px 0 0', paddingLeft: i === 0 ? 0 : 40, borderLeft: i > 0 ? `1px solid ${BORDER}` : 'none' }}>
                 <div style={{ fontFamily: 'Georgia, serif', fontSize: 44, color: BORDER, fontWeight: 700, lineHeight: 1, marginBottom: 10 }}>{p.num}</div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: p.color, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>Phase {i + 1} — {p.phase}</div>
                 <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 19, color: TEXT, margin: '0 0 10px', lineHeight: 1.3 }}>{p.title}</h3>
@@ -216,8 +238,8 @@ export default function EnterpriseAgilePage() {
 
       {/* ── CTA ── */}
       <section id="contact" style={{ background: BG_ALT, borderBottom: `1px solid ${BORDER}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 28px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, alignItems: 'center' }}>
-          <div style={{ paddingRight: 64, borderRight: `1px solid ${BORDER}` }}>
+        <div className="ea-contact-grid" style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 28px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, alignItems: 'center' }}>
+          <div className="ea-contact-left" style={{ paddingRight: 64, borderRight: `1px solid ${BORDER}` }}>
             <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: ROSE, marginBottom: 14 }}>Ready to Move Forward</div>
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 3vw, 42px)', color: TEXT, margin: '0 0 16px', lineHeight: 1.1, letterSpacing: '-0.01em' }}>
               From Transition<br /><span style={{ fontStyle: 'italic', color: MUTED }}>to Transformation.</span>
@@ -227,7 +249,7 @@ export default function EnterpriseAgilePage() {
             </p>
             <p style={{ fontSize: 14, color: FAINT, fontStyle: 'italic', margin: 0 }}>The first conversation is a consultation, not a pitch.</p>
           </div>
-          <div style={{ paddingLeft: 64, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div className="ea-contact-right" style={{ paddingLeft: 64, display: 'flex', flexDirection: 'column', gap: 10 }}>
             <a href="mailto:consulting@optim-sol.com?subject=Strategic Partnership Consultation Request"
               style={{ display: 'block', background: BG_DARK, color: '#F7F6F2', padding: '16px 32px', fontWeight: 700, fontSize: 16, textDecoration: 'none', textAlign: 'center', borderRadius: 6 }}>
               Schedule a Consultation →
@@ -244,7 +266,7 @@ export default function EnterpriseAgilePage() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ background: BG_DARK, padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <footer className="ea-footer" style={{ background: BG_DARK, padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <span style={{ fontFamily: 'Georgia, serif', fontSize: 14, color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>Optimized Solutions</span>
         <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0 }}>
           © {new Date().getFullYear()} · Enterprise Agile & Cloud Modernization ·{' '}
