@@ -239,6 +239,7 @@ export default function QuickRegisterClient() {
   const [couponError,   setCouponError]   = useState('');
   const [couponLoading, setCouponLoading] = useState(false);
   const [liveSessions,  setLiveSessions]  = useState(UPCOMING);
+  const [dbSessions,    setDbSessions]    = useState(null); // null = not yet loaded
 
 
   // Fetch live sessions from DB on mount
@@ -246,7 +247,7 @@ export default function QuickRegisterClient() {
     fetch('/api/sessions')
       .then(r => r.json())
       .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
           const mapped = data.map(s => ({
             id:         s.id,
             certId:     s.code.toLowerCase(),
@@ -259,10 +260,11 @@ export default function QuickRegisterClient() {
             seats:      s.max_seats,
             booked:     0,
           }));
-          setLiveSessions(mapped);
+          setDbSessions(mapped);
+          if (mapped.length > 0) setLiveSessions(mapped);
         }
       })
-      .catch(() => {}); // keep hardcoded fallback on error
+      .catch(() => {}); // keep hardcoded fallback on error; dbSessions stays null
   }, []);
 
   const cert     = useMemo(() => getCert(form.certId),     [form.certId]);
@@ -386,8 +388,9 @@ export default function QuickRegisterClient() {
   }, [form, cert, session, price, regId]);
 
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  const seats   = session ? seatsLeft(session) : null;
-  const urgency = seats !== null && seats <= 6;
+  const seats    = session ? seatsLeft(session) : null;
+  const urgency  = seats !== null && seats <= 6;
+  const noSlotsForSelected = Boolean(form.certId) && dbSessions !== null && !dbSessions.some(s => s.certId === form.certId);
 
   return (
     <>
@@ -450,7 +453,7 @@ export default function QuickRegisterClient() {
               <div className="qr-form-card">
 
                 {/* ── Registration form (always visible) ── */}
-                {phase === 'form'    && <RegistrationForm form={form} set={set} blur={blur} fieldErr={fieldErr} cert={cert} sessions={sessions} session={session} price={price} basePrice={basePrice} couponDiscount={couponDiscount} eb={eb} seats={seats} urgency={urgency} submitting={submitting} apiError={apiError} onSubmit={handleSubmit} showCoupon={showCoupon} couponCode={couponCode} setCouponCode={setCouponCode} couponApplied={couponApplied} couponError={couponError} couponLoading={couponLoading} applyCoupon={applyCoupon} isAuthenticated={authStatus === 'authenticated'} />}
+                {phase === 'form'    && <RegistrationForm form={form} set={set} blur={blur} fieldErr={fieldErr} cert={cert} sessions={sessions} session={session} price={price} basePrice={basePrice} couponDiscount={couponDiscount} eb={eb} seats={seats} urgency={urgency} submitting={submitting} apiError={apiError} onSubmit={handleSubmit} showCoupon={showCoupon} couponCode={couponCode} setCouponCode={setCouponCode} couponApplied={couponApplied} couponError={couponError} couponLoading={couponLoading} applyCoupon={applyCoupon} isAuthenticated={authStatus === 'authenticated'} noSlots={noSlotsForSelected} />}
                 {phase === 'payment' && <PaymentSection   form={form} cert={cert} session={session} price={price} regId={regId} onSuccess={handlePaymentSuccess} />}
 
               </div>
@@ -493,9 +496,11 @@ export default function QuickRegisterClient() {
               { id: 'sa',   recommended: true  },
               { id: 'popm', recommended: false },
             ].map(({ id, recommended }) => {
-              const c   = getCert(id);
-              const s   = getSessions(id)[0];
-              const isEB = s && isEarlyBird(s.ebDeadline);
+              const c      = getCert(id);
+              const liveS  = liveSessions.filter(s => s.certId === id)[0];
+              const noSlots = dbSessions !== null && !dbSessions.some(s => s.certId === id);
+              const isEB   = liveS && isEarlyBird(liveS.ebDeadline);
+              const discountedPrice = Math.round(c.price * 0.25);
               return (
                 <div className={`qr-price-card${recommended ? ' recommended' : ''}`} key={id}>
                   {recommended && <div className="qr-price-rec-badge">Most Popular</div>}
@@ -504,7 +509,13 @@ export default function QuickRegisterClient() {
                   <div className="qr-price-title">{c.title}</div>
                   <div className="qr-price-role">{c.role} · {c.duration}</div>
                   <div style={{ marginTop: 12, marginBottom: 4 }}>
-                    {authStatus === 'authenticated' ? (
+                    {noSlots ? (
+                      <>
+                        <div style={{ fontSize: 12, color: 'var(--slate-lt)', textDecoration: 'line-through' }}>{fmtPrice(c.price)}</div>
+                        <span className="qr-price-num" style={{ color: 'var(--gold)' }}>{fmtPrice(discountedPrice)}</span>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold)', marginTop: 2, letterSpacing: '0.5px' }}>75% OFF</div>
+                      </>
+                    ) : authStatus === 'authenticated' ? (
                       <>
                         {isEB && <div className="qr-price-eb">⚡ Early bird active</div>}
                         {isEB && <div className="qr-price-full">{fmtPrice(c.price)}</div>}
@@ -514,7 +525,10 @@ export default function QuickRegisterClient() {
                       <div style={{ fontSize: 14, color: 'var(--slate)', fontStyle: 'italic', paddingBottom: 4 }}>Register for further details</div>
                     )}
                   </div>
-                  {s && <div className="qr-price-dur">📅 Next: {fmtDate(s.date)}</div>}
+                  {noSlots
+                    ? <div style={{ fontSize: 12, color: 'var(--danger)', fontWeight: 600, marginTop: 4 }}>⚠ No slots available</div>
+                    : liveS && <div className="qr-price-dur">📅 Next: {fmtDate(liveS.date)}</div>
+                  }
                   <button className="btn btn-gold qr-price-btn" onClick={() => { setForm(f => ({ ...f, certId: id })); scrollToForm(); }}>
                     {authStatus === 'authenticated' ? 'Select & Register →' : 'Register for Details →'}
                   </button>
@@ -522,10 +536,51 @@ export default function QuickRegisterClient() {
               );
             })}
           </div>
-          <p style={{ marginTop: 20, fontSize: 13, color: 'var(--slate)' }}>
-            Looking for RTE, SPC, or Advanced Scrum Master?{' '}
-            <button onClick={scrollToForm} style={{ background: 'none', border: 'none', color: 'var(--gold)', fontWeight: 600, cursor: 'pointer', fontSize: 13 }}>View all courses in the form →</button>
-          </p>
+          <div className="qr-pricing-grid" style={{ marginTop: 24 }}>
+            {[
+              { id: 'sasm',   recommended: false },
+              { id: 'devops', recommended: false },
+              { id: 'rte',    recommended: false },
+              { id: 'spc',    recommended: false },
+            ].map(({ id }) => {
+              const c      = getCert(id);
+              const liveS  = liveSessions.filter(s => s.certId === id)[0];
+              const noSlots = dbSessions !== null && !dbSessions.some(s => s.certId === id);
+              const isEB   = liveS && isEarlyBird(liveS.ebDeadline);
+              const discountedPrice = Math.round(c.price * 0.25);
+              return (
+                <div className="qr-price-card" key={id}>
+                  <div className="qr-price-code">{c.code}</div>
+                  <div className="qr-price-title">{c.title}</div>
+                  <div className="qr-price-role">{c.role} · {c.duration}</div>
+                  <div style={{ marginTop: 12, marginBottom: 4 }}>
+                    {noSlots ? (
+                      <>
+                        <div style={{ fontSize: 12, color: 'var(--slate-lt)', textDecoration: 'line-through' }}>{fmtPrice(c.price)}</div>
+                        <span className="qr-price-num" style={{ color: 'var(--gold)' }}>{fmtPrice(discountedPrice)}</span>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold)', marginTop: 2, letterSpacing: '0.5px' }}>75% OFF</div>
+                      </>
+                    ) : authStatus === 'authenticated' ? (
+                      <>
+                        {isEB && <div className="qr-price-eb">⚡ Early bird active</div>}
+                        {isEB && <div className="qr-price-full">{fmtPrice(c.price)}</div>}
+                        <span className="qr-price-num">{fmtPrice(isEB ? c.earlyBird : c.price)}</span>
+                      </>
+                    ) : (
+                      <div style={{ fontSize: 14, color: 'var(--slate)', fontStyle: 'italic', paddingBottom: 4 }}>Register for further details</div>
+                    )}
+                  </div>
+                  {noSlots
+                    ? <div style={{ fontSize: 12, color: 'var(--danger)', fontWeight: 600, marginTop: 4 }}>⚠ No slots available</div>
+                    : liveS && <div className="qr-price-dur">📅 Next: {fmtDate(liveS.date)}</div>
+                  }
+                  <button className="btn btn-gold qr-price-btn" onClick={() => { setForm(f => ({ ...f, certId: id })); scrollToForm(); }}>
+                    {authStatus === 'authenticated' ? 'Select & Register →' : 'Register for Details →'}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -615,7 +670,7 @@ export default function QuickRegisterClient() {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function RegistrationForm({ form, set, blur, fieldErr, cert, sessions, session, price, basePrice, couponDiscount, eb, seats, urgency, submitting, apiError, onSubmit, showCoupon, couponCode, setCouponCode, couponApplied, couponError, couponLoading, applyCoupon, isAuthenticated }) {
+function RegistrationForm({ form, set, blur, fieldErr, cert, sessions, session, price, basePrice, couponDiscount, eb, seats, urgency, submitting, apiError, onSubmit, showCoupon, couponCode, setCouponCode, couponApplied, couponError, couponLoading, applyCoupon, isAuthenticated, noSlots }) {
   return (
     <form onSubmit={onSubmit} noValidate>
       <div className="qr-form-title">Quick Registration</div>
@@ -716,16 +771,23 @@ function RegistrationForm({ form, set, blur, fieldErr, cert, sessions, session, 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 14px' }}>
             <div>
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginBottom: 2 }}>{cert.title}</div>
-              {isAuthenticated && eb && <div style={{ fontSize: 11, color: 'var(--success)' }}>⚡ Special rate applied</div>}
-              {isAuthenticated && couponDiscount > 0 && (
+              {noSlots && <div style={{ fontSize: 11, color: '#FCA5A5', fontWeight: 600 }}>⚠ No slots available</div>}
+              {!noSlots && isAuthenticated && eb && <div style={{ fontSize: 11, color: 'var(--success)' }}>⚡ Special rate applied</div>}
+              {!noSlots && isAuthenticated && couponDiscount > 0 && (
                 <div style={{ fontSize: 11, color: '#86EFAC' }}>🏷 Coupon: −${Number(couponDiscount).toLocaleString('en-US')}</div>
               )}
             </div>
-            <div>
-              {isAuthenticated ? (
+            <div style={{ textAlign: 'right' }}>
+              {noSlots ? (
+                <>
+                  <div style={{ fontSize: 13, color: 'rgba(255,255,255,.4)', textDecoration: 'line-through' }}>${cert.price.toLocaleString('en-US')}</div>
+                  <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 24, color: 'var(--gold)' }}>${Math.round(cert.price * 0.25).toLocaleString('en-US')}</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold)', letterSpacing: '0.5px' }}>75% OFF</div>
+                </>
+              ) : isAuthenticated ? (
                 <>
                   {couponDiscount > 0 && (
-                    <div style={{ fontSize: 13, color: 'rgba(255,255,255,.4)', textDecoration: 'line-through', textAlign: 'right' }}>${basePrice.toLocaleString('en-US')}</div>
+                    <div style={{ fontSize: 13, color: 'rgba(255,255,255,.4)', textDecoration: 'line-through' }}>${basePrice.toLocaleString('en-US')}</div>
                   )}
                   <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 24, color: 'var(--gold)' }}>${price.toLocaleString('en-US')}</div>
                 </>

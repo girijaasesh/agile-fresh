@@ -12,7 +12,7 @@ export async function POST(req) {
       const response = NextResponse.json({ success: true });
       response.cookies.set('admin_token', process.env.NEXTAUTH_SECRET || 'agile-edge-secret-2026', {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'production',
         maxAge: 60 * 60 * 8,
         path: '/',
       });

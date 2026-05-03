@@ -74,7 +74,7 @@ export default function ArticlesPage() {
   const rest = articles.slice(1);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#F8FAFC', fontFamily: "'DM Sans', Arial, sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: '#F8FAFC', fontFamily: "'DM Sans', Arial, sans-serif", paddingTop: 64 }}>
       <style>{mobileStyles}</style>
 
       {/* Hero */}

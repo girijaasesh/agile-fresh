@@ -85,8 +85,17 @@ export default function GlobalHeader() {
                 {label}
               </Link>
             ))}
-            <a href="/#contact" style={{
+            <Link href="/quick-register" style={{
               marginLeft: 12,
+              background: 'transparent', color: '#111',
+              padding: '8px 20px', fontSize: 13, fontWeight: 600,
+              textDecoration: 'none', borderRadius: 3,
+              border: '1.5px solid #111',
+            }}>
+              Quick Register
+            </Link>
+            <a href="/#contact" style={{
+              marginLeft: 8,
               background: '#111', color: '#FAFAF8',
               padding: '9px 22px', fontSize: 13, fontWeight: 600,
               textDecoration: 'none', borderRadius: 3,
@@ -112,6 +121,7 @@ export default function GlobalHeader() {
               {label}
             </Link>
           ))}
+          <Link href="/quick-register" style={{ color: '#111', fontWeight: 700, border: '1.5px solid #111', borderRadius: 4, textAlign: 'center', padding: '12px 22px', marginTop: 4, borderBottom: 'none' }}>Quick Register</Link>
           <a href="/#contact" className="gh-cta">Let's Talk</a>
         </div>
       )}
