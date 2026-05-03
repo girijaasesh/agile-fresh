@@ -500,7 +500,7 @@ export default function QuickRegisterClient() {
               const liveS  = liveSessions.filter(s => s.certId === id)[0];
               const noSlots = dbSessions !== null && !dbSessions.some(s => s.certId === id);
               const isEB   = liveS && isEarlyBird(liveS.ebDeadline);
-              const discountedPrice = Math.round(c.price * 0.25);
+              const discountedPrice = Math.round(c.price * 0.5);
               return (
                 <div className={`qr-price-card${recommended ? ' recommended' : ''}`} key={id}>
                   {recommended && <div className="qr-price-rec-badge">Most Popular</div>}
@@ -513,7 +513,7 @@ export default function QuickRegisterClient() {
                       <>
                         <div style={{ fontSize: 12, color: 'var(--slate-lt)', textDecoration: 'line-through' }}>{fmtPrice(c.price)}</div>
                         <span className="qr-price-num" style={{ color: 'var(--gold)' }}>{fmtPrice(discountedPrice)}</span>
-                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold)', marginTop: 2, letterSpacing: '0.5px' }}>75% OFF</div>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold)', marginTop: 2, letterSpacing: '0.5px' }}>50% OFF</div>
                       </>
                     ) : authStatus === 'authenticated' ? (
                       <>
@@ -547,7 +547,7 @@ export default function QuickRegisterClient() {
               const liveS  = liveSessions.filter(s => s.certId === id)[0];
               const noSlots = dbSessions !== null && !dbSessions.some(s => s.certId === id);
               const isEB   = liveS && isEarlyBird(liveS.ebDeadline);
-              const discountedPrice = Math.round(c.price * 0.25);
+              const discountedPrice = Math.round(c.price * 0.5);
               return (
                 <div className="qr-price-card" key={id}>
                   <div className="qr-price-code">{c.code}</div>
@@ -558,7 +558,7 @@ export default function QuickRegisterClient() {
                       <>
                         <div style={{ fontSize: 12, color: 'var(--slate-lt)', textDecoration: 'line-through' }}>{fmtPrice(c.price)}</div>
                         <span className="qr-price-num" style={{ color: 'var(--gold)' }}>{fmtPrice(discountedPrice)}</span>
-                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold)', marginTop: 2, letterSpacing: '0.5px' }}>75% OFF</div>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold)', marginTop: 2, letterSpacing: '0.5px' }}>50% OFF</div>
                       </>
                     ) : authStatus === 'authenticated' ? (
                       <>
@@ -781,8 +781,8 @@ function RegistrationForm({ form, set, blur, fieldErr, cert, sessions, session, 
               {noSlots ? (
                 <>
                   <div style={{ fontSize: 13, color: 'rgba(255,255,255,.4)', textDecoration: 'line-through' }}>${cert.price.toLocaleString('en-US')}</div>
-                  <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 24, color: 'var(--gold)' }}>${Math.round(cert.price * 0.25).toLocaleString('en-US')}</div>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold)', letterSpacing: '0.5px' }}>75% OFF</div>
+                  <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 24, color: 'var(--gold)' }}>${Math.round(cert.price * 0.5).toLocaleString('en-US')}</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold)', letterSpacing: '0.5px' }}>50% OFF</div>
                 </>
               ) : isAuthenticated ? (
                 <>
