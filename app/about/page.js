@@ -43,12 +43,12 @@ const EXPERIENCE = [
   {
     role: 'Senior Agile Coach & RTE',
     org: 'Optimized Solutions / PBGC',
-    period: 'Nov 2024 – Present',
+    period: 'Nov 2024 – Apr 2025',
     points: [
-      'Coaching federal agency teams through SAFe transformation and ART standup',
-      'Facilitating PI Planning events, ART syncs, and System Demos',
-      'Advising senior leadership on Lean portfolio management and value stream alignment',
-      'Driving continuous improvement through Inspect & Adapt workshops',
+      'Coached federal agency teams through SAFe transformation and ART standup',
+      'Facilitated PI Planning events, ART syncs, and System Demos',
+      'Advised senior leadership on Lean portfolio management and value stream alignment',
+      'Drove continuous improvement through Inspect & Adapt workshops',
     ],
   },
   {
