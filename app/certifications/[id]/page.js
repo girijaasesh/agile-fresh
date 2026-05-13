@@ -10,8 +10,8 @@ const CERT_META = {
   spc:    { title: 'SAFe Program Consultant (SPC) Certification Training', desc: 'The most comprehensive SAFe certification. 32 hours live, exam included. Train others in SAFe and lead enterprise transformations.' },
 };
 
-export async function generateMetadata({ params }) {
-  const { id } = await params;
+export function generateMetadata({ params }) {
+  const { id } = params;
   const meta = CERT_META[id];
   if (!meta) return { title: 'Certification Not Found | AgileEdge' };
   return {
@@ -20,11 +20,11 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return Object.keys(CERT_META).map(id => ({ id }));
 }
 
-export default async function CertDetailPage({ params }) {
-  const { id } = await params;
+export default function CertDetailPage({ params }) {
+  const { id } = params;
   return <CertDetailClient certId={id} />;
 }
