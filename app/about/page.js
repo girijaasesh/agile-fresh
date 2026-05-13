@@ -39,29 +39,22 @@ const ACHIEVEMENTS = [
   { metric: '15+', label: 'Years of enterprise agile coaching & leadership' },
 ];
 
-const EXPERIENCE = [
+const SERVICES = [
   {
-    role: 'Senior Agile Coach & RTE',
-    org: 'Optimized Solutions / PBGC',
-    period: '',
-    points: [
-      'Coached federal agency teams through SAFe transformation and ART standup',
-      'Facilitated PI Planning events, ART syncs, and System Demos',
-      'Advised senior leadership on Lean portfolio management and value stream alignment',
-      'Drove continuous improvement through Inspect & Adapt workshops',
-    ],
+    title: 'SAFe Certification Training',
+    desc: 'Live, instructor-led training for all major SAFe certifications — from SA and SSM to SPC and RTE. Every course includes the exam fee and is led by a certified SAFe Program Consultant.',
   },
   {
-    role: 'SAFe Program Consultant & Agile Coach',
-    org: 'Enterprise Client Engagements',
-    period: '',
-    points: [
-      'Led SAFe transformations for Fortune 500 organizations across financial services, healthcare, and government sectors',
-      'Coached 20+ Agile teams and multiple ARTs simultaneously toward high performance',
-      'Delivered SAFe certification training (SPC, RTE, POPM, SSM, SA) to hundreds of practitioners',
-      'Established Communities of Practice and Agile Centers of Excellence',
-      'Implemented OKR frameworks and metrics dashboards to track business outcomes',
-    ],
+    title: 'Enterprise Agile Coaching',
+    desc: 'Embedded coaching for teams, ARTs, and leadership. We help organizations move from intent to outcomes — building the habits, cadences, and culture that make agility stick.',
+  },
+  {
+    title: 'PI Planning Facilitation',
+    desc: 'End-to-end facilitation of PI Planning events for Agile Release Trains of all sizes, including pre-PI prep, event execution, and post-PI follow-through.',
+  },
+  {
+    title: 'Lean Portfolio Management',
+    desc: 'Strategic coaching on value stream identification, portfolio Kanban, OKR alignment, and connecting business strategy to team-level execution.',
   },
 ];
 
@@ -71,28 +64,14 @@ export default function AboutPage() {
 
       {/* Hero */}
       <section style={{ background: NAVY, color: '#fff', padding: '72px 20px 64px' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 60, flexWrap: 'wrap' }}>
-          <div style={{ flexShrink: 0, position: 'relative', width: 220, height: 260, borderRadius: 12, overflow: 'hidden', border: `4px solid ${GOLD}`, boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
-            <Image
-              src="/girijaa-photo.png"
-              alt="Girijaa Seshachala — Senior Agile Coach"
-              fill
-              style={{ objectFit: 'cover', objectPosition: 'top' }}
-              priority
-            />
-          </div>
-          <div style={{ flex: 1, minWidth: 280 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 12 }}>About</div>
-            <h1 style={{ fontSize: 'clamp(28px, 5vw, 42px)', fontFamily: 'Georgia, serif', fontWeight: 700, margin: '0 0 10px', lineHeight: 1.15 }}>
-              Girijaa Seshachala
-            </h1>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.75)', fontWeight: 600, margin: '0 0 20px', letterSpacing: 0.3 }}>
-              Senior Agile Coach &nbsp;|&nbsp; SAFe SPC &nbsp;|&nbsp; RTE &nbsp;|&nbsp; PMP &nbsp;|&nbsp; CSM
-            </p>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.88)', lineHeight: 1.7, maxWidth: 540, margin: 0 }}>
-              Transforming organizations through Lean-Agile practices — coaching leaders, teams, and Agile Release Trains to peak performance across federal, financial, and enterprise environments.
-            </p>
-          </div>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 16 }}>About Us</div>
+          <h1 style={{ fontSize: 'clamp(30px, 5vw, 48px)', fontFamily: 'Georgia, serif', fontWeight: 700, margin: '0 0 16px', lineHeight: 1.15, maxWidth: 700 }}>
+            Optimized Solutions
+          </h1>
+          <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.82)', lineHeight: 1.7, maxWidth: 640, margin: 0 }}>
+            A practitioner-led Agile training and coaching firm built to help teams, leaders, and organizations achieve sustainable, measurable business agility.
+          </p>
         </div>
       </section>
 
@@ -108,56 +87,87 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* About narrative */}
+      {/* Mission */}
       <section style={{ padding: '60px 20px' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
-          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 10 }}>My Story</div>
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 10 }}>Our Mission</div>
           <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontFamily: 'Georgia, serif', color: NAVY, margin: '0 0 28px' }}>
-            15+ Years Driving Agile Excellence
+            Agile That Actually Works
           </h2>
           <div style={{ fontSize: 16, color: SLATE, lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 18 }}>
             <p style={{ margin: 0 }}>
-              I'm Girijaa Seshachala — a Senior Agile Coach and SAFe Program Consultant with over 15 years of experience helping organizations navigate complex transformations. My work spans federal government agencies, Fortune 500 companies, and high-growth enterprises, where I've served as coach, trainer, Release Train Engineer, and trusted strategic advisor.
+              Optimized Solutions was founded on a simple belief: agile transformation works best when it's led by practitioners who have done the work — not consultants who have only read the playbook. We bring deep, hands-on experience from the field to every training course, coaching engagement, and organizational transformation we take on.
             </p>
             <p style={{ margin: 0 }}>
-              My coaching philosophy centers on sustainable change: I don't just introduce frameworks — I embed Lean-Agile thinking into the culture, systems, and leadership mindset of every organization I work with. Whether I'm facilitating a PI Planning event for 200+ people, coaching a C-suite on portfolio management, or working one-on-one with a Scrum Master on team dynamics, I bring both rigor and empathy to every engagement.
+              Our approach centers on sustainable change. We don't just introduce frameworks — we embed Lean-Agile thinking into the culture, systems, and leadership mindset of every organization we work with. Whether facilitating a PI Planning event for 200+ people, coaching a C-suite on portfolio strategy, or developing a new Scrum Master's skills, we bring both rigor and empathy to every engagement.
             </p>
             <p style={{ margin: 0 }}>
-              As founder of <strong>Optimized Solutions</strong>, I now offer SAFe certification training, Agile coaching services, and enterprise transformation consulting — bringing practitioner-grade experience directly to individuals and organizations ready to grow.
+              From federal agencies to Fortune 500 enterprises, we've helped organizations across financial services, healthcare, and government sectors achieve real, measurable outcomes — not just framework compliance.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Experience */}
+      {/* Services */}
       <section style={{ background: '#fff', padding: '60px 20px', borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
-          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 10 }}>Experience</div>
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 10 }}>What We Do</div>
           <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontFamily: 'Georgia, serif', color: NAVY, margin: '0 0 40px' }}>
-            Where I've Made an Impact
+            Our Services
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
-            {EXPERIENCE.map((exp) => (
-              <div key={exp.role} style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
-                <div style={{ minWidth: 200, flexShrink: 0 }}>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: NAVY }}>{exp.org}</div>
-                </div>
-                <div style={{ flex: 1, minWidth: 260 }}>
-                  <div style={{ fontSize: 17, fontWeight: 700, color: NAVY, marginBottom: 14 }}>{exp.role}</div>
-                  <ul style={{ margin: 0, padding: '0 0 0 20px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {exp.points.map((pt, i) => (
-                      <li key={i} style={{ fontSize: 15, color: SLATE, lineHeight: 1.6 }}>{pt}</li>
-                    ))}
-                  </ul>
-                </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 24 }}>
+            {SERVICES.map((s) => (
+              <div key={s.title} style={{ padding: '28px 28px 24px', background: CREAM, border: '1px solid #E2E8F0', borderRadius: 10 }}>
+                <div style={{ width: 36, height: 4, background: GOLD, borderRadius: 2, marginBottom: 16 }} />
+                <div style={{ fontSize: 17, fontWeight: 700, color: NAVY, marginBottom: 10 }}>{s.title}</div>
+                <div style={{ fontSize: 14, color: SLATE, lineHeight: 1.7 }}>{s.desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Competencies */}
+      {/* Founder */}
       <section style={{ padding: '60px 20px' }}>
+        <div style={{ maxWidth: 820, margin: '0 auto' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 10 }}>Our Founder</div>
+          <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontFamily: 'Georgia, serif', color: NAVY, margin: '0 0 40px' }}>
+            Meet Girijaa Seshachala
+          </h2>
+          <div style={{ display: 'flex', gap: 48, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+            <div style={{ flexShrink: 0, position: 'relative', width: 200, height: 240, borderRadius: 10, overflow: 'hidden', border: `3px solid ${GOLD}`, boxShadow: '0 12px 40px rgba(0,0,0,0.12)' }}>
+              <Image
+                src="/girijaa-photo.png"
+                alt="Girijaa Seshachala — Founder, Optimized Solutions"
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'top' }}
+              />
+            </div>
+            <div style={{ flex: 1, minWidth: 260 }}>
+              <div style={{ fontSize: 20, fontWeight: 700, color: NAVY, marginBottom: 4 }}>Girijaa Seshachala</div>
+              <div style={{ fontSize: 14, color: GOLD, fontWeight: 600, marginBottom: 20 }}>
+                Founder &nbsp;·&nbsp; SAFe SPC &nbsp;·&nbsp; RTE &nbsp;·&nbsp; PMP &nbsp;·&nbsp; CSM
+              </div>
+              <div style={{ fontSize: 15, color: SLATE, lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 14 }}>
+                <p style={{ margin: 0 }}>
+                  Girijaa is a Senior Agile Coach and SAFe Program Consultant with over 15 years of experience helping organizations navigate complex transformations. She founded Optimized Solutions to bring practitioner-grade SAFe training and coaching directly to individuals and organizations ready to grow.
+                </p>
+                <p style={{ margin: 0 }}>
+                  Her background spans federal government, financial services, and enterprise technology — serving as coach, trainer, Release Train Engineer, and strategic advisor across organizations of all sizes.
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 20 }}>
+                {['SAFe SPC 6.0', 'RTE', 'PMP', 'CSM', 'POPM', 'SSM', 'SA', 'SASM'].map(c => (
+                  <span key={c} style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', color: NAVY, padding: '5px 12px', borderRadius: 100, fontSize: 12, fontWeight: 700 }}>{c}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Competencies */}
+      <section style={{ background: '#fff', padding: '60px 20px', borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
           <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 10 }}>Expertise</div>
           <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontFamily: 'Georgia, serif', color: NAVY, margin: '0 0 32px' }}>
@@ -173,24 +183,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Certifications */}
-      <section style={{ background: '#fff', padding: '60px 20px', borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
-        <div style={{ maxWidth: 820, margin: '0 auto' }}>
-          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: GOLD, textTransform: 'uppercase', marginBottom: 10 }}>Credentials</div>
-          <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontFamily: 'Georgia, serif', color: NAVY, margin: '0 0 32px' }}>
-            Certifications
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 14 }}>
-            {CERTIFICATIONS.map((cert) => (
-              <div key={cert} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 18px', background: CREAM, border: '1px solid #E2E8F0', borderRadius: 8 }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: GOLD, flexShrink: 0 }} />
-                <span style={{ fontSize: 14, color: NAVY, fontWeight: 600 }}>{cert}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section style={{ background: NAVY, color: '#fff', padding: '64px 20px', textAlign: 'center' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
@@ -198,7 +190,7 @@ export default function AboutPage() {
             Ready to Transform Your Organization?
           </h2>
           <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.8)', margin: '0 0 36px', lineHeight: 1.7 }}>
-            Whether you're looking for SAFe certification training, executive coaching, or a full-scale Agile transformation partner — let's connect.
+            Whether you need SAFe certification training, executive coaching, or a full-scale Agile transformation partner — we're here to help.
           </p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="/#contact" style={{ background: GOLD, color: '#fff', padding: '14px 32px', borderRadius: 4, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>
