@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import FounderStrip from './FounderStrip';
 
 export const metadata = {
   title: 'Enterprise Agile Implementation Partner | Optimized Solutions',
@@ -88,6 +89,42 @@ export default function EnterpriseAgilePage() {
         </div>
       </section>
 
+
+      {/* ── SOCIAL PROOF BAR ── */}
+      <div style={{ background: '#F0EDE8', borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}`, padding: '18px 28px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, flexWrap: 'wrap' }}>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: FAINT, whiteSpace: 'nowrap' }}>Trusted by enterprise teams across</span>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {['Banking', 'Healthcare', 'Technology', 'Government', 'Retail'].map(l => (
+                <span key={l} style={{ fontSize: 11, fontWeight: 700, color: MUTED, border: `1px solid ${BORDER}`, background: '#FAFAF8', padding: '4px 12px', borderRadius: 20, letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>{l}</span>
+              ))}
+            </div>
+          </div>
+          {[
+            ['200+', 'Professionals certified'],
+            ['15+', 'Years SAFe experience'],
+          ].map(([n, l]) => (
+            <div key={n} style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+              <div style={{ width: 1, height: 32, background: BORDER, margin: '0 28px' }} />
+              <div style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
+                <div style={{ fontFamily: 'Georgia, serif', fontSize: 20, fontWeight: 700, color: TEXT, lineHeight: 1 }}>{n}</div>
+                <div style={{ fontSize: 11, color: FAINT, marginTop: 3, fontWeight: 500 }}>{l}</div>
+              </div>
+            </div>
+          ))}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ width: 1, height: 32, background: BORDER, margin: '0 28px' }} />
+            <div>
+              <div style={{ color: PEACH, fontSize: 12, letterSpacing: 2 }}>★★★★★</div>
+              <div style={{ fontSize: 13, color: MUTED, fontStyle: 'italic', fontWeight: 500, whiteSpace: 'nowrap' }}>"Transformation that actually sticks"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── FOUNDER STRIP ── */}
+      <FounderStrip />
 
       {/* ── CERTIFICATIONS ── */}
       <section id="certifications" style={{ borderBottom: `1px solid ${BORDER}`, background: BG_ALT }}>

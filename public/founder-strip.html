@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder Strip — Optimized Solutions (Component)</title>
+  <!-- INSERT AFTER: social proof bar, BEFORE certifications section (#certifications) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', Arial, sans-serif; }
+
+    /* ─── Founder Strip ──────────────────────────────────── */
+    .founder-strip {
+      background: #1A3832;
+      padding: 80px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle paper-grain texture via SVG data URI */
+    .founder-strip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .founder-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 72px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Photo ─────────────────────────── */
+    .founder-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    /* Gold accent line above photo */
+    .founder-photo-wrap::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 48px;
+      height: 3px;
+      background: #C9973A;
+      border-radius: 2px;
+    }
+
+    /* EDIT: Replace src with the actual path to the founder's photo */
+    .founder-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 3px;
+      display: block;
+      filter: contrast(1.04) saturate(0.92);
+    }
+
+    /* Grain overlay on photo for editorial feel */
+    .founder-photo-wrap .grain {
+      position: absolute;
+      inset: 0;
+      border-radius: 3px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    /* ── Copy ─────────────────────────── */
+    .founder-copy {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .founder-copy.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* EDIT: Update label text */
+    .founder-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #C9973A;
+      margin-bottom: 22px;
+    }
+
+    /* EDIT: Update headline — keep <em> for the italic pull */
+    .founder-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #F7F4EF;
+      margin: 0 0 28px;
+    }
+
+    .founder-headline em {
+      font-style: italic;
+      color: #C9B88A;
+    }
+
+    /* Thin rule between headline and body */
+    .founder-rule {
+      width: 40px;
+      height: 1px;
+      background: rgba(201, 151, 58, 0.35);
+      margin-bottom: 22px;
+    }
+
+    /* EDIT: Update body copy — 3–4 sentences, direct & personal tone */
+    .founder-body {
+      font-size: 16px;
+      line-height: 1.82;
+      color: rgba(247, 244, 239, 0.76);
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+
+    /* EDIT: Update href if the About page slug changes */
+    .founder-cta {
+      display: inline-block;
+      font-size: 15px;
+      font-weight: 700;
+      color: #C9973A;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 151, 58, 0.38);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .founder-cta:hover {
+      color: #E0B55A;
+      border-color: #E0B55A;
+    }
+
+    /* ── Responsive ────────────────────── */
+    @media (max-width: 700px) {
+      .founder-strip  { padding: 56px 20px; }
+      .founder-inner  { grid-template-columns: 1fr; gap: 32px; }
+      .founder-photo-wrap { max-width: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     FOUNDER STRIP
+     Paste this <section> immediately after the social proof
+     bar and before the certifications section (#certifications).
+     ════════════════════════════════════════════════════════ -->
+
+<section class="founder-strip">
+  <div class="founder-inner">
+
+    <!-- ── Photo column ── -->
+    <!-- EDIT: Replace src with actual founder photo path -->
+    <div class="founder-photo-wrap">
+      <img
+        class="founder-photo"
+        src="/girijaa-photo.png"
+        alt="Girijaa Seshachala — Founder &amp; Lead Consultant, Optimized Solutions"
+        loading="lazy"
+      />
+      <div class="grain" aria-hidden="true"></div>
+    </div>
+
+    <!-- ── Copy column ── -->
+    <div class="founder-copy" id="founderCopy">
+
+      <!-- EDIT: Update label if title changes -->
+      <div class="founder-label">Founder &amp; Lead Consultant</div>
+
+      <!-- EDIT: Headline — keep italicised fragment for visual rhythm -->
+      <h2 class="founder-headline">
+        "I've seen transformation fail —<br>
+        <em>and I know exactly why."</em>
+      </h2>
+
+      <div class="founder-rule"></div>
+
+      <!-- EDIT: Replace with founder's personal voice — keep to 3–4 sentences -->
+      <p class="founder-body">
+        After 20 years guiding enterprises through Agile transformations across industries, I founded Optimized Solutions with one conviction: most transformations stall not because of bad frameworks — but because of misaligned strategy, siloed execution, and governance that was never designed for flow. I built this to fix that. Every engagement I lead is hands-on, outcome-obsessed, and built around your reality — not a textbook case study.
+      </p>
+
+      <!-- EDIT: Update href if About page slug changes -->
+      <a class="founder-cta" href="/about">Read my full story →</a>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // Scroll fade-in via Intersection Observer
+  (function () {
+    var el = document.getElementById('founderCopy');
+    if (!el) return;
+    if (!('IntersectionObserver' in window)) {
+      el.classList.add('is-visible');
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    obs.observe(el);
+  })();
+</script>
+
+</body>
+</html>

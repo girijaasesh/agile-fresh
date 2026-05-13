@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Optimized Solutions</title>
+  <meta name="description" content="Optimized Solutions is a practitioner-led enterprise Agile transformation and SAFe certification firm, founded by Girijaa Seshachala.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fraunces: editorial display serif · Lora: readable body serif -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset & Base ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F6F2;   /* warm cream */
+      --bg-alt:   #EFECEA;   /* soft warm-grey */
+      --bg-dark:  #2D4A55;   /* deep teal */
+      --bg-found: #1A3832;   /* deep forest green */
+      --border:   #C8C4BC;
+      --text:     #111C20;
+      --muted:    #3D5A60;
+      --faint:    #5A7880;
+      --gold:     #C9973A;
+      --sage:     #2E7D52;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    /* ─── Scroll-reveal utility ─────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── Eyebrow label ─────────────────────────────────── */
+    .eyebrow {
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* ─── Section wrapper ───────────────────────────────── */
+    .section-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+
+    /* ════════════════════════════════════════════════════
+       A. HERO
+       ════════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      background: var(--bg-found);
+      overflow: hidden;
+      padding: 0;
+      /* For sites with a fixed nav, add padding-top equal to nav height */
+    }
+
+    /* Parallax photo — positioned absolutely, JS moves it on scroll */
+    /* EDIT: Replace --hero-img url with actual full-width founder photo */
+    .hero-photo-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('/girijaa-photo.png');
+      background-size: cover;
+      background-position: center top;
+      will-change: transform;
+      filter: brightness(0.38) saturate(0.7);
+      z-index: 0;
+    }
+
+    /* Diagonal fade overlay */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,56,50,0.95) 42%, rgba(26,56,50,0.55) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 120px 28px 100px;
+    }
+
+    /* EDIT: Update headline */
+    .hero-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(34px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: #F7F4EF;
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: #C9B88A;
+    }
+
+    /* EDIT: Update subhead credentials */
+    .hero-sub {
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(247,244,239,0.65);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-sub span { color: rgba(247,244,239,0.3); margin: 0 10px; }
+
+
+    /* ════════════════════════════════════════════════════
+       B. TIMELINE
+       ════════════════════════════════════════════════════ */
+    .timeline-section {
+      background: var(--bg);
+      padding: 88px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-section h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 64px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .tl-entry {
+      position: relative;
+      margin-bottom: 56px;
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tl-entry.visible { opacity: 1; transform: translateX(0); }
+
+    /* Dot on the line */
+    .tl-entry::before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 10px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 1px var(--gold);
+    }
+
+    /* EDIT: Update year for each milestone */
+    .tl-year {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* EDIT: Update event title */
+    .tl-title {
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    /* EDIT: Update event description */
+    .tl-desc {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+
+    /* ════════════════════════════════════════════════════
+       C. PHILOSOPHY (3 pillars)
+       ════════════════════════════════════════════════════ */
+    .philosophy-section {
+      background: var(--bg-alt);
+      padding: 88px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .philosophy-section h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 56px;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .pillar {
+      padding: 0 40px 0 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .pillar:first-child { padding-left: 0; }
+    .pillar:last-child  { padding-right: 0; border-right: none; }
+    .pillar + .pillar   { padding-left: 40px; }
+
+    .pillar-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 18px;
+      color: var(--gold);
+    }
+
+    /* EDIT: Update pillar titles */
+    .pillar-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    /* EDIT: Update pillar body — 2 sentences each */
+    .pillar-body {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    @media (max-width: 700px) {
+      .pillar-grid { grid-template-columns: 1fr; gap: 32px; }
+      .pillar { padding: 0 0 32px 0; border-right: none; border-bottom: 1px solid var(--border); }
+      .pillar:last-child { border-bottom: none; padding-bottom: 0; }
+      .pillar + .pillar { padding-left: 0; }
+    }
+
+
+    /* ════════════════════════════════════════════════════
+       D. FOUNDER CARD (who's behind the firm)
+       ════════════════════════════════════════════════════ */
+    .founder-section {
+      background: var(--bg);
+      padding: 88px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 60px;
+      align-items: flex-start;
+    }
+
+    /* EDIT: Replace src with founder photo */
+    .founder-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 3px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .founder-copy-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .founder-copy-role {
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .founder-copy-bio {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .cert-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cert-chip {
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      padding: 5px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 700px) {
+      .founder-grid { grid-template-columns: 1fr; gap: 28px; }
+      .founder-img  { max-width: 200px; }
+    }
+
+
+    /* ════════════════════════════════════════════════════
+       E. CTA
+       ════════════════════════════════════════════════════ */
+    .cta-section {
+      background: var(--bg-dark);
+      padding: 88px 28px;
+      text-align: center;
+    }
+
+    /* EDIT: Update headline */
+    .cta-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #F7F4EF;
+      margin-bottom: 16px;
+    }
+
+    .cta-headline em { font-style: italic; color: #C9B88A; }
+
+    .cta-sub {
+      font-size: 16px;
+      color: rgba(247,244,239,0.68);
+      margin-bottom: 44px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* EDIT: Update hrefs on both buttons */
+    .btn-primary {
+      background: var(--gold);
+      color: #fff;
+      padding: 15px 36px;
+      border-radius: 4px;
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #B8882F; }
+
+    .btn-outline {
+      background: transparent;
+      color: rgba(247,244,239,0.85);
+      padding: 15px 36px;
+      border-radius: 4px;
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1.5px solid rgba(247,244,239,0.3);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(247,244,239,0.7); color: #F7F4EF; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     ABOUT PAGE  ·  Optimized Solutions
+     This is a full standalone page.
+     When integrating into Next.js, replace <body> content with
+     the JSX in app/about/page.js and remove HTML boilerplate.
+     ════════════════════════════════════════════════════════ -->
+
+
+<!-- ══ A. HERO ══════════════════════════════════════════ -->
+<!-- EDIT: Replace hero-photo-bg src with a wide editorial founder photo -->
+<section class="hero">
+  <div class="hero-photo-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="eyebrow" style="color: rgba(201,151,58,0.85);">About Us</span>
+    <!-- EDIT: Update headline -->
+    <h1 class="hero-headline">
+      Transformation is personal.<br>
+      <em>So is how we lead it.</em>
+    </h1>
+    <!-- EDIT: Update credentials list -->
+    <p class="hero-sub">
+      Enterprise Agile Consulting
+      <span>·</span>
+      SAFe Program Consultants
+      <span>·</span>
+      AI Transformation Specialists
+    </p>
+  </div>
+</section>
+
+
+<!-- ══ B. TIMELINE ══════════════════════════════════════ -->
+<section class="timeline-section">
+  <div class="section-inner">
+    <span class="eyebrow reveal">The Journey</span>
+    <h2 class="reveal reveal-delay-1">How We Got Here</h2>
+
+    <div class="timeline">
+
+      <!-- EDIT: Update year and copy for each milestone -->
+      <div class="tl-entry">
+        <span class="tl-year">Early Career</span>
+        <div class="tl-title">First Enterprise Agile Engagement</div>
+        <p class="tl-desc">Witnessed a large-scale transformation stall because strategy never connected to execution. That experience became the lens for everything that followed.</p>
+      </div>
+
+      <!-- EDIT: Update year -->
+      <div class="tl-entry">
+        <span class="tl-year">Mid Career</span>
+        <div class="tl-title">Agile Release Trains That Actually Delivered</div>
+        <p class="tl-desc">Led Agile transformation for a multi-thousand-person organization — first time a Value Stream delivered on time, every sprint. Proved what's possible when strategy and execution are aligned.</p>
+      </div>
+
+      <!-- EDIT: Update year -->
+      <div class="tl-entry">
+        <span class="tl-year">Certification</span>
+        <div class="tl-title">Became a SAFe Program Consultant</div>
+        <p class="tl-desc">Earning SPC certification confirmed what the field had already taught: certification alone means nothing without implementation wisdom. Both matter. Neither is sufficient alone.</p>
+      </div>
+
+      <!-- EDIT: Update year -->
+      <div class="tl-entry">
+        <span class="tl-year">Founding</span>
+        <div class="tl-title">Founded Optimized Solutions</div>
+        <p class="tl-desc">Built the firm that was always missing from the market — practitioner-led, outcome-obsessed, and structured to transfer capability rather than create dependency.</p>
+      </div>
+
+      <div class="tl-entry">
+        <span class="tl-year">2025</span>
+        <div class="tl-title">AI-Empowered SAFe Certifications</div>
+        <p class="tl-desc">The market needed certifications designed for an AI-augmented enterprise. We built the curriculum first, integrating AI tools into every SAFe practice area.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ C. PHILOSOPHY ════════════════════════════════════ -->
+<section class="philosophy-section">
+  <div class="section-inner">
+    <span class="eyebrow reveal">Our Philosophy</span>
+    <h2 class="reveal reveal-delay-1">Three Principles We Never Compromise</h2>
+    <div class="pillar-grid">
+
+      <!-- EDIT: Update icon SVG, title, and body for each pillar -->
+      <div class="pillar reveal">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 32L20 8l12 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11 26h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="pillar-title">Strategy Before Framework</div>
+        <p class="pillar-body">No framework saves a misaligned strategy. We align first, then implement — because the best methodology in the wrong context just accelerates failure.</p>
+      </div>
+
+      <div class="pillar reveal reveal-delay-1">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 14v6l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="pillar-title">Outcomes Over Outputs</div>
+        <p class="pillar-body">We don't count velocity points. We count business results — reduced time to market, measurable ROI, and governance that accelerates instead of obstructs.</p>
+      </div>
+
+      <div class="pillar reveal reveal-delay-2">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="15" cy="14" r="5" stroke="currentColor" stroke-width="2"/>
+          <circle cx="27" cy="22" r="5" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 14c0 0 4 2 4 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="pillar-title">Transformation Is Human Work</div>
+        <p class="pillar-body">Technology and process are the easy part. People, culture, and leadership are where transformations win or lose — and that's where we spend most of our energy.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ D. FOUNDER ════════════════════════════════════════ -->
+<section class="founder-section">
+  <div class="section-inner">
+    <span class="eyebrow reveal">Our Founder</span>
+    <div class="founder-grid reveal reveal-delay-1">
+      <!-- EDIT: Replace src with founder photo -->
+      <img
+        class="founder-img"
+        src="/girijaa-photo.png"
+        alt="Girijaa Seshachala — Founder, Optimized Solutions"
+        loading="lazy"
+      />
+      <div>
+        <div class="founder-copy-title">Girijaa Seshachala</div>
+        <!-- EDIT: Update role line -->
+        <div class="founder-copy-role">Founder · SAFe SPC · RTE · PMP · CSM</div>
+        <!-- EDIT: Update bio paragraphs -->
+        <p class="founder-copy-bio">
+          Girijaa is a Senior Agile Coach and SAFe Program Consultant with over 15 years of experience helping organizations navigate complex transformations — from federal government agencies to Fortune 500 enterprises across financial services, healthcare, and technology.
+        </p>
+        <p class="founder-copy-bio" style="margin-bottom: 28px;">
+          She founded Optimized Solutions to bridge the gap between certification and real-world implementation, bringing practitioner-grade insight to every training course and coaching engagement the firm delivers.
+        </p>
+        <!-- EDIT: Update or add/remove credential chips -->
+        <div class="cert-chips">
+          <span class="cert-chip">SAFe SPC 6.0</span>
+          <span class="cert-chip">RTE</span>
+          <span class="cert-chip">PMP</span>
+          <span class="cert-chip">CSM</span>
+          <span class="cert-chip">POPM</span>
+          <span class="cert-chip">SSM</span>
+          <span class="cert-chip">SA</span>
+          <span class="cert-chip">SASM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ E. CTA ════════════════════════════════════════════ -->
+<section class="cta-section">
+  <!-- EDIT: Update headline and button hrefs -->
+  <h2 class="cta-headline">
+    Ready to transform —<br>
+    <em>not just transition?</em>
+  </h2>
+  <p class="cta-sub">The first conversation is a consultation, not a pitch.</p>
+  <div class="cta-buttons">
+    <a class="btn-primary" href="/#contact">Schedule a Conversation</a>
+    <a class="btn-outline" href="/quick-register">View Certifications</a>
+  </div>
+</section>
+
+
+<script>
+  // ── Parallax hero on scroll ──────────────────────────
+  var heroBg = document.getElementById('heroBg');
+  if (heroBg) {
+    window.addEventListener('scroll', function () {
+      heroBg.style.transform = 'translateY(' + (window.scrollY * 0.35) + 'px)';
+    }, { passive: true });
+  }
+
+  // ── Scroll-reveal (generic .reveal elements) ─────────
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+    // ── Timeline entries ─────────────────────────────
+    var tlObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          tlObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.tl-entry').forEach(function (el, i) {
+      el.style.transitionDelay = (i * 0.08) + 's';
+      tlObs.observe(el);
+    });
+  } else {
+    // Fallback: show everything immediately
+    document.querySelectorAll('.reveal, .tl-entry').forEach(function (el) {
+      el.classList.add('visible');
+    });
+  }
+</script>
+
+</body>
+</html>
