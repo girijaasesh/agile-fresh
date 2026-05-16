@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ── Core pages ── -->
+  <url>
+    <loc>https://www.optim-soln.com/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/quick-register</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/about</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ── SAFe Certification detail pages ── -->
+  <url>
+    <loc>https://www.optim-soln.com/certifications/sa</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/certifications/ssm</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/certifications/sasm</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/certifications/popm</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/certifications/devops</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/certifications/rte</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/certifications/spc</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ── Knowledge Hub articles (74 total, from DB) ── -->
+  <url>
+    <loc>https://www.optim-soln.com/articles/continuous-learning-my-top-10-recommended-books-for-agile-leaders-mo828nav</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/navigating-career-transitions-moving-from-pm-to-senior-leadership-mo828n6o</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/personal-agility-using-scrum-to-manage-your-own-life-and-career-mo828n5f</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-future-of-the-agile-pm-skills-you-ll-need-by-2030-mo828n18</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/agile-in-times-of-crisis-pivoting-strategy-when-the-market-shifts-mo828n0g</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/certifications-vs-experience-which-matters-more-in-2026-mo828mye</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-first-90-days-starting-as-an-agile-pm-in-a-new-organization-mo828mul</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/adapting-agile-for-non-it-projects-mo828mrd</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/lessons-from-a-large-scale-agile-transformation-mo828mo0</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/my-biggest-agile-failure-and-what-i-learned-from-it-mo828lwa</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/diversity-of-thought-how-inclusive-teams-build-better-products-mo80iaps</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/mentorship-in-agile-growing-the-next-generation-of-scrum-masters-mo80iam0</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-art-of-saying-no-how-pms-protect-the-team-from-scope-creep-mo80ial1</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/burnout-in-agile-identifying-the-signs-of-sprint-fatigue-mo80iagj</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/remote-agility-keeping-global-teams-aligned-across-time-zones-mo80iabz</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-introvert-s-guide-to-scrum-making-ceremonies-inclusive-mo80ia96</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/coaching-through-conflict-navigating-team-storms-professionally-mo80ia8d</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/building-cross-functional-teams-breaking-down-the-silo-mentality-mo80ia5e</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/psychological-safety-the-foundation-of-high-performing-agile-teams-mo80ia4i</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-servant-leader-balancing-accountability-with-support-mo80i9fz</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/data-driven-decision-making-using-jira-and-azure-devops-analytics-to-find-bottlenecks-mo80aadg</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/low-code-no-code-accelerating-prototyping-in-an-agile-environment-mo80aa9j</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/cybersecurity-in-the-sprint-integrating-shift-left-security-mentalities-mo80aa8h</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/technical-debt-how-to-visualize-and-prioritize-it-in-the-backlog-mo80aa7l</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/agentic-workflows-the-next-frontier-for-agile-productivity-mo80aa6n</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-impact-of-cloud-migration-on-agile-team-speed-mo80aa5m</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/automating-the-boring-stuff-using-python-to-streamline-pm-administrative-tasks-mo80aa4m</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/devops-and-agile-why-you-can-t-truly-have-one-without-the-other-mo80aa3p</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/intelligent-document-processing-speeding-up-the-agile-workflow-mo80aa1x</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/agile-for-ai-managing-the-uncertainty-of-machine-learning-projects-mo80a9bb</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/capacity-planning-how-to-account-for-the-real-world-in-your-velocity-mo7z8b4g</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/story-pointing-vs-hours-why-the-distinction-creates-better-predictability-mo7z8b3h</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/managing-dependencies-in-a-scaled-agile-environment-mo7z8b2o</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/definition-of-ready-vs-definition-of-done-closing-the-quality-gap-mo7z8b1t</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/effective-retrospectives-5-techniques-to-keep-them-fresh-and-actionable-mo7z8b0w</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-art-of-the-sprint-review-turning-demos-into-feedback-loops-mo7z8azr</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/scrum-vs-kanban-how-to-choose-based-on-your-team-s-flow-mo7z8ayu</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/refining-the-backlog-techniques-for-continuous-prioritization-mo7z8axw</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-anatomy-of-a-perfect-user-story-beyond-the-as-a-i-want-so-that-mo7z8awn</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/mastering-pi-planning-tips-for-a-successful-two-day-synchronization-mo7z8a1l</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-role-of-the-pmo-in-an-agile-world-evolution-or-extinction-mo7w9n3g</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/measuring-what-matters-replacing-vanity-metrics-with-value-stream-kpis-mo7w9n2r</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-hybrid-reality-managing-the-intersection-of-waterfall-and-agile-mo7w9n24</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/overcoming-resistance-strategies-for-middle-management-buy-in-mo7w9n1h</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/budgeting-for-agility-moving-from-annual-cycles-to-value-stream-funding-mo7w9n0t</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-executive-s-guide-to-agile-how-to-speak-agile-to-the-c-suite-mo7w9n07</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/scaling-without-breaking-a-comparison-of-safe-less-and-dad-mo7w9mzl</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/from-project-to-product-navigating-the-shift-in-organizational-mindset-mo7w9myx</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/agile-is-not-a-silver-bullet-recognizing-when-agile-isn-t-the-right-fit-mo7w9my4</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-why-before-the-how-identifying-the-business-drivers-for-agile-mo7w9ko2</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-future-of-agile-building-ai-native-teams-that-deliver-at-machine-speed-mnzg0bj1</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/using-ai-to-supercharge-agile-retrospectives-and-continuous-improvement-mnzg0bfn</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/ai-in-continuous-delivery-how-machine-learning-is-accelerating-agile-pipelines-mnzg0bca</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/ai-powered-sprint-planning-smarter-estimation-better-prioritization-mnzg0b8x</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/how-ai-is-transforming-agile-teams-from-automation-to-intelligent-collaboration-mnzg0a7h</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-agile-leader-s-role-in-organizational-culture-how-leadership-behavior-shapes-agile-outcomes-mnz3rrzq</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/building-high-performance-agile-teams-the-leader-s-role-in-team-development-mnz3rrw4</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/leading-through-uncertainty-how-agile-leaders-navigate-ambiguity-at-scale-mnz3rrst</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/servant-leadership-in-agile-the-leader-who-removes-obstacles-instead-of-assigning-tasks-mnz3rrpl</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/what-agile-leadership-actually-means-and-why-it-is-different-from-traditional-management-mnz3rrib</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/measuring-safe-success-the-metrics-that-actually-matter-mnz1x02a</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/value-streams-how-safe-restructures-organizations-around-flow-mnz1wzz1</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/pi-planning-the-two-days-that-align-an-entire-enterprise-mnz1wzvu</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/how-safe-eliminates-the-coordination-tax-in-large-organizations-mnz1wzsl</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/what-is-safe-and-why-enterprises-are-adopting-it-at-scale-mnz1wz3p</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-agile-manifesto-at-20-what-it-got-right-wrong-and-left-unsaid-mnz0zmeq</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/estimation-is-a-conversation-not-a-commitment-mnz0zmbf</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-retrospective-is-the-most-underrated-meeting-in-software-mnz0zm83</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/kanban-is-not-just-a-board-it-s-a-philosophy-of-flow-mnz0zm4r</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/why-sprint-velocity-is-the-wrong-metric-to-obsess-over-mnz0zla3</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-2026-shift-mnfp99m8</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-science-of-prioritization-mndfz1ws</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-modern-scrum-master-mndfy5qw</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-product-management-pivot-mndfx7zg</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/quality-is-not-an-option-mndfwapu</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/leading-safe-milestone-mndfv6hf</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-roi-of-agility-mndfu6ic</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/lean-portfolio-management-lpm-mndftc1y</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/why-pi-planning-is-the-heartbeat-of-the-enterprise-mndfrw47</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.optim-soln.com/articles/the-strategic-necessity-of-the-spc-mndfqk7y</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
